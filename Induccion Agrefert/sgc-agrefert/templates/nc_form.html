@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if nc %}Editar NC{% else %}Nueva Non-Conformidad{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="text-white mb-0">
+                {% if nc %}Editar Non-Conformidad{% else %}Nueva Non-Conformidad{% endif %}
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card bg-dark border-secondary">
+                <div class="card-body">
+                    <form method="POST" action="{% if nc %}{{ url_for('nc_form', nc_id=nc.id) }}{% else %}{{ url_for('nc_form') }}{% endif %}">
+
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label text-white">Título *</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-dark"
+                                id="title"
+                                name="title"
+                                value="{{ nc.title if nc else '' }}"
+                                required
+                                placeholder="Descripción breve de la NC">
+                            <small class="form-text text-muted">Máximo 200 caracteres</small>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label text-white">Descripción *</label>
+                            <textarea
+                                class="form-control form-control-dark"
+                                id="description"
+                                name="description"
+                                rows="4"
+                                required
+                                placeholder="Detalles de la no-conformidad encontrada">{{ nc.description if nc else '' }}</textarea>
+                            <small class="form-text text-muted">Describe claramente qué y dónde se encontró el problema</small>
+                        </div>
+
+                        <!-- NC Type -->
+                        <div class="mb-3">
+                            <label for="nc_type" class="form-label text-white">Tipo de NC *</label>
+                            <select
+                                class="form-select form-select-dark"
+                                id="nc_type"
+                                name="nc_type"
+                                required>
+                                <option value="">-- Selecciona un tipo --</option>
+                                <option value="menor" {% if nc and nc.nc_type == 'menor' %}selected{% endif %}>Menor</option>
+                                <option value="mayor" {% if nc and nc.nc_type == 'mayor' %}selected{% endif %}>Mayor</option>
+                                <option value="observacion" {% if nc and nc.nc_type == 'observacion' %}selected{% endif %}>Observación</option>
+                                <option value="oportunidad_mejora" {% if nc and nc.nc_type == 'oportunidad_mejora' %}selected{% endif %}>Oportunidad de Mejora</option>
+                            </select>
+                        </div>
+
+                        <!-- Source -->
+                        <div class="mb-3">
+                            <label for="source" class="form-label text-white">Fuente *</label>
+                            <select
+                                class="form-select form-select-dark"
+                                id="source"
+                                name="source"
+                                required>
+                                <option value="">-- Selecciona una fuente --</option>
+                                <option value="auditoria_interna" {% if nc and nc.source == 'auditoria_interna' %}selected{% endif %}>Auditoría Interna</option>
+                                <option value="auditoria_externa" {% if nc and nc.source == 'auditoria_externa' %}selected{% endif %}>Auditoría Externa</option>
+                                <option value="reclamo_cliente" {% if nc and nc.source == 'reclamo_cliente' %}selected{% endif %}>Reclamo de Cliente</option>
+                                <option value="proceso" {% if nc and nc.source == 'proceso' %}selected{% endif %}>Proceso Interno</option>
+                            </select>
+                        </div>
+
+                        <!-- Area -->
+                        <div class="mb-3">
+                            <label for="area_id" class="form-label text-white">Área Responsable *</label>
+                            <select
+                                class="form-select form-select-dark"
+                                id="area_id"
+                                name="area_id"
+                                required>
+                                <option value="">-- Selecciona un área --</option>
+                                {% for area in areas %}
+                                    <option value="{{ area.id }}" {% if nc and nc.area_id == area.id %}selected{% endif %}>
+                                        {{ area.name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Assigned To -->
+                        <div class="mb-3">
+                            <label for="assigned_to" class="form-label text-white">Responsable de Tratamiento *</label>
+                            <select
+                                class="form-select form-select-dark"
+                                id="assigned_to"
+                                name="assigned_to"
+                                required>
+                                <option value="">-- Selecciona un usuario --</option>
+                                {% for user in users %}
+                                    <option value="{{ user.id }}" {% if nc and nc.assigned_to == user.id %}selected{% endif %}>
+                                        {{ user.username }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Due Date -->
+                        <div class="mb-3">
+                            <label for="due_date" class="form-label text-white">Fecha de Vencimiento *</label>
+                            <input
+                                type="date"
+                                class="form-control form-control-dark"
+                                id="due_date"
+                                name="due_date"
+                                value="{% if nc and nc.due_date %}{{ nc.due_date.strftime('%Y-%m-%d') }}{% endif %}"
+                                required>
+                            <small class="form-text text-muted">Fecha límite para el cierre de la NC</small>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i>
+                                {% if nc %}Actualizar NC{% else %}Crear NC{% endif %}
+                            </button>
+                            <a href="{{ url_for('non_conformities') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle"></i> Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Panel -->
+        <div class="col-lg-4">
+            <div class="card bg-dark border-info">
+                <div class="card-header bg-info bg-opacity-25 border-info">
+                    <h6 class="text-white mb-0">
+                        <i class="bi bi-info-circle"></i> Ayuda
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h6 class="text-info">Tipos de NC</h6>
+                        <ul class="small text-muted list-unstyled">
+                            <li><strong>Menor:</strong> Incumplimiento de bajo impacto</li>
+                            <li><strong>Mayor:</strong> Incumplimiento significativo</li>
+                            <li><strong>Observación:</strong> Hallazgo que merece atención</li>
+                            <li><strong>Oportunidad:</strong> Mejora sugerida</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="text-info">Buenas Prácticas</h6>
+                        <ul class="small text-muted list-unstyled">
+                            <li>Sé específico en la descripción</li>
+                            <li>Incluye ubicación y fecha del hallazgo</li>
+                            <li>Asigna a la persona correcta</li>
+                            <li>Establece plazos realistas</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <small>
+                            <strong>Nota:</strong> Los campos marcados con * son obligatorios
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.form-control-dark {
+    background-color: #495057;
+    border-color: #495057;
+    color: #ffffff;
+}
+
+.form-control-dark:focus {
+    background-color: #495057;
+    border-color: #80bdff;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control-dark::placeholder {
+    color: #adb5bd;
+}
+
+.form-select-dark {
+    background-color: #495057;
+    border-color: #495057;
+    color: #ffffff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.form-select-dark:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-select-dark option {
+    background-color: #495057;
+    color: #ffffff;
+}
+</style>
+{% endblock %}

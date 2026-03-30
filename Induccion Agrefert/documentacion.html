@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentacion — Induccion Agrefert</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+<script>
+    // Apply saved theme immediately to prevent flash
+    (function(){var t=localStorage.getItem('agrefert-theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark')}})();
+    </script>
+</head>
+<body>
+<!-- ─── PROGRESS BAR ─── -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ─── NAVBAR ─── -->
+<nav class="topnav" id="topnav">
+    <div class="topnav-inner">
+        <a href="index.html" class="logo"><img src="img/logo.png" alt="Agrefert"></a>
+        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+        <div class="nav-links">
+            <a href="index.html">La Empresa</a>
+            <a href="equipo.html">Equipo</a>
+            <a href="productos.html">Productos</a>
+            <a href="documentacion.html" class="current">Documentacion</a>
+            <a href="operaciones.html">Operaciones</a>
+            <a href="manuales.html">Manuales</a>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Cambiar tema" title="Modo oscuro / claro">&#9790;</button>
+        </div>
+    </div>
+</nav>
+
+<!-- ─── PAGE HEADER ─── -->
+<div style="padding-top: 80px; padding-bottom: 1.5rem; background: var(--surface-alt);">
+    <div class="container" style="padding-top: 1.5rem;">
+        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+            <a href="index.html" style="color: var(--brand-green); text-decoration: none;">Home</a> → Documentacion
+        </div>
+        <h1 style="font-size: clamp(1.75rem, 2.5vw, 2.25rem); font-weight: 900; color: var(--text-primary); margin-bottom: 0.35rem;">Centro de Documentacion</h1>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">Manuales, procedimientos e instructivos de todas las areas — integrado con Google Drive y Confluence</p>
+    </div>
+</div>
+
+<!-- ─── DOCUMENTACION SECTION ─── -->
+<section id="documentacion" class="alt-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Base de Conocimiento</span>
+            <h2 class="section-title">Centro de Manuales y Procedimientos</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Acceso directo a los manuales, procedimientos e instructivos de cada area — integrado con Google Drive y Confluence</p>
+        </div>
+
+        <div class="doc-grid">
+            <!-- Direccion -->
+            <div class="doc-area reveal reveal-delay-1">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon green">&#127919;</div>
+                    <div><div class="doc-area-title">Direccion General</div><div class="doc-area-subtitle">Norberto &amp; Federico Munoz</div></div>
+                    <span class="doc-count">6 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://drive.google.com/drive/folders/1DEpY5EV-64cHr6Q-2G0X65ysRtzrTxcg" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Procedimientos de Direccion</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/1AcbuAKxG5xFD3lQvtHDgwvdVC8TdFVlCoslsasGMBsE/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128202;</div>
+                        <div><div class="doc-link-name">Bajada ISO 2026</div><div class="doc-link-type">Estrategia</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/1FAfl6Ymd57sMA0gBfdcXYHEHUehsKN3ckJcPyHbLsZk/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#127919;</div>
+                        <div><div class="doc-link-name">OKRs 2026</div><div class="doc-link-type">Objetivos</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/1VeBtVe-4gfSC81jhTdZNUyiifhR46cYNiYme8LIKRmo/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#9989;</div>
+                        <div><div class="doc-link-name">Sistema de Gestion de Calidad</div><div class="doc-link-type">Manual principal</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="#0052CC"><path d="M11.17 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.83L15.17 2H11.17zM14 8V3l5 5h-5z"/></svg> Confluence</div>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/948076545" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128220;</div>
+                        <div><div class="doc-link-name">Politica de Compras, Gastos y Rendiciones</div><div class="doc-link-type">Politica integral</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/33183/Manuales" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128218;</div>
+                        <div><div class="doc-link-name">Manuales (Indice general)</div><div class="doc-link-type">Pagina raiz</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Comercial -->
+            <div class="doc-area reveal reveal-delay-2">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon blue">&#128200;</div>
+                    <div><div class="doc-area-title">Area Comercial</div><div class="doc-area-subtitle">Nicolas Hernandez &middot; Equipo BizDev</div></div>
+                    <span class="doc-count">9 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://drive.google.com/drive/folders/1yNV-kL3p9ZYSu_tfWq3DsW3i-VH2foZD" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Procedimientos Comerciales</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1tIQSnk0Q8JB5TylQ9JvN_bJmYZ5h5eVL" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128203;</div>
+                        <div><div class="doc-link-name">Instructivos Comerciales</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/1CZ5vkUpfYhaZPcfoO5Wak4HMg7uJQGryl-ZHtqs0_F4/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128230;</div>
+                        <div><div class="doc-link-name">Catalogo de Productos 2025</div><div class="doc-link-type">Referencia</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/1uJS1sGd5bWZa8Dq2RH0AzdaCr0JaBP12gmGcV6psBk0/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#127793;</div>
+                        <div><div class="doc-link-name">Guia Comercial Foliares (Soja y Maiz)</div><div class="doc-link-type">Argumentario</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="#0052CC"><path d="M11.17 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.83L15.17 2H11.17zM14 8V3l5 5h-5z"/></svg> Confluence</div>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/360808/Comercial+Manuales" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128218;</div>
+                        <div><div class="doc-link-name">Comercial — Manuales</div><div class="doc-link-type">Indice de area</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/360826/Manual+General+de+Ventas" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128214;</div>
+                        <div><div class="doc-link-name">Manual General de Ventas</div><div class="doc-link-type">Manual completo</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/22118503" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128101;</div>
+                        <div><div class="doc-link-name">Protocolo Distribuidores Zonales</div><div class="doc-link-type">Protocolo comercial</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/186056705/Manual+de+Marca" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#127912;</div>
+                        <div><div class="doc-link-name">Manual de Marca</div><div class="doc-link-type">Branding</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/791773192" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128205;</div>
+                        <div><div class="doc-link-name">Informe Misiones (Campo)</div><div class="doc-link-type">Reporte de zona</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Admin y Finanzas -->
+            <div class="doc-area reveal reveal-delay-3">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon orange">&#128176;</div>
+                    <div><div class="doc-area-title">Administracion y Finanzas</div><div class="doc-area-subtitle">Facundo Tomasella &middot; L. Posco &middot; S. Mayotti</div></div>
+                    <span class="doc-count">5 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://drive.google.com/drive/folders/1ANajpi07PffYqFN76BqrFVfW0SeN9ohI" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Documentacion Ventas &amp; Finanzas</div><div class="doc-link-type">Carpeta principal</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/1b8vYXbx2DomYfbypvjZEP2dmCVyl78XvCSE0tzLRtww/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128202;</div>
+                        <div><div class="doc-link-name">Reporte Anual Agrefert 2025</div><div class="doc-link-type">Reporte integral</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="#0052CC"><path d="M11.17 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.83L15.17 2H11.17zM14 8V3l5 5h-5z"/></svg> Confluence</div>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/17727489/Admin+Manuales" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128218;</div>
+                        <div><div class="doc-link-name">Admin — Manuales</div><div class="doc-link-type">Indice de area</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/460554360/Finanzas+Manuales" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128176;</div>
+                        <div><div class="doc-link-name">Finanzas — Manuales</div><div class="doc-link-type">Indice de area</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/17858729" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128179;</div>
+                        <div><div class="doc-link-name">Facturacion &amp; Cobranzas — Manuales</div><div class="doc-link-type">Indice de area</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Planta / Produccion -->
+            <div class="doc-area reveal reveal-delay-4">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon cyan">&#128295;</div>
+                    <div><div class="doc-area-title">Operaciones y Planta</div><div class="doc-area-subtitle">Christian Insua &middot; Equipo de planta</div></div>
+                    <span class="doc-count">7 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://drive.google.com/drive/folders/1rOQziiv__yP5NPLJwv9sySy-qpbS9rmp" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Procedimientos de Produccion</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1-L5VQw7Q2yjI78-pBuWmsLIh2-qTVhdj" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128203;</div>
+                        <div><div class="doc-link-name">Instructivos de Produccion</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1TTuYaL7SLSTvyjOMStwPSR1Id5Te208O" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#127981;</div>
+                        <div><div class="doc-link-name">Documentacion de Planta</div><div class="doc-link-type">Carpeta general</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1GNxkYDo2Je6OlktNzLuTnywEypLo7M-G" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#9888;</div>
+                        <div><div class="doc-link-name">Hojas de Seguridad (SDS)</div><div class="doc-link-type">Fichas tecnicas</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="#0052CC"><path d="M11.17 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.83L15.17 2H11.17zM14 8V3l5 5h-5z"/></svg> Confluence</div>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/27197441/Planta+-+Manuales" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128218;</div>
+                        <div><div class="doc-link-name">Planta — Manuales</div><div class="doc-link-type">Indice de area</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/27263008" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128300;</div>
+                        <div><div class="doc-link-name">Protocolo Monoproducto y Mezclas Solidas</div><div class="doc-link-type">Protocolo planta</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/27262977" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#129514;</div>
+                        <div><div class="doc-link-name">Protocolo Extraccion Muestra Fertilizantes</div><div class="doc-link-type">Protocolo laboratorio</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Compras y COMEX -->
+            <div class="doc-area reveal reveal-delay-5">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon green">&#128679;</div>
+                    <div><div class="doc-area-title">Compras y COMEX</div><div class="doc-area-subtitle">Equipo de Abastecimiento</div></div>
+                    <span class="doc-count">2 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://drive.google.com/drive/folders/1mMV_uQkT6EXDu7b7Olr1VIHxqAfbQ_lD" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Procedimientos Compras y Proveedores</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="#0052CC"><path d="M11.17 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.83L15.17 2H11.17zM14 8V3l5 5h-5z"/></svg> Confluence</div>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/948076545" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128220;</div>
+                        <div><div class="doc-link-name">Politica de Compras, Gastos y Rendiciones</div><div class="doc-link-type">Politica integral</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- RRHH -->
+            <div class="doc-area reveal reveal-delay-6">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon green">&#129333;</div>
+                    <div><div class="doc-area-title">Recursos Humanos</div><div class="doc-area-subtitle">Induccion &middot; Evaluaciones</div></div>
+                    <span class="doc-count">4 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://drive.google.com/drive/folders/1llaO3I6GGDz9yiCIR5iu8hDSvzuLBAeW" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Procedimientos de RRHH</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/14MA6bdDIBnI6lLaVwbCeV5eA1HzljhPBmi2mGvg7zf4/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128218;</div>
+                        <div><div class="doc-link-name">Modelo de Induccion</div><div class="doc-link-type">Template</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="#0052CC"><path d="M11.17 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.83L15.17 2H11.17zM14 8V3l5 5h-5z"/></svg> Confluence</div>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/540016641/Recursos+Humanos" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#129333;</div>
+                        <div><div class="doc-link-name">Recursos Humanos</div><div class="doc-link-type">Pagina de area</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/22118532" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128178;</div>
+                        <div><div class="doc-link-name">Politica de Sueldos y Performance</div><div class="doc-link-type">Politica interna</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ISO / Calidad -->
+            <div class="doc-area reveal">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon green">&#9989;</div>
+                    <div><div class="doc-area-title">Sistema de Gestion ISO 9001</div><div class="doc-area-subtitle">Certificacion &middot; ANMaC &middot; Auditorias</div></div>
+                    <span class="doc-count">3 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://drive.google.com/drive/folders/1FUK1cLU4pUYn1bc_bLIGzQf_EClgI_o_" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Procedimientos del SGC</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/14BmforUR5yov5mLVc6AhG4TNxo9xmaTU" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128451;</div>
+                        <div><div class="doc-link-name">Arbol completo ISO (Todos los docs)</div><div class="doc-link-type">Carpeta raiz</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1GgxYIZpQo-NAhHj7e45xs1cH96gb0A3q" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128203;</div>
+                        <div><div class="doc-link-name">Registros ISO</div><div class="doc-link-type">Formularios y registros</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bactools -->
+            <div class="doc-area reveal">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon green">&#129514;</div>
+                    <div><div class="doc-area-title">Bactools (Bioinsumos)</div><div class="doc-area-subtitle">Biotecnologia &middot; I+D</div></div>
+                    <span class="doc-count">4 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://docs.google.com/document/d/17CllWA4I0FVnBfUDm7_O4gZDsZkxR-7_UEdc58wxUYI/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128218;</div>
+                        <div><div class="doc-link-name">Manual Comercial Bactools</div><div class="doc-link-type">Argumentario completo</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/17XZ5mcvUONBr2kNXqMy4FDIOmcmoTx4AME_UWi7Z7PY/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#127793;</div>
+                        <div><div class="doc-link-name">Plan Comercial Pack Soja B4+BSP</div><div class="doc-link-type">Estrategia</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1P5pI8WFwHF3NnF72qYXaCWFw_X-3GErc" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Procedimientos de Planta Bactools</div><div class="doc-link-type">Carpeta</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1tt9bvuJ9mU2zgLqNpBZgECgFg4sxbU9S" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128202;</div>
+                        <div><div class="doc-link-name">Comercial Bactools (Completo)</div><div class="doc-link-type">Carpeta</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Reportes Semanales Confluence -->
+            <div class="doc-area reveal">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon blue">&#128202;</div>
+                    <div><div class="doc-area-title">Reportes Semanales</div><div class="doc-area-subtitle">Seguimiento semanal por area en Confluence</div></div>
+                    <span class="doc-count">100+ reportes</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="#0052CC"><path d="M11.17 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.83L15.17 2H11.17zM14 8V3l5 5h-5z"/></svg> Confluence &middot; Reportes mas recientes</div>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/1002111097" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#127981;</div>
+                        <div><div class="doc-link-name">Planta Semanal (W11 — mas reciente)</div><div class="doc-link-type">Christian Insua</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/990740481" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128200;</div>
+                        <div><div class="doc-link-name">Comercial Semanal (W7 — mas reciente)</div><div class="doc-link-type">Nicolas Hernandez</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/955318273" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128202;</div>
+                        <div><div class="doc-link-name">Reporte General Semanal (W53)</div><div class="doc-link-type">Agustin Raffa</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/951812097" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128176;</div>
+                        <div><div class="doc-link-name">Admin y Finanzas Semanal (W51)</div><div class="doc-link-type">Facundo Tomasella</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/955351041/2026+-+Reportes" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128197;</div>
+                        <div><div class="doc-link-name">Indice de Reportes 2026</div><div class="doc-link-type">Pagina indice</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── MAPA DE PROCESOS ─── -->
+<section id="procesos">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">ISO 9001</span>
+            <h2 class="section-title">Mapa de Procesos</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Estructura ISO 9001 de Agrefert: desde el requerimiento del cliente hasta su satisfaccion</p>
+        </div>
+
+        <div class="pmap reveal">
+            <div class="pmap-band pmap-strat">
+                <div class="pmap-band-title">Direccion Estrategica</div>
+                <div class="pmap-flow">
+                    <div class="pmap-step pmap-step-outline">Politica de Calidad</div>
+                    <div class="pmap-step pmap-step-outline">Objetivos e Indicadores</div>
+                    <div class="pmap-step pmap-step-outline">Revision por la Direccion</div>
+                    <div class="pmap-step pmap-step-outline">Analisis de Ambiente</div>
+                    <div class="pmap-step pmap-step-outline">Gestion de Calidad</div>
+                </div>
+            </div>
+
+            <div class="pmap-band pmap-core">
+                <div class="pmap-band-title">Proceso Principal (Cadena de valor)</div>
+                <div class="pmap-io">
+                    <div class="pmap-io-label">Requisitos del cliente</div>
+                    <div style="flex:1;">
+                        <div class="pmap-flow" style="margin-bottom:0.6rem;">
+                            <div class="pmap-step pmap-step-green">Comercial</div>
+                            <span class="pmap-arr">&rarr;</span>
+                            <div class="pmap-step pmap-step-green">Diseno y Desarrollo</div>
+                            <span class="pmap-arr">&rarr;</span>
+                            <div class="pmap-step pmap-step-green">Planificacion</div>
+                            <span class="pmap-arr">&rarr;</span>
+                            <div class="pmap-step pmap-step-green">Compras y COMEX</div>
+                            <span class="pmap-arr">&rarr;</span>
+                            <div class="pmap-step pmap-step-green">Recepcion</div>
+                            <span class="pmap-arr">&rarr;</span>
+                            <div class="pmap-step pmap-step-green" style="background:var(--brand-green-dark);">Deposito</div>
+                        </div>
+                        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:0.5rem;">
+                            <div class="pmap-sub">
+                                <div class="pmap-sub-title">Mezclas Solidas</div>
+                                <div class="pmap-flow">
+                                    <div class="pmap-step pmap-step-green" style="font-size:0.72rem;">Formulacion</div>
+                                    <span class="pmap-arr">&rarr;</span>
+                                    <div class="pmap-step pmap-step-green" style="font-size:0.72rem;">Tolva</div>
+                                    <span class="pmap-arr">&rarr;</span>
+                                    <div class="pmap-step pmap-step-green" style="font-size:0.72rem;">Mezcladora</div>
+                                </div>
+                            </div>
+                            <div class="pmap-sub">
+                                <div class="pmap-sub-title">Liquidos</div>
+                                <div class="pmap-flow">
+                                    <div class="pmap-step pmap-step-green" style="font-size:0.72rem;">Formulacion</div>
+                                    <span class="pmap-arr">&rarr;</span>
+                                    <div class="pmap-step pmap-step-green" style="font-size:0.72rem;">Reactor</div>
+                                    <span class="pmap-arr">&rarr;</span>
+                                    <div class="pmap-step pmap-step-green" style="font-size:0.72rem;">Acopio</div>
+                                </div>
+                            </div>
+                            <div class="pmap-sub">
+                                <div class="pmap-sub-title">Mono Producto</div>
+                                <div class="pmap-flow">
+                                    <div class="pmap-step pmap-step-green" style="font-size:0.72rem;">Embolsado / Granel</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pmap-flow" style="margin-top:0.6rem; justify-content:flex-end;">
+                            <div class="pmap-step pmap-step-dark">Carga a Camion</div>
+                            <span class="pmap-arr">&rarr;</span>
+                            <div class="pmap-step pmap-step-dark">Despacho</div>
+                        </div>
+                    </div>
+                    <div class="pmap-io-label">Satisfaccion del cliente</div>
+                </div>
+            </div>
+
+            <div class="pmap-band pmap-support">
+                <div class="pmap-band-title">Procesos de Soporte</div>
+                <div class="pmap-flow">
+                    <div class="pmap-step pmap-step-support">RRHH</div>
+                    <div class="pmap-step pmap-step-support">Mantenimiento</div>
+                    <div class="pmap-step pmap-step-support">Compras</div>
+                    <div class="pmap-step pmap-step-support">Seguridad e Higiene</div>
+                </div>
+            </div>
+
+            <div class="pmap-band pmap-ext">
+                <div class="pmap-band-title">Actividades por Terceros</div>
+                <div class="pmap-flow">
+                    <div class="pmap-step pmap-step-ext">Consultoria de Calidad</div>
+                    <div class="pmap-step pmap-step-ext">Consultoria Legal</div>
+                    <div class="pmap-step pmap-step-ext">SENASA / ANMaC</div>
+                    <div class="pmap-step pmap-step-ext">Despachante COMEX</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── OBJETIVOS 2026 ─── -->
+<section id="objetivos" class="alt-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Plan 2026</span>
+            <h2 class="section-title">Plan y Objetivos 2026</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Consolidar el crecimiento de 2025 y superar 110.000 toneladas</p>
+        </div>
+
+        <div class="obj-grid">
+            <div class="obj-card reveal reveal-delay-1">
+                <h4>Mix y Margen (Marcas Propias)</h4>
+                <p>Definir Core Portfolio (top 7-10 SKUs por margen y rotacion). Pricing por zona/canal. Disciplina de contribucion marginal por familia. Plan tecnico-comercial con ensayos y argumentario.</p>
+            </div>
+            <div class="obj-card reveal reveal-delay-2">
+                <h4>Mezclas Fisicas (Nueva Mezcladora)</h4>
+                <p>Implementacion con estandares: recetas, control de lotes, trazabilidad y liberacion de calidad. Layout de depositos ordenado. Objetivo: capturar especialidades solidas con servicio y velocidad.</p>
+            </div>
+            <div class="obj-card reveal reveal-delay-3">
+                <h4>Liquidos (Aprovechar 2da Linea)</h4>
+                <p>Programacion de planta y forecast semanal por familia. Metrica de eficiencia: costo por tonelada producida. Crecer sin que aumente proporcionalmente el costo fijo/t.</p>
+            </div>
+            <div class="obj-card reveal reveal-delay-4">
+                <h4>Nitricas (Ventana Comercial)</h4>
+                <p>Diversificacion de origenes, planificacion por ventanas, stock minimo por familia. Solucion tecnica o decision de portfolio para UAN 32.</p>
+            </div>
+            <div class="obj-card reveal reveal-delay-5">
+                <h4>Capital de Trabajo</h4>
+                <p>Inventario: "una sola verdad" con cierre mensual. CC: aging mensual, limites, garantias y semaforo. Compras: comite semanal Comercial-Comex-Finanzas-Planta.</p>
+            </div>
+            <div class="obj-card reveal reveal-delay-6">
+                <h4>Bactools (Lanzamiento)</h4>
+                <p>Portafolio 2026: elegir 2-3 productos lideres. Pipeline de distribuidores prioritarios con metricas de conversion. Unit economics: costo por litro, margen y capacidad utilizada.</p>
+            </div>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin: 3rem 0 1rem; font-weight:700;" class="reveal">KPIs de Directorio (Tablero Mensual)</h3>
+        <div class="seg-grid">
+            <div class="seg-card reveal"><h4>Volumen y Mix</h4><p>Toneladas vendidas y % por familia</p></div>
+            <div class="seg-card reveal"><h4>Margen Bruto</h4><p>% por familia y top SKUs (US$/t)</p></div>
+            <div class="seg-card reveal"><h4>Costo Fijo/t</h4><p>Evolucion y punto de equilibrio</p></div>
+            <div class="seg-card reveal"><h4>Inventario</h4><p>Dias de stock por familia + quiebres</p></div>
+            <div class="seg-card reveal"><h4>Cuentas Corrientes</h4><p>Aging 0-30/31-60/61-90/+90, top 10</p></div>
+            <div class="seg-card reveal"><h4>OTIF</h4><p>Entrega completa y a tiempo (%)</p></div>
+            <div class="seg-card reveal"><h4>Calidad</h4><p>Reclamos (%) con base definida</p></div>
+            <div class="seg-card reveal"><h4>Caja</h4><p>Posicion neta, lineas y compromisos</p></div>
+            <div class="seg-card reveal"><h4>Capacidad</h4><p>% utilizada: liquidos y solidos</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+    <img src="img/logo_fert_white.png" alt="Agrefert Fertilizantes" style="max-width:180px; width:50%; margin-bottom:1rem; opacity:0.8;">
+    <p>Desde 1999 contribuyendo a la produccion de mas y mejores alimentos.</p>
+    <p style="margin-top:0.5rem; font-size:0.75rem; opacity:0.5;">Material de induccion &mdash; Uso interno &mdash; 2026</p>
+</footer>
+
+<!-- ─── BACK TO TOP ─── -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0})" aria-label="Volver arriba">&#8593;</button>
+
+<!-- ─── JAVASCRIPT ─── -->
+<script>
+(function() {
+    // Scroll reveal with IntersectionObserver
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right').forEach(function(el) { observer.observe(el); });
+
+    // Scroll progress bar
+    var progressBar = document.getElementById('scrollProgress');
+    var backToTop = document.getElementById('backToTop');
+    var topnav = document.getElementById('topnav');
+
+    window.addEventListener('scroll', function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = progress + '%';
+
+        // Back to top
+        if (scrollTop > 600) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+
+        // Nav shadow on scroll
+        if (scrollTop > 10) {
+            topnav.classList.add('scrolled');
+        } else {
+            topnav.classList.remove('scrolled');
+        }
+    });
+
+    // Active nav link highlight
+    var sections = document.querySelectorAll('section[id]');
+    var navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', function() {
+        var scrollPos = window.pageYOffset + 100;
+        navLinks.forEach(function(l) { l.classList.remove('current'); });
+        sections.forEach(function(section) {
+            if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+                var id = section.getAttribute('id');
+                navLinks.forEach(function(link) {
+                    if (link.getAttribute('href') === '#' + id) {
+                        link.classList.add('current');
+                    }
+                });
+            }
+        });
+    });
+
+    // Close mobile menu on link click
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.remove('open');
+        });
+    });
+})();
+</script>
+
+<script>
+function toggleTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('agrefert-theme', next);
+    updateToggleIcon();
+}
+function updateToggleIcon() {
+    var btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    btn.innerHTML = isDark ? '&#9728;' : '&#9790;';
+    btn.title = isDark ? 'Modo claro' : 'Modo oscuro';
+}
+updateToggleIcon();
+</script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Empresa — Induccion Agrefert</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+<script>
+    // Apply saved theme immediately to prevent flash
+    (function(){var t=localStorage.getItem('agrefert-theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark')}})();
+    </script>
+</head>
+<body>
+
+<!-- ─── SCROLL PROGRESS ─── -->
+<div id="scrollProgress" class="scroll-progress"></div>
+
+<!-- ─── TOPNAV ─── -->
+<nav class="topnav" id="topnav">
+    <div class="topnav-inner">
+        <a href="index.html" class="logo"><img src="img/logo.png" alt="Agrefert"></a>
+        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+        <div class="nav-links">
+            <a href="empresa.html" class="current">La Empresa</a>
+            <a href="equipo.html">Equipo</a>
+            <a href="productos.html">Productos</a>
+            <a href="documentacion.html">Documentacion</a>
+            <a href="operaciones.html">Operaciones</a>
+            <a href="manuales.html">Manuales</a>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Cambiar tema" title="Modo oscuro / claro">&#9790;</button>
+        </div>
+    </div>
+</nav>
+
+<!-- ─── PAGE HEADER ─── -->
+<div class="page-header">
+    <div class="page-header-content">
+        <h1>La Empresa</h1>
+        <p class="page-subtitle">Mision, vision, valores e historia de Agrefert desde 1999</p>
+        <div class="breadcrumb">
+            <a href="index.html">Inicio</a>
+            <span>/</span>
+            <span>La Empresa</span>
+        </div>
+    </div>
+</div>
+
+<!-- ─── MISION, VISION, VALORES ─── -->
+<section id="mision">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Nuestra Identidad</span>
+            <h2 class="section-title">Quienes Somos</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Lo que nos mueve, nuestra vision a futuro y los valores que guian cada decision</p>
+        </div>
+
+        <div class="mission-box reveal">
+            <h3>Mision</h3>
+            <p>Responder a la creciente demanda de fertilizantes, proporcionando a nuestros clientes productos de calidad y servicios personalizados siendo respetuosos del medio ambiente, y a nuestros empleados la posibilidad de ejecutar sus competencias profesionales.</p>
+        </div>
+
+        <div class="vision-box reveal">
+            <h3>Vision</h3>
+            <p>Vemos una economia donde el campo es el motor de la prosperidad economica. Donde la demanda de alimentos a nivel mundial tiene un crecimiento exponencial ano a ano y la produccion debe aumentar utilizando mejor tecnologia. Somos lideres en nutricion vegetal. Elaboramos y distribuimos fertilizantes liquidos y solidos de calidad y brindamos apoyo agronomico permanente.</p>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin-bottom:1.25rem; font-size:1.15rem; font-weight:700;" class="reveal">Nuestros Valores</h3>
+        <div class="values-grid">
+            <div class="value-card reveal reveal-delay-1">
+                <h4>Legalidad</h4>
+                <p>Operamos con todas las habilitaciones y cumplimiento normativo. Certificacion ISO 9001 y habilitaciones ANMaC.</p>
+            </div>
+            <div class="value-card reveal reveal-delay-2">
+                <h4>Creatividad</h4>
+                <p>Desarrollamos soluciones innovadoras en formulaciones y procesos para responder a las necesidades del productor.</p>
+            </div>
+            <div class="value-card reveal reveal-delay-3">
+                <h4>Responsabilidad</h4>
+                <p>Compromiso con la calidad, el medio ambiente y la entrega en tiempo y forma a cada cliente.</p>
+            </div>
+            <div class="value-card reveal reveal-delay-4">
+                <h4>Innovacion</h4>
+                <p>Bactools, bioinsumos, formulaciones liquidas avanzadas y expansion constante de nuestro portfolio tecnologico.</p>
+            </div>
+            <div class="value-card reveal reveal-delay-5">
+                <h4>Transparencia y Compromiso</h4>
+                <p>Comunicacion abierta con clientes, equipo y socios. Compartimos conocimiento y datos agronomicos.</p>
+            </div>
+            <div class="value-card reveal reveal-delay-6">
+                <h4>Credibilidad</h4>
+                <p>Mas de 25 anos cumpliendo compromisos, con trazabilidad completa y reclamos de calidad en solo 0,49%.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── HISTORIA ─── -->
+<section id="historia" class="alt-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Trayectoria</span>
+            <h2 class="section-title">Nuestra Historia</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Mas de 25 anos transformando la nutricion vegetal en Argentina</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="year">1999 — Fundacion</div>
+                <p>Norberto Munoz funda Agrefert en Rosario, con oficina administrativa en Capital Federal, comercializando fertilizantes solidos a granel. La empresa nace para llenar un vacio en el mercado de fertilizantes multinutrientes liquidos.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="year">2010 — Planta propia en COMIRSA</div>
+                <p>Se inaugura la planta de produccion y distribucion en el Complejo Industrial Ramallo &ndash; San Nicolas (COMIRSA), Buenos Aires. Predio de 50.000 m2 totalmente automatizado con sistemas completos de trazabilidad. Liderada por Ing. Jose Maria Llorens y Norberto Munoz.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="year">2011-2020 — Consolidacion y crecimiento</div>
+                <p>Se duplica la capacidad de almacenaje. Se incorporan lineas de produccion de fertilizantes liquidos. Se consolidan las marcas propias Zurko (liquidos) y Chacarero (mezclas solidas). Se obtiene la certificacion ISO 9001:2015 y habilitaciones ANMaC.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="year">2022 — 22.300 t vendidas</div>
+                <p>La empresa alcanza las 22.300 toneladas vendidas, iniciando una etapa de crecimiento acelerado con base comercial diversificada.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="year">2023 — 28.500 t vendidas</div>
+                <p>Crecimiento sostenido a 28.500 toneladas. Se fortalece la red de distribucion y el equipo comercial.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="year">2024 — 50.000 t vendidas</div>
+                <p>Salto a 50.000 toneladas, mas que duplicando el volumen en dos anos. Expansion nacional y nuevos segmentos de clientes. Primer ano de crecimiento compuesto positivo desde 2017.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="year">2025 — Record historico: 88.412 t</div>
+                <p>El ano del salto de escala. 88.412 toneladas vendidas, 246 clientes, 21 provincias, 34 SKUs. Facturacion >US$ 40 MM. Se instala la segunda linea de reactores de liquidos (+70% capacidad), equipo de despacho a granel (+50% productividad). Se valida la planta de Bactools (bioinsumos). 62.824 t importadas en 17 operaciones. Mix de 53,6% marcas propias.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="year">2026 — Objetivo: 110.000+ t</div>
+                <p>Consolidar el crecimiento y superar 110.000 t. Lanzamiento de mezclas fisicas con nueva mezcladora. Inicio comercial de Bactools. Foco en eficiencia, margen y gobernanza de procesos.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+    <img src="img/logo_fert_white.png" alt="Agrefert Fertilizantes" style="max-width:180px; width:50%; margin-bottom:1rem; opacity:0.8;">
+    <p>Desde 1999 contribuyendo a la produccion de mas y mejores alimentos.</p>
+    <p style="margin-top:0.5rem; font-size:0.75rem; opacity:0.5;">Material de induccion &mdash; Uso interno &mdash; 2026</p>
+</footer>
+
+<!-- ─── BACK TO TOP ─── -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0})" aria-label="Volver arriba">&#8593;</button>
+
+<!-- ─── JAVASCRIPT ─── -->
+<script>
+(function() {
+    // Scroll reveal with IntersectionObserver
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right').forEach(function(el) { observer.observe(el); });
+
+    // Scroll progress bar
+    var progressBar = document.getElementById('scrollProgress');
+    var backToTop = document.getElementById('backToTop');
+    var topnav = document.getElementById('topnav');
+
+    window.addEventListener('scroll', function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = progress + '%';
+
+        // Back to top
+        if (scrollTop > 600) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+
+        // Nav shadow on scroll
+        if (scrollTop > 10) {
+            topnav.classList.add('scrolled');
+        } else {
+            topnav.classList.remove('scrolled');
+        }
+    });
+
+    // Close mobile menu on link click
+    var navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.remove('open');
+        });
+    });
+})();
+</script>
+
+<script>
+function toggleTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('agrefert-theme', next);
+    updateToggleIcon();
+}
+function updateToggleIcon() {
+    var btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    btn.innerHTML = isDark ? '&#9728;' : '&#9790;';
+    btn.title = isDark ? 'Modo claro' : 'Modo oscuro';
+}
+updateToggleIcon();
+</script>
+</body>
+</html>

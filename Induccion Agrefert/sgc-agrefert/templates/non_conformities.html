@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+
+{% block title %}Non-Conformidades{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1 class="text-white mb-0">Non-Conformidades</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="{{ url_for('nc_form') }}" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Nueva NC
+            </a>
+        </div>
+    </div>
+
+    <!-- Status Filter -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="btn-group btn-group-sm" role="group">
+                <a href="{{ url_for('non_conformities', status_filter=None) }}"
+                   class="btn {% if not status_filter %}btn-secondary{% else %}btn-outline-secondary{% endif %} text-white">
+                    Todas
+                </a>
+                <a href="{{ url_for('non_conformities', status_filter='abierta') }}"
+                   class="btn {% if status_filter == 'abierta' %}btn-secondary{% else %}btn-outline-secondary{% endif %} text-white">
+                    Abiertas
+                </a>
+                <a href="{{ url_for('non_conformities', status_filter='en_tratamiento') }}"
+                   class="btn {% if status_filter == 'en_tratamiento' %}btn-secondary{% else %}btn-outline-secondary{% endif %} text-white">
+                    En Tratamiento
+                </a>
+                <a href="{{ url_for('non_conformities', status_filter='cerrada') }}"
+                   class="btn {% if status_filter == 'cerrada' %}btn-secondary{% else %}btn-outline-secondary{% endif %} text-white">
+                    Cerradas
+                </a>
+                <a href="{{ url_for('non_conformities', status_filter='verificada') }}"
+                   class="btn {% if status_filter == 'verificada' %}btn-secondary{% else %}btn-outline-secondary{% endif %} text-white">
+                    Verificadas
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Non-Conformities Table -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card bg-dark border-secondary">
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover mb-0">
+                        <thead class="table-secondary">
+                            <tr>
+                                <th style="width: 50px;">Semáforo</th>
+                                <th style="width: 80px;">Código</th>
+                                <th>Título</th>
+                                <th style="width: 120px;">Tipo</th>
+                                <th style="width: 120px;">Área</th>
+                                <th style="width: 120px;">Responsable</th>
+                                <th style="width: 100px;">Estado</th>
+                                <th style="width: 100px;">Vencimiento</th>
+                                <th style="width: 60px;">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if ncs %}
+                                {% for nc in ncs %}
+                                    <tr>
+                                        <td>
+                                            {% if nc.status == 'abierta' %}
+                                                <span class="traffic-light rojo"></span>
+                                            {% elif nc.status == 'en_tratamiento' %}
+                                                <span class="traffic-light amarillo"></span>
+                                            {% elif nc.status == 'cerrada' %}
+                                                <span class="traffic-light verde"></span>
+                                            {% else %}
+                                                <span class="traffic-light gris"></span>
+                                            {% endif %}
+                                        </td>
+                                        <td><code>{{ nc.code }}</code></td>
+                                        <td>
+                                            <a href="{{ url_for('nc_detail', nc_id=nc.id) }}" class="text-decoration-none text-white">
+                                                {{ nc.title }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {% if nc.nc_type == 'menor' %}
+                                                <span class="badge bg-info">Menor</span>
+                                            {% elif nc.nc_type == 'mayor' %}
+                                                <span class="badge bg-danger">Mayor</span>
+                                            {% elif nc.nc_type == 'observacion' %}
+                                                <span class="badge bg-warning text-dark">Observación</span>
+                                            {% elif nc.nc_type == 'oportunidad_mejora' %}
+                                                <span class="badge bg-success">Oportunidad</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ nc.area.name if nc.area else '-' }}</td>
+                                        <td>{{ nc.assignee.username if nc.assignee else '-' }}</td>
+                                        <td>
+                                            {% if nc.status == 'abierta' %}
+                                                <span class="badge badge-status status-abierta">Abierta</span>
+                                            {% elif nc.status == 'en_tratamiento' %}
+                                                <span class="badge badge-status status-en-tratamiento">En Tratamiento</span>
+                                            {% elif nc.status == 'cerrada' %}
+                                                <span class="badge badge-status status-cerrada">Cerrada</span>
+                                            {% elif nc.status == 'verificada' %}
+                                                <span class="badge badge-status status-verificada">Verificada</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if nc.due_date %}
+                                                <small class="text-muted">{{ nc.due_date.strftime('%d/%m/%Y') }}</small>
+                                            {% else %}
+                                                <small class="text-muted">-</small>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{{ url_for('nc_detail', nc_id=nc.id) }}" class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="9" class="text-center text-muted py-4">
+                                        No hay non-conformidades registradas
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.traffic-light {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #666;
+}
+
+.traffic-light.verde {
+    background-color: #28a745;
+}
+
+.traffic-light.amarillo {
+    background-color: #ffc107;
+}
+
+.traffic-light.rojo {
+    background-color: #dc3545;
+}
+
+.traffic-light.gris {
+    background-color: #6c757d;
+}
+
+.badge-status {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+}
+
+.badge-status.status-abierta {
+    background-color: #dc3545;
+}
+
+.badge-status.status-en-tratamiento {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.badge-status.status-cerrada {
+    background-color: #28a745;
+}
+
+.badge-status.status-verificada {
+    background-color: #17a2b8;
+}
+</style>
+{% endblock %}

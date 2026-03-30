@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Notificaciones - SGC Agrefert{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="text-success mb-2">Notificaciones</h1>
+            <p class="text-muted">Gestiona tus notificaciones y alertas</p>
+        </div>
+        {% if notifications %}
+        <div class="col-md-4 text-end">
+            <form method="POST" action="{{ url_for('mark_all_as_read') }}" style="display: inline;">
+                <button type="submit" class="btn btn-sm btn-outline-success">
+                    <i class="fas fa-check-double"></i> Marcar todas como leídas
+                </button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if notifications %}
+    <div class="list-group">
+        {% for notification in notifications %}
+        <div class="list-group-item list-group-item-action bg-dark border-bottom border-secondary {% if not notification.read %}border-start border-success border-5{% endif %}" style="cursor: pointer;">
+            <div class="d-flex align-items-start gap-3">
+                <!-- Severity Icon -->
+                <div class="pt-1">
+                    {% if notification.severity == 'critical' %}
+                    <span class="badge bg-danger p-2">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </span>
+                    {% elif notification.severity == 'warning' %}
+                    <span class="badge bg-warning text-dark p-2">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                    {% elif notification.severity == 'info' %}
+                    <span class="badge bg-info text-dark p-2">
+                        <i class="fas fa-info-circle"></i>
+                    </span>
+                    {% else %}
+                    <span class="badge bg-success p-2">
+                        <i class="fas fa-check-circle"></i>
+                    </span>
+                    {% endif %}
+                </div>
+
+                <!-- Notification Content -->
+                <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="mb-1 {% if notification.read %}text-muted{% else %}text-success{% endif %}">
+                                {{ notification.title }}
+                            </h6>
+                            <p class="mb-2 text-muted small">
+                                {{ notification.message }}
+                            </p>
+                        </div>
+                        <small class="text-muted flex-shrink-0">
+                            {{ notification.created_at.strftime('%d/%m/%Y %H:%M') if notification.created_at else 'N/A' }}
+                        </small>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex gap-2 mt-2">
+                        {% if not notification.read %}
+                        <form method="POST" action="{{ url_for('mark_notification_as_read', notification_id=notification.id) }}" style="display: inline;">
+                            <button type="submit" class="btn btn-sm btn-success">
+                                <i class="fas fa-check"></i> Marcar como leída
+                            </button>
+                        </form>
+                        {% endif %}
+
+                        {% if notification.entity_type and notification.entity_id %}
+                        <a href="{{ url_for('notification_entity', entity_type=notification.entity_type, entity_id=notification.entity_id) }}" class="btn btn-sm btn-outline-success">
+                            <i class="fas fa-arrow-right"></i> Ver
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-success" role="alert">
+        <i class="fas fa-check-circle"></i> No tienes notificaciones nuevas. ¡Buen trabajo!
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .list-group-item:hover {
+        background-color: rgba(76, 175, 80, 0.1) !important;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,319 @@
+{% extends 'base.html' %}
+
+{% block title %}NC {{ nc.code }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="text-white mb-2">{{ nc.title }}</h1>
+            <div class="d-flex gap-2 align-items-center">
+                <code class="text-info">{{ nc.code }}</code>
+                {% if nc.status == 'abierta' %}
+                    <span class="badge badge-status status-abierta">Abierta</span>
+                    <span class="traffic-light rojo"></span>
+                {% elif nc.status == 'en_tratamiento' %}
+                    <span class="badge badge-status status-en-tratamiento">En Tratamiento</span>
+                    <span class="traffic-light amarillo"></span>
+                {% elif nc.status == 'cerrada' %}
+                    <span class="badge badge-status status-cerrada">Cerrada</span>
+                    <span class="traffic-light verde"></span>
+                {% elif nc.status == 'verificada' %}
+                    <span class="badge badge-status status-verificada">Verificada</span>
+                    <span class="traffic-light gris"></span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{{ url_for('non_conformities') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+        </div>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-dark border-secondary">
+                <div class="card-body">
+                    <h6 class="text-muted small mb-2">TIPO</h6>
+                    {% if nc.nc_type == 'menor' %}
+                        <span class="badge bg-info">Menor</span>
+                    {% elif nc.nc_type == 'mayor' %}
+                        <span class="badge bg-danger">Mayor</span>
+                    {% elif nc.nc_type == 'observacion' %}
+                        <span class="badge bg-warning text-dark">Observación</span>
+                    {% elif nc.nc_type == 'oportunidad_mejora' %}
+                        <span class="badge bg-success">Oportunidad</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-dark border-secondary">
+                <div class="card-body">
+                    <h6 class="text-muted small mb-2">FUENTE</h6>
+                    <p class="text-white small mb-0">
+                        {% if nc.source == 'auditoria_interna' %}
+                            Auditoría Interna
+                        {% elif nc.source == 'auditoria_externa' %}
+                            Auditoría Externa
+                        {% elif nc.source == 'reclamo_cliente' %}
+                            Reclamo de Cliente
+                        {% elif nc.source == 'proceso' %}
+                            Proceso Interno
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-dark border-secondary">
+                <div class="card-body">
+                    <h6 class="text-muted small mb-2">ÁREA</h6>
+                    <p class="text-white small mb-0">{{ nc.area.name if nc.area else '-' }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-dark border-secondary">
+                <div class="card-body">
+                    <h6 class="text-muted small mb-2">VENCIMIENTO</h6>
+                    <p class="text-white small mb-0">
+                        {% if nc.due_date %}
+                            {{ nc.due_date.strftime('%d/%m/%Y') }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <form method="POST" action="{{ url_for('nc_detail', nc_id=nc.id) }}">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Description Section -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h5 class="text-white mb-0">Descripción de la NC</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-light mb-0">{{ nc.description }}</p>
+                    </div>
+                </div>
+
+                <!-- Root Cause Section -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h5 class="text-white mb-0">Causa Raíz</h5>
+                    </div>
+                    <div class="card-body">
+                        <textarea
+                            class="form-control form-control-dark"
+                            name="root_cause"
+                            rows="4"
+                            placeholder="Describe la causa raíz del problema">{{ nc.root_cause or '' }}</textarea>
+                        <small class="form-text text-muted d-block mt-2">Análisis detallado de por qué ocurrió la NC</small>
+                    </div>
+                </div>
+
+                <!-- Corrective Action Section -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h5 class="text-white mb-0">Acción Correctiva</h5>
+                    </div>
+                    <div class="card-body">
+                        <textarea
+                            class="form-control form-control-dark"
+                            name="corrective_action"
+                            rows="4"
+                            placeholder="Acción inmediata para corregir el problema">{{ nc.corrective_action or '' }}</textarea>
+                        <small class="form-text text-muted d-block mt-2">Qué se hizo para resolver inmediatamente</small>
+                    </div>
+                </div>
+
+                <!-- Preventive Action Section -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h5 class="text-white mb-0">Acción Preventiva</h5>
+                    </div>
+                    <div class="card-body">
+                        <textarea
+                            class="form-control form-control-dark"
+                            name="preventive_action"
+                            rows="4"
+                            placeholder="Cómo se evitará que vuelva a ocurrir">{{ nc.preventive_action or '' }}</textarea>
+                        <small class="form-text text-muted d-block mt-2">Plan a largo plazo para prevenir recurrencia</small>
+                    </div>
+                </div>
+
+                <!-- Verification Section -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h5 class="text-white mb-0">Verificación</h5>
+                    </div>
+                    <div class="card-body">
+                        <textarea
+                            class="form-control form-control-dark"
+                            name="verification"
+                            rows="4"
+                            placeholder="Cómo se verificó la eficacia de las acciones">{{ nc.verification or '' }}</textarea>
+                        <small class="form-text text-muted d-block mt-2">Evidencia de que las acciones fueron efectivas</small>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="d-flex gap-2 mb-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-circle"></i> Guardar Cambios
+                    </button>
+                    <a href="{{ url_for('non_conformities') }}" class="btn btn-outline-secondary">
+                        Cancelar
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Responsible Person -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h6 class="text-white mb-0">Responsable</h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-light small mb-0">
+                            <i class="bi bi-person-check"></i>
+                            {{ nc.assignee.username if nc.assignee else 'Sin asignar' }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Status Change -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h6 class="text-white mb-0">Cambiar Estado</h6>
+                    </div>
+                    <div class="card-body">
+                        <select
+                            class="form-select form-select-dark form-select-sm"
+                            name="status">
+                            <option value="abierta" {% if nc.status == 'abierta' %}selected{% endif %}>Abierta</option>
+                            <option value="en_tratamiento" {% if nc.status == 'en_tratamiento' %}selected{% endif %}>En Tratamiento</option>
+                            <option value="cerrada" {% if nc.status == 'cerrada' %}selected{% endif %}>Cerrada</option>
+                            <option value="verificada" {% if nc.status == 'verificada' %}selected{% endif %}>Verificada</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h6 class="text-white mb-0">Cronograma</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="small">
+                            <div class="mb-2">
+                                <span class="text-muted">Creada:</span>
+                                <br>
+                                <span class="text-light">{{ nc.created_at.strftime('%d/%m/%Y %H:%M') if nc.created_at else '-' }}</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="text-muted">Actualizada:</span>
+                                <br>
+                                <span class="text-light">{{ nc.updated_at.strftime('%d/%m/%Y %H:%M') if nc.updated_at else '-' }}</span>
+                            </div>
+                            <div>
+                                <span class="text-muted">Vencimiento:</span>
+                                <br>
+                                <span class="text-warning">{{ nc.due_date.strftime('%d/%m/%Y') if nc.due_date else '-' }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+.traffic-light {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #666;
+}
+
+.traffic-light.verde {
+    background-color: #28a745;
+}
+
+.traffic-light.amarillo {
+    background-color: #ffc107;
+}
+
+.traffic-light.rojo {
+    background-color: #dc3545;
+}
+
+.traffic-light.gris {
+    background-color: #6c757d;
+}
+
+.badge-status {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+}
+
+.badge-status.status-abierta {
+    background-color: #dc3545;
+}
+
+.badge-status.status-en-tratamiento {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.badge-status.status-cerrada {
+    background-color: #28a745;
+}
+
+.badge-status.status-verificada {
+    background-color: #17a2b8;
+}
+
+.form-control-dark {
+    background-color: #495057;
+    border-color: #495057;
+    color: #ffffff;
+}
+
+.form-control-dark:focus {
+    background-color: #495057;
+    border-color: #80bdff;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-select-dark {
+    background-color: #495057;
+    border-color: #495057;
+    color: #ffffff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.form-select-dark:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-select-dark option {
+    background-color: #495057;
+    color: #ffffff;
+}
+</style>
+{% endblock %}

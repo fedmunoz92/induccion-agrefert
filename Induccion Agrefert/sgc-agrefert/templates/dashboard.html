@@ -1,0 +1,843 @@
+{% extends "base.html" %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- KPI Cards Row -->
+    <div class="row mb-4">
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="kpi-card success">
+                <div class="kpi-icon">
+                    <i class="bi bi-file-earmark-check"></i>
+                </div>
+                <div class="kpi-value">{{ total_docs }}</div>
+                <div class="kpi-label">Docs Vigentes</div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="kpi-card warning">
+                <div class="kpi-icon">
+                    <i class="bi bi-exclamation-triangle"></i>
+                </div>
+                <div class="kpi-value">{{ docs_warning }}</div>
+                <div class="kpi-label">Por Vencer</div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="kpi-card danger">
+                <div class="kpi-icon">
+                    <i class="bi bi-x-circle"></i>
+                </div>
+                <div class="kpi-value">{{ docs_expired }}</div>
+                <div class="kpi-label">Docs Vencidos</div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="kpi-card ncs">
+                <div class="kpi-icon">
+                    <i class="bi bi-bug"></i>
+                </div>
+                <div class="kpi-value">{{ open_ncs }}</div>
+                <div class="kpi-label">NCs Abiertas</div>
+                {% if ncs_overdue > 0 %}
+                    <div class="ncs-overdue">{{ ncs_overdue }} vencidas</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="kpi-card claims">
+                <div class="kpi-icon">
+                    <i class="bi bi-chat-dots-fill"></i>
+                </div>
+                <div class="kpi-value">{{ open_claims }}</div>
+                <div class="kpi-label">Reclamos Abiertos</div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="kpi-card audits">
+                <div class="kpi-icon">
+                    <i class="bi bi-clipboard-check"></i>
+                </div>
+                <div class="kpi-value">{{ upcoming_audits }}</div>
+                <div class="kpi-label">Auditorías Pendientes</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quality Objectives Section -->
+    {% if objectives %}
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card card-dark">
+                <div class="card-header card-header-dark">
+                    <h5 class="mb-0">
+                        <i class="bi bi-target"></i> Objetivos de Calidad 2026
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for obj in objectives %}
+                        <div class="col-lg-6 mb-4">
+                            <div class="objective-card">
+                                <div class="objective-header">
+                                    <div class="objective-info">
+                                        <span class="objective-code">{{ obj.code }}</span>
+                                        <h6 class="objective-name">{{ obj.name }}</h6>
+                                        {% if obj.area %}
+                                        <span class="objective-area">{{ obj.area.name }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="traffic-light {{ obj.alert_status }}">
+                                        <div class="light"></div>
+                                    </div>
+                                </div>
+                                <div class="objective-progress">
+                                    <div class="progress-bar-container">
+                                        <div class="progress-bar-fill" style="width: {% if obj.target > 0 %}{{ (obj.current_value / obj.target * 100)|round|int }}{% else %}0{% endif %}%"></div>
+                                    </div>
+                                    <div class="progress-labels">
+                                        <span class="progress-current">{{ obj.current_value }}</span>
+                                        <span class="progress-target">Meta: {{ obj.target }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Recent Activity Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card card-dark">
+                <div class="card-header card-header-dark">
+                    <h5 class="mb-0">
+                        <i class="bi bi-clock-history"></i> Actividad Reciente
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-tabs nav-tabs-dark" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="docs-tab" data-bs-toggle="tab" data-bs-target="#docs-panel" type="button" role="tab" aria-controls="docs-panel" aria-selected="true">
+                                <i class="bi bi-file-earmark"></i> Documentos
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="ncs-tab" data-bs-toggle="tab" data-bs-target="#ncs-panel" type="button" role="tab" aria-controls="ncs-panel" aria-selected="false">
+                                <i class="bi bi-bug"></i> No Conformidades
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="claims-tab" data-bs-toggle="tab" data-bs-target="#claims-panel" type="button" role="tab" aria-controls="claims-panel" aria-selected="false">
+                                <i class="bi bi-chat-dots"></i> Reclamos
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content tab-content-dark">
+                        <!-- Documents Tab -->
+                        <div class="tab-pane fade show active" id="docs-panel" role="tabpanel" aria-labelledby="docs-tab">
+                            {% if recent_docs %}
+                                <div class="activity-list">
+                                    {% for doc in recent_docs %}
+                                    <div class="activity-item">
+                                        <div class="activity-icon docs">
+                                            <i class="bi bi-file-earmark"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <h6 class="activity-title">{{ doc.title }}</h6>
+                                            <p class="activity-meta">{{ doc.code }}</p>
+                                            <small class="activity-date">{{ doc.updated_at.strftime('%d %b %Y %H:%M') if doc.updated_at else '' }}</small>
+                                        </div>
+                                        <div class="activity-status">
+                                            {% if doc.status == 'vigente' %}
+                                                <span class="badge bg-success">Vigente</span>
+                                            {% elif doc.status == 'vencido' %}
+                                                <span class="badge bg-danger">Vencido</span>
+                                            {% else %}
+                                                <span class="badge bg-warning">Por vencer</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <div class="empty-state">
+                                    <i class="bi bi-inbox"></i>
+                                    <p>No hay documentos recientes</p>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Non-Conformities Tab -->
+                        <div class="tab-pane fade" id="ncs-panel" role="tabpanel" aria-labelledby="ncs-tab">
+                            {% if recent_ncs %}
+                                <div class="activity-list">
+                                    {% for nc in recent_ncs %}
+                                    <div class="activity-item">
+                                        <div class="activity-icon ncs">
+                                            <i class="bi bi-bug"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <h6 class="activity-title">{{ nc.title }}</h6>
+                                            <p class="activity-meta">{{ nc.number }}</p>
+                                            <small class="activity-date">{{ nc.created_at.strftime('%d %b %Y %H:%M') if nc.created_at else '' }}</small>
+                                        </div>
+                                        <div class="activity-status">
+                                            {% if nc.status == 'abierta' %}
+                                                <span class="badge bg-danger">Abierta</span>
+                                            {% elif nc.status == 'en_tratamiento' %}
+                                                <span class="badge bg-warning">En tratamiento</span>
+                                            {% else %}
+                                                <span class="badge bg-success">Cerrada</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <div class="empty-state">
+                                    <i class="bi bi-inbox"></i>
+                                    <p>No hay no conformidades recientes</p>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Claims Tab -->
+                        <div class="tab-pane fade" id="claims-panel" role="tabpanel" aria-labelledby="claims-tab">
+                            {% if recent_claims %}
+                                <div class="activity-list">
+                                    {% for claim in recent_claims %}
+                                    <div class="activity-item">
+                                        <div class="activity-icon claims">
+                                            <i class="bi bi-chat-dots"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <h6 class="activity-title">{{ claim.title }}</h6>
+                                            <p class="activity-meta">{{ claim.number }}</p>
+                                            <small class="activity-date">{{ claim.created_at.strftime('%d %b %Y %H:%M') if claim.created_at else '' }}</small>
+                                        </div>
+                                        <div class="activity-status">
+                                            {% if claim.status == 'abierto' %}
+                                                <span class="badge bg-danger">Abierto</span>
+                                            {% elif claim.status == 'en_investigacion' %}
+                                                <span class="badge bg-warning">En investigación</span>
+                                            {% else %}
+                                                <span class="badge bg-success">Cerrado</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <div class="empty-state">
+                                    <i class="bi bi-inbox"></i>
+                                    <p>No hay reclamos recientes</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Section -->
+    {% if notifications %}
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card card-dark">
+                <div class="card-header card-header-dark">
+                    <h5 class="mb-0">
+                        <i class="bi bi-bell"></i> Panel de Notificaciones
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="notifications-list">
+                        {% for notification in notifications %}
+                        <div class="notification-item notification-{{ notification.severity }}">
+                            <div class="notification-icon">
+                                {% if notification.severity == 'danger' %}
+                                    <i class="bi bi-exclamation-circle-fill"></i>
+                                {% elif notification.severity == 'warning' %}
+                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                {% elif notification.severity == 'info' %}
+                                    <i class="bi bi-info-circle-fill"></i>
+                                {% else %}
+                                    <i class="bi bi-check-circle-fill"></i>
+                                {% endif %}
+                            </div>
+                            <div class="notification-content">
+                                <h6 class="notification-title">{{ notification.title }}</h6>
+                                <p class="notification-message">{{ notification.message }}</p>
+                                <small class="notification-time">{{ notification.created_at.strftime('%d %b %Y %H:%M') if notification.created_at else '' }}</small>
+                            </div>
+                            {% if notification.dismissible %}
+                            <button type="button" class="btn-dismiss" data-notification-id="{{ notification.id }}">
+                                <i class="bi bi-x"></i>
+                            </button>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    :root {
+        --primary-green: #4CAF50;
+        --dark-bg: #0d1117;
+        --dark-card: #161b22;
+        --dark-border: #30363d;
+        --text-light: #c9d1d9;
+        --text-muted: #8b949e;
+    }
+
+    /* KPI Cards */
+    .kpi-card {
+        background-color: var(--dark-card);
+        border: 1px solid var(--dark-border);
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .kpi-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .kpi-card.success::before {
+        background-color: #10b981;
+    }
+
+    .kpi-card.warning::before {
+        background-color: #f59e0b;
+    }
+
+    .kpi-card.danger::before {
+        background-color: #ef4444;
+    }
+
+    .kpi-card.ncs::before {
+        background-color: #8b5cf6;
+    }
+
+    .kpi-card.claims::before {
+        background-color: #06b6d4;
+    }
+
+    .kpi-card.audits::before {
+        background-color: var(--primary-green);
+    }
+
+    .kpi-card:hover {
+        border-color: var(--primary-green);
+        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15);
+        transform: translateY(-2px);
+    }
+
+    .kpi-icon {
+        font-size: 32px;
+        margin-bottom: 12px;
+        color: var(--primary-green);
+    }
+
+    .kpi-card.warning .kpi-icon {
+        color: #f59e0b;
+    }
+
+    .kpi-card.danger .kpi-icon {
+        color: #ef4444;
+    }
+
+    .kpi-card.ncs .kpi-icon {
+        color: #8b5cf6;
+    }
+
+    .kpi-card.claims .kpi-icon {
+        color: #06b6d4;
+    }
+
+    .kpi-card.audits .kpi-icon {
+        color: var(--primary-green);
+    }
+
+    .kpi-value {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--text-light);
+        margin-bottom: 8px;
+    }
+
+    .kpi-label {
+        font-size: 13px;
+        color: var(--text-muted);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .ncs-overdue {
+        font-size: 11px;
+        color: #ef4444;
+        font-weight: 600;
+        margin-top: 8px;
+    }
+
+    /* Card Styling */
+    .card-dark {
+        background-color: var(--dark-card);
+        border: 1px solid var(--dark-border);
+        border-radius: 8px;
+    }
+
+    .card-header-dark {
+        background-color: rgba(76, 175, 80, 0.1);
+        border-bottom: 1px solid var(--dark-border);
+        padding: 16px;
+    }
+
+    .card-header-dark h5 {
+        color: var(--primary-green);
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .card-body {
+        color: var(--text-light);
+    }
+
+    /* Objective Cards */
+    .objective-card {
+        background-color: rgba(76, 175, 80, 0.05);
+        border: 1px solid var(--dark-border);
+        border-radius: 8px;
+        padding: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .objective-card:hover {
+        border-color: var(--primary-green);
+        box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
+    }
+
+    .objective-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 16px;
+    }
+
+    .objective-info {
+        flex: 1;
+    }
+
+    .objective-code {
+        display: inline-block;
+        background-color: rgba(76, 175, 80, 0.15);
+        color: var(--primary-green);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .objective-name {
+        color: var(--text-light);
+        margin-bottom: 4px;
+        font-weight: 600;
+    }
+
+    .objective-area {
+        font-size: 12px;
+        color: var(--text-muted);
+    }
+
+    .traffic-light {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .traffic-light.verde {
+        background-color: rgba(16, 185, 129, 0.15);
+    }
+
+    .traffic-light.verde .light {
+        width: 12px;
+        height: 12px;
+        background-color: #10b981;
+        border-radius: 50%;
+        box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+    }
+
+    .traffic-light.amarillo {
+        background-color: rgba(245, 158, 11, 0.15);
+    }
+
+    .traffic-light.amarillo .light {
+        width: 12px;
+        height: 12px;
+        background-color: #f59e0b;
+        border-radius: 50%;
+        box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+    }
+
+    .traffic-light.rojo {
+        background-color: rgba(239, 68, 68, 0.15);
+    }
+
+    .traffic-light.rojo .light {
+        width: 12px;
+        height: 12px;
+        background-color: #ef4444;
+        border-radius: 50%;
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+    }
+
+    .traffic-light.gris {
+        background-color: rgba(107, 114, 128, 0.15);
+    }
+
+    .traffic-light.gris .light {
+        width: 12px;
+        height: 12px;
+        background-color: #6b7280;
+        border-radius: 50%;
+        box-shadow: 0 0 8px rgba(107, 114, 128, 0.3);
+    }
+
+    .progress-bar-container {
+        background-color: rgba(0, 0, 0, 0.2);
+        height: 6px;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 8px;
+    }
+
+    .progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary-green) 0%, #45a049 100%);
+        border-radius: 3px;
+        transition: width 0.3s ease;
+    }
+
+    .progress-labels {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+    }
+
+    .progress-current {
+        color: var(--text-light);
+        font-weight: 600;
+    }
+
+    .progress-target {
+        color: var(--text-muted);
+    }
+
+    /* Tabs */
+    .nav-tabs-dark {
+        border-bottom: 1px solid var(--dark-border);
+    }
+
+    .nav-tabs-dark .nav-link {
+        color: var(--text-muted);
+        border: none;
+        border-bottom: 2px solid transparent;
+        padding: 12px 16px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .nav-tabs-dark .nav-link:hover {
+        color: var(--text-light);
+        border-bottom-color: var(--primary-green);
+    }
+
+    .nav-tabs-dark .nav-link.active {
+        color: var(--primary-green);
+        border-bottom-color: var(--primary-green);
+        background-color: transparent;
+    }
+
+    .tab-content-dark {
+        padding: 16px 0;
+    }
+
+    /* Activity List */
+    .activity-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .activity-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px;
+        background-color: rgba(76, 175, 80, 0.05);
+        border: 1px solid var(--dark-border);
+        border-radius: 6px;
+        transition: all 0.2s ease;
+    }
+
+    .activity-item:hover {
+        background-color: rgba(76, 175, 80, 0.1);
+        border-color: var(--primary-green);
+    }
+
+    .activity-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 18px;
+    }
+
+    .activity-icon.docs {
+        background-color: rgba(59, 130, 246, 0.15);
+        color: #3b82f6;
+    }
+
+    .activity-icon.ncs {
+        background-color: rgba(139, 92, 246, 0.15);
+        color: #8b5cf6;
+    }
+
+    .activity-icon.claims {
+        background-color: rgba(6, 182, 212, 0.15);
+        color: #06b6d4;
+    }
+
+    .activity-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .activity-title {
+        color: var(--text-light);
+        font-weight: 600;
+        margin-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .activity-meta {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+    }
+
+    .activity-date {
+        color: var(--text-muted);
+        font-size: 11px;
+    }
+
+    .activity-status {
+        flex-shrink: 0;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--text-muted);
+    }
+
+    .empty-state i {
+        font-size: 48px;
+        margin-bottom: 16px;
+        opacity: 0.5;
+    }
+
+    .empty-state p {
+        margin: 0;
+        font-size: 14px;
+    }
+
+    /* Notifications */
+    .notifications-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .notification-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px;
+        border-left: 4px solid;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+        transition: all 0.2s ease;
+    }
+
+    .notification-item.notification-danger {
+        border-left-color: #ef4444;
+        background-color: rgba(239, 68, 68, 0.1);
+    }
+
+    .notification-item.notification-warning {
+        border-left-color: #f59e0b;
+        background-color: rgba(245, 158, 11, 0.1);
+    }
+
+    .notification-item.notification-info {
+        border-left-color: #3b82f6;
+        background-color: rgba(59, 130, 246, 0.1);
+    }
+
+    .notification-item.notification-success {
+        border-left-color: #10b981;
+        background-color: rgba(16, 185, 129, 0.1);
+    }
+
+    .notification-icon {
+        font-size: 20px;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .notification-item.notification-danger .notification-icon {
+        color: #ef4444;
+    }
+
+    .notification-item.notification-warning .notification-icon {
+        color: #f59e0b;
+    }
+
+    .notification-item.notification-info .notification-icon {
+        color: #3b82f6;
+    }
+
+    .notification-item.notification-success .notification-icon {
+        color: #10b981;
+    }
+
+    .notification-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .notification-title {
+        color: var(--text-light);
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+
+    .notification-message {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+    }
+
+    .notification-time {
+        color: var(--text-muted);
+        font-size: 11px;
+    }
+
+    .btn-dismiss {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        padding: 4px;
+        font-size: 18px;
+        transition: color 0.2s ease;
+    }
+
+    .btn-dismiss:hover {
+        color: var(--text-light);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .kpi-card {
+            padding: 15px;
+        }
+
+        .kpi-value {
+            font-size: 24px;
+        }
+
+        .objective-header {
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .traffic-light {
+            align-self: flex-start;
+        }
+
+        .activity-item {
+            flex-wrap: wrap;
+        }
+
+        .activity-content {
+            width: 100%;
+        }
+
+        .activity-status {
+            align-self: flex-end;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle notification dismissal
+        const dismissButtons = document.querySelectorAll('.btn-dismiss');
+        dismissButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const notificationId = this.dataset.notificationId;
+                const notificationItem = this.closest('.notification-item');
+
+                notificationItem.style.opacity = '0';
+                notificationItem.style.transform = 'translateX(-10px)';
+
+                setTimeout(() => {
+                    notificationItem.remove();
+                    // Optionally, send a request to the server to mark notification as read/dismissed
+                    // fetch('/api/notifications/' + notificationId + '/dismiss', { method: 'POST' });
+                }, 200);
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SGC{% endblock %} — Agrefert ISO 9001</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --ag-green: #1a472a;
+            --ag-green-light: #2d6a3f;
+            --ag-green-accent: #4CAF50;
+            --ag-dark: #0d1117;
+            --ag-surface: #161b22;
+            --ag-surface-alt: #21262d;
+            --ag-border: #30363d;
+            --ag-text: #e6edf3;
+            --ag-text-secondary: #8b949e;
+            --ag-red: #f85149;
+            --ag-yellow: #e3b341;
+            --ag-blue: #58a6ff;
+        }
+        * { box-sizing: border-box; }
+        body { background: var(--ag-dark); color: var(--ag-text); font-family: 'Segoe UI', system-ui, sans-serif; margin: 0; }
+        /* Sidebar */
+        .sidebar {
+            position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
+            background: var(--ag-surface); border-right: 1px solid var(--ag-border);
+            display: flex; flex-direction: column; z-index: 100;
+            transition: transform 0.3s;
+        }
+        .sidebar-brand {
+            padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--ag-border);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .sidebar-brand h5 { margin: 0; font-weight: 800; color: var(--ag-green-accent); font-size: 1.1rem; }
+        .sidebar-brand small { display: block; color: var(--ag-text-secondary); font-size: 0.7rem; font-weight: 400; }
+        .sidebar-nav { flex: 1; overflow-y: auto; padding: 0.75rem 0; }
+        .sidebar-nav .nav-section {
+            padding: 0.5rem 1.5rem 0.25rem; font-size: 0.65rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.1em; color: var(--ag-text-secondary);
+        }
+        .sidebar-nav a {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.6rem 1.5rem; color: var(--ag-text-secondary);
+            text-decoration: none; font-size: 0.875rem; transition: all 0.15s;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-nav a:hover { background: var(--ag-surface-alt); color: var(--ag-text); }
+        .sidebar-nav a.active {
+            background: rgba(74,175,80,0.08); color: var(--ag-green-accent);
+            border-left-color: var(--ag-green-accent);
+        }
+        .sidebar-nav a i { font-size: 1.1rem; width: 1.25rem; text-align: center; }
+        .sidebar-user {
+            padding: 1rem 1.5rem; border-top: 1px solid var(--ag-border);
+            display: flex; align-items: center; gap: 0.75rem; font-size: 0.8rem;
+        }
+        .sidebar-user .avatar {
+            width: 32px; height: 32px; border-radius: 50%; background: var(--ag-green);
+            display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem;
+        }
+        /* Main */
+        .main-content { margin-left: 260px; min-height: 100vh; }
+        .topbar {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(13,17,23,0.85); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--ag-border);
+            padding: 0.75rem 2rem; display: flex; align-items: center; justify-content: space-between;
+        }
+        .topbar h1 { font-size: 1.15rem; font-weight: 700; margin: 0; }
+        .content-body { padding: 1.5rem 2rem; }
+        /* Cards */
+        .card { background: var(--ag-surface); border: 1px solid var(--ag-border); border-radius: 10px; }
+        .card-header { background: transparent; border-bottom: 1px solid var(--ag-border); font-weight: 600; }
+        /* Traffic lights */
+        .traffic-light { display: inline-block; width: 12px; height: 12px; border-radius: 50%; }
+        .traffic-light.verde { background: var(--ag-green-accent); box-shadow: 0 0 6px rgba(76,175,80,0.5); }
+        .traffic-light.amarillo { background: var(--ag-yellow); box-shadow: 0 0 6px rgba(227,179,65,0.5); }
+        .traffic-light.rojo { background: var(--ag-red); box-shadow: 0 0 6px rgba(248,81,73,0.5); animation: pulse-red 2s infinite; }
+        .traffic-light.gris { background: #555; }
+        @keyframes pulse-red { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+        /* KPI Cards */
+        .kpi-card {
+            background: var(--ag-surface); border: 1px solid var(--ag-border); border-radius: 10px;
+            padding: 1.25rem; position: relative; overflow: hidden;
+        }
+        .kpi-card .kpi-icon { font-size: 2rem; opacity: 0.15; position: absolute; right: 1rem; top: 1rem; }
+        .kpi-card .kpi-value { font-size: 2rem; font-weight: 800; line-height: 1; }
+        .kpi-card .kpi-label { font-size: 0.8rem; color: var(--ag-text-secondary); margin-top: 0.25rem; }
+        .kpi-card.danger { border-left: 4px solid var(--ag-red); }
+        .kpi-card.warning { border-left: 4px solid var(--ag-yellow); }
+        .kpi-card.success { border-left: 4px solid var(--ag-green-accent); }
+        .kpi-card.info { border-left: 4px solid var(--ag-blue); }
+        /* Status badges */
+        .badge-status { font-size: 0.7rem; padding: 0.3em 0.6em; border-radius: 4px; font-weight: 600; }
+        .badge-vigente { background: rgba(76,175,80,0.15); color: #4CAF50; }
+        .badge-borrador { background: rgba(227,179,65,0.15); color: #e3b341; }
+        .badge-en_revision { background: rgba(88,166,255,0.15); color: #58a6ff; }
+        .badge-obsoleto { background: rgba(139,148,158,0.15); color: #8b949e; }
+        .badge-abierta { background: rgba(248,81,73,0.15); color: #f85149; }
+        .badge-en_tratamiento { background: rgba(227,179,65,0.15); color: #e3b341; }
+        .badge-cerrada { background: rgba(76,175,80,0.15); color: #4CAF50; }
+        .badge-verificada { background: rgba(88,166,255,0.15); color: #58a6ff; }
+        .badge-pendiente { background: rgba(227,179,65,0.15); color: #e3b341; }
+        .badge-aprobado { background: rgba(76,175,80,0.15); color: #4CAF50; }
+        .badge-rechazado { background: rgba(248,81,73,0.15); color: #f85149; }
+        .badge-programada { background: rgba(88,166,255,0.15); color: #58a6ff; }
+        .badge-completada { background: rgba(76,175,80,0.15); color: #4CAF50; }
+        .badge-recibido { background: rgba(248,81,73,0.15); color: #f85149; }
+        .badge-en_investigacion { background: rgba(227,179,65,0.15); color: #e3b341; }
+        .badge-resuelto { background: rgba(76,175,80,0.15); color: #4CAF50; }
+        .badge-cerrado { background: rgba(139,148,158,0.15); color: #8b949e; }
+        /* Forms */
+        .form-control, .form-select {
+            background: var(--ag-surface-alt); border: 1px solid var(--ag-border);
+            color: var(--ag-text); border-radius: 6px;
+        }
+        .form-control:focus, .form-select:focus {
+            background: var(--ag-surface-alt); border-color: var(--ag-green-accent);
+            color: var(--ag-text); box-shadow: 0 0 0 2px rgba(76,175,80,0.2);
+        }
+        .form-label { font-size: 0.85rem; font-weight: 600; color: var(--ag-text-secondary); }
+        .btn-primary { background: var(--ag-green); border-color: var(--ag-green); }
+        .btn-primary:hover { background: var(--ag-green-light); border-color: var(--ag-green-light); }
+        .btn-outline-light { border-color: var(--ag-border); color: var(--ag-text-secondary); }
+        .btn-outline-light:hover { background: var(--ag-surface-alt); color: var(--ag-text); }
+        /* Tables */
+        .table { color: var(--ag-text); --bs-table-bg: transparent; }
+        .table th { color: var(--ag-text-secondary); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; border-color: var(--ag-border); }
+        .table td { border-color: var(--ag-border); font-size: 0.875rem; vertical-align: middle; }
+        .table-hover tbody tr:hover { background: var(--ag-surface-alt); }
+        /* Notification badge */
+        .notif-badge {
+            position: absolute; top: -2px; right: -6px; background: var(--ag-red);
+            color: white; font-size: 0.6rem; width: 18px; height: 18px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-weight: 700;
+        }
+        /* Responsive */
+        .sidebar-toggle { display: none; background: none; border: none; color: var(--ag-text); font-size: 1.5rem; cursor: pointer; }
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .main-content { margin-left: 0; }
+            .sidebar-toggle { display: inline-block; }
+            .content-body { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <div>
+                <h5>SGC Agrefert</h5>
+                <small>ISO 9001:2015</small>
+            </div>
+        </div>
+        <div class="sidebar-nav">
+            <div class="nav-section">Principal</div>
+            <a href="{{ url_for('dashboard') }}" class="{% if request.endpoint == 'dashboard' %}active{% endif %}">
+                <i class="bi bi-speedometer2"></i> Dashboard
+            </a>
+            <div class="nav-section">Gestión Documental</div>
+            <a href="{{ url_for('documents') }}" class="{% if 'document' in request.endpoint|default('') %}active{% endif %}">
+                <i class="bi bi-file-earmark-text"></i> Documentos SGC
+            </a>
+            <a href="{{ url_for('forms') }}" class="{% if 'form' in request.endpoint|default('') %}active{% endif %}">
+                <i class="bi bi-ui-checks-grid"></i> Formularios
+            </a>
+            <div class="nav-section">Calidad</div>
+            <a href="{{ url_for('objectives') }}" class="{% if 'objective' in request.endpoint|default('') %}active{% endif %}">
+                <i class="bi bi-bullseye"></i> Objetivos de Calidad
+            </a>
+            <a href="{{ url_for('non_conformities') }}" class="{% if 'nc_' in request.endpoint|default('') or request.endpoint == 'non_conformities' %}active{% endif %}">
+                <i class="bi bi-exclamation-triangle"></i> No Conformidades
+            </a>
+            <a href="{{ url_for('claims') }}" class="{% if 'claim' in request.endpoint|default('') %}active{% endif %}">
+                <i class="bi bi-chat-left-dots"></i> Reclamos de Clientes
+            </a>
+            <a href="{{ url_for('audits') }}" class="{% if 'audit' in request.endpoint|default('') %}active{% endif %}">
+                <i class="bi bi-clipboard-check"></i> Auditorías
+            </a>
+            <div class="nav-section">Sistema</div>
+            <a href="{{ url_for('notifications') }}" class="{% if request.endpoint == 'notifications' %}active{% endif %}" style="position:relative;">
+                <i class="bi bi-bell"></i> Notificaciones
+                {% if notif_count > 0 %}<span class="notif-badge">{{ notif_count }}</span>{% endif %}
+            </a>
+            {% if current_user.role in ('admin', 'responsable') %}
+            <a href="{{ url_for('users') }}" class="{% if 'user' in request.endpoint|default('') %}active{% endif %}">
+                <i class="bi bi-people"></i> Usuarios
+            </a>
+            {% endif %}
+        </div>
+        <div class="sidebar-user">
+            <div class="avatar">{{ current_user.name[0] }}</div>
+            <div style="flex:1;min-width:0;">
+                <div style="font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ current_user.name }}</div>
+                <div style="color:var(--ag-text-secondary);font-size:0.7rem;">{{ current_user.role|capitalize }}</div>
+            </div>
+            <a href="{{ url_for('logout') }}" style="color:var(--ag-text-secondary);" title="Cerrar sesión"><i class="bi bi-box-arrow-right"></i></a>
+        </div>
+    </nav>
+
+    <!-- Main -->
+    <div class="main-content">
+        <div class="topbar">
+            <div style="display:flex;align-items:center;gap:0.75rem;">
+                <button class="sidebar-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">
+                    <i class="bi bi-list"></i>
+                </button>
+                <h1>{% block page_title %}Dashboard{% endblock %}</h1>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;">
+                <span style="font-size:0.8rem;color:var(--ag-text-secondary);">{{ today.strftime('%d/%m/%Y') }}</span>
+                <a href="{{ url_for('notifications') }}" style="position:relative;color:var(--ag-text-secondary);">
+                    <i class="bi bi-bell" style="font-size:1.2rem;"></i>
+                    {% if notif_count > 0 %}<span class="notif-badge">{{ notif_count }}</span>{% endif %}
+                </a>
+            </div>
+        </div>
+        <div class="content-body">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="border-radius:8px;font-size:0.875rem;">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

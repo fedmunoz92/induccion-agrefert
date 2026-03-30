@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}{% if user %}Editar Usuario{% else %}Crear Usuario{% endif %} - SGC Agrefert{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="text-success mb-2">
+                {% if user %}Editar Usuario: {{ user.name }}{% else %}Crear Nuevo Usuario{% endif %}
+            </h1>
+            <p class="text-muted">Completa los datos del usuario</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card bg-dark border-success">
+                <div class="card-body">
+                    <form method="POST" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="name" class="form-label text-success">
+                                Nombre <span class="text-danger">*</span>
+                            </label>
+                            <input type="text"
+                                   class="form-control bg-secondary text-white border-success"
+                                   id="name"
+                                   name="name"
+                                   value="{{ user.name if user else '' }}"
+                                   required>
+                            <div class="invalid-feedback">El nombre es obligatorio.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label text-success">
+                                Email <span class="text-danger">*</span>
+                            </label>
+                            <input type="email"
+                                   class="form-control bg-secondary text-white border-success"
+                                   id="email"
+                                   name="email"
+                                   value="{{ user.email if user else '' }}"
+                                   required>
+                            <div class="invalid-feedback">Email válido requerido.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label text-success">
+                                Contraseña {% if not user %}<span class="text-danger">*</span>{% else %}<small class="text-muted">(dejar en blanco para no cambiar)</small>{% endif %}
+                            </label>
+                            <input type="password"
+                                   class="form-control bg-secondary text-white border-success"
+                                   id="password"
+                                   name="password"
+                                   {% if not user %}required{% endif %}>
+                            <div class="invalid-feedback">La contraseña es obligatoria para nuevos usuarios.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="role" class="form-label text-success">
+                                Rol <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-select bg-secondary text-white border-success"
+                                    id="role"
+                                    name="role"
+                                    required>
+                                <option value="">Selecciona un rol</option>
+                                <option value="admin" {% if user and user.role == 'admin' %}selected{% endif %}>Administrador</option>
+                                <option value="responsable" {% if user and user.role == 'responsable' %}selected{% endif %}>Responsable</option>
+                                <option value="auditor" {% if user and user.role == 'auditor' %}selected{% endif %}>Auditor</option>
+                                <option value="usuario" {% if user and user.role == 'usuario' %}selected{% endif %}>Usuario</option>
+                            </select>
+                            <div class="invalid-feedback">Selecciona un rol válido.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="area_id" class="form-label text-success">Área</label>
+                            <select class="form-select bg-secondary text-white border-success"
+                                    id="area_id"
+                                    name="area_id">
+                                <option value="">Sin área asignada</option>
+                                {% if areas %}
+                                    {% for area in areas %}
+                                    <option value="{{ area.id }}" {% if user and user.area_id == area.id %}selected{% endif %}>
+                                        {{ area.name }}
+                                    </option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input border-success" type="checkbox" id="active" name="active" {% if not user or user.active %}checked{% endif %}>
+                                <label class="form-check-label text-success" for="active">
+                                    Usuario Activo
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> {% if user %}Actualizar{% else %}Crear{% endif %}
+                            </button>
+                            <a href="{{ url_for('users') }}" class="btn btn-outline-success">
+                                <i class="fas fa-arrow-left"></i> Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
+{% endblock %}

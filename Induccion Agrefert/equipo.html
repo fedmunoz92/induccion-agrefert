@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Equipo — Induccion Agrefert</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+<script>
+    // Apply saved theme immediately to prevent flash
+    (function(){var t=localStorage.getItem('agrefert-theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark')}})();
+    </script>
+</head>
+<body>
+
+<!-- ─── SCROLL PROGRESS ─── -->
+<div id="scrollProgress" class="scroll-progress"></div>
+
+<!-- ─── TOPNAV ─── -->
+<nav class="topnav" id="topnav">
+    <div class="topnav-inner">
+        <a href="index.html" class="logo"><img src="img/logo.png" alt="Agrefert"></a>
+        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+        <div class="nav-links">
+            <a href="empresa.html">La Empresa</a>
+            <a href="equipo.html" class="current">Equipo</a>
+            <a href="productos.html">Productos</a>
+            <a href="documentacion.html">Documentacion</a>
+            <a href="operaciones.html">Operaciones</a>
+            <a href="manuales.html">Manuales</a>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Cambiar tema" title="Modo oscuro / claro">&#9790;</button>
+        </div>
+    </div>
+</nav>
+
+<!-- ─── PAGE HEADER ─── -->
+<div class="page-header">
+    <div class="page-header-content">
+        <h1>Nuestro Equipo</h1>
+        <p class="page-subtitle">Estructura organizacional y datos de contacto del equipo Agrefert</p>
+        <div class="breadcrumb">
+            <a href="index.html">Inicio</a>
+            <span>/</span>
+            <span>Equipo</span>
+        </div>
+    </div>
+</div>
+
+<!-- ─── ORGANIGRAMA ─── -->
+<section id="organigrama">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Equipo</span>
+            <h2 class="section-title">Estructura de la Empresa</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Areas clave y su funcion dentro de Agrefert</p>
+        </div>
+
+        <!-- Direccion -->
+        <div class="org-top reveal">
+            <div class="org-person org-person-ceo" style="min-width:260px;">
+                <div class="org-avatar org-avatar-lg">NM</div>
+                <div class="org-info">
+                    <div class="org-name">Norberto Mu&ntilde;oz</div>
+                    <div class="org-role">CEO &amp; Board Director</div>
+                </div>
+            </div>
+            <div class="org-connector"></div>
+            <div class="org-person org-person-coo" style="min-width:260px;">
+                <div class="org-avatar org-avatar-lg" style="background:var(--brand-orange);">FM</div>
+                <div class="org-info">
+                    <div class="org-name">Federico Mu&ntilde;oz</div>
+                    <div class="org-role">COO &mdash; Direcci&oacute;n Operativa</div>
+                </div>
+            </div>
+            <div class="org-connector"></div>
+            <div class="org-connector-h"></div>
+        </div>
+        <!-- Areas -->
+        <div class="org-areas reveal">
+            <!-- Admin & Finanzas -->
+            <div class="org-area org-area-admin">
+                <div class="org-area-header">
+                    <div class="org-area-icon">&#128176;</div>
+                    <div><div class="org-area-title">Admin &amp; Finanzas</div><div class="org-area-count">7 personas</div></div>
+                </div>
+                <div class="org-area-body">
+                    <div class="org-person org-person-leader"><div class="org-avatar">FT</div><div class="org-info"><div class="org-name">Facundo Tomasella</div><div class="org-role">Gerente de Admin &amp; Finanzas</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">LP</div><div class="org-info"><div class="org-name">Luciana Posco</div><div class="org-role">L&iacute;der Admin &amp; Contabilidad</div></div></div>
+                    <div class="org-person" style="margin-left:2rem;"><div class="org-avatar" style="width:28px;height:28px;font-size:0.58rem;">LA</div><div class="org-info"><div class="org-name">Luc&iacute;a Ayala</div><div class="org-role">Aux. admin. contable</div></div></div>
+                    <div class="org-person" style="margin-left:2rem;"><div class="org-avatar" style="width:28px;height:28px;font-size:0.58rem;">HD</div><div class="org-info"><div class="org-name">H&eacute;ctor Di Tullio</div><div class="org-role">Aux. admin. contable</div></div></div>
+                    <div class="org-person org-person-new" style="margin-left:2rem;"><div class="org-avatar" style="width:28px;height:28px;font-size:0.58rem;background:#4CAF50;">NA</div><div class="org-info"><div class="org-name">Nazareno Aon</div><div class="org-role">Auxiliar contable</div><span class="org-badge" style="background:#4CAF50;color:white;">NUEVO</span></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">SM</div><div class="org-info"><div class="org-name">Santiago Mayotti</div><div class="org-role">L&iacute;der de Finanzas</div></div></div>
+                    <div class="org-person" style="margin-left:2rem;"><div class="org-avatar" style="width:28px;height:28px;font-size:0.58rem;">YA</div><div class="org-info"><div class="org-name">Yuliana Alfo</div><div class="org-role">Analista Cr&eacute;d. &amp; Cbzas.</div></div></div>
+                    <div class="org-person" style="margin-left:2rem;"><div class="org-avatar" style="width:28px;height:28px;font-size:0.58rem;">LL</div><div class="org-info"><div class="org-name">Lucas Lypka</div><div class="org-role">Analista Cr&eacute;d. &amp; Cbzas.</div></div></div>
+                </div>
+            </div>
+            <!-- Comercial -->
+            <div class="org-area org-area-comercial">
+                <div class="org-area-header">
+                    <div class="org-area-icon">&#128200;</div>
+                    <div><div class="org-area-title">Comercial</div><div class="org-area-count">7 personas</div></div>
+                </div>
+                <div class="org-area-body">
+                    <div class="org-person org-person-leader"><div class="org-avatar">NH</div><div class="org-info"><div class="org-name">Nicol&aacute;s Hern&aacute;ndez</div><div class="org-role">L&iacute;der Comercial</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">LC</div><div class="org-info"><div class="org-name">Luis Cano</div><div class="org-role">Business Developer</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">AA</div><div class="org-info"><div class="org-name">Alejandro Allen</div><div class="org-role">Business Developer</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">ML</div><div class="org-info"><div class="org-name">Mario L&oacute;pez</div><div class="org-role">Business Developer</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">AR</div><div class="org-info"><div class="org-name">Agust&iacute;n Raffa</div><div class="org-role">Biz Dev &amp; Log&iacute;stica</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">ES</div><div class="org-info"><div class="org-name">Eugenio Sanmartino</div><div class="org-role">Business Developer</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">MC</div><div class="org-info"><div class="org-name">Mateo Castanier</div><div class="org-role">Business Developer</div></div></div>
+                </div>
+            </div>
+            <!-- Planta & Operaciones -->
+            <div class="org-area org-area-planta">
+                <div class="org-area-header">
+                    <div class="org-area-icon">&#128295;</div>
+                    <div><div class="org-area-title">Planta &amp; Operaciones</div><div class="org-area-count">7 personas + 10 operarios</div></div>
+                </div>
+                <div class="org-area-body">
+                    <div class="org-person org-person-leader"><div class="org-avatar" style="background:var(--brand-orange);">CI</div><div class="org-info"><div class="org-name">Christian Insua</div><div class="org-role">Jefe de Planta</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;background:var(--brand-orange);">AD</div><div class="org-info"><div class="org-name">Agust&iacute;n Daniele</div><div class="org-role">Analista de planta</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;background:var(--brand-orange);">GK</div><div class="org-info"><div class="org-name">Ger&oacute;nimo Kukurelo</div><div class="org-role">Analista de planta</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;background:var(--brand-orange);">JF</div><div class="org-info"><div class="org-name">Juan C. Farr&eacute;s</div><div class="org-role">Supervisor</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;background:var(--brand-orange);">JM</div><div class="org-info"><div class="org-name">Juan I. Maggio</div><div class="org-role">Supervisor</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;background:var(--brand-orange);">WD</div><div class="org-info"><div class="org-name">Walter Duarte</div><div class="org-role">Resp. Mantenimiento</div></div></div>
+                    <div class="org-person" style="margin-left:2rem;"><div class="org-avatar" style="width:28px;height:28px;font-size:0.58rem;background:var(--brand-orange);">JL</div><div class="org-info"><div class="org-name">Juan Lucero</div><div class="org-role">Mantenimiento</div></div></div>
+                    <div class="org-person" style="margin-left:2rem;"><div class="org-avatar" style="width:28px;height:28px;font-size:0.58rem;background:var(--brand-orange);">LN</div><div class="org-info"><div class="org-name">Luciano Novik</div><div class="org-role">Mantenimiento</div></div></div>
+                </div>
+            </div>
+            <!-- Bactools -->
+            <div class="org-area org-area-bactools">
+                <div class="org-area-header">
+                    <div class="org-area-icon">&#129514;</div>
+                    <div><div class="org-area-title">Bactools</div><div class="org-area-count">Bioinsumos</div></div>
+                </div>
+                <div class="org-area-body">
+                    <div class="org-person org-person-leader"><div class="org-avatar" style="background:#0891B2;">FZ</div><div class="org-info"><div class="org-name">Franco Ziraldo</div><div class="org-role">Comercial Bactools</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;background:#0891B2;">WR</div><div class="org-info"><div class="org-name">Walter Ram&iacute;rez</div><div class="org-role">RRHH &amp; T&eacute;cnico</div></div></div>
+                </div>
+            </div>
+        </div>
+        <!-- Operarios -->
+        <div class="org-operarios reveal">
+            <div class="org-operarios-title"><span>&#128119;</span> Operarios de Planta &mdash; Ramallo</div>
+            <div class="org-operarios-list">
+                <span class="org-operario-chip"><span class="org-mini-avatar">GC</span> Guillermo Contreras</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">LR</span> Lucas Rodr&iacute;guez</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">DA</span> Daniel Ag&uuml;ero</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">ER</span> Emanuel Reynoso</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">AR</span> Alexis Ruiz D&iacute;az</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">LR</span> Lucas Rol&oacute;n</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">LG</span> Leandro G&oacute;mez</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">CP</span> C&eacute;sar Peralta</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">MG</span> Mario J. G&oacute;mez</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">FC</span> Fabi&aacute;n Carrizo</span>
+            </div>
+        </div>
+
+        <div class="card-grid" style="margin-top:2.5rem;">
+            <div class="card reveal reveal-delay-1">
+                <h3><span class="icon-circle">&#128200;</span> Area Comercial</h3>
+                <p>Gestion de 246 clientes en 21 provincias. 23 cuentas con negocios >1.000 t y 120 con <100 t. Segmentacion por geolocalizacion (5 zonas), por tamano (Cuenta Nacional, Distribuidor Gold, Distribuidor, Productor Gold, Productor) y por importancia estrategica (Key Account vs Normal). CRM para seguimiento de cotizaciones y cierres. Proceso: Prospecto &rarr; Contacto &rarr; Calificacion &rarr; Envio de info &rarr; Reunion &rarr; Cotizacion &rarr; Nota de Venta.</p>
+            </div>
+            <div class="card reveal reveal-delay-2">
+                <h3><span class="icon-circle">&#128176;</span> Administracion y Finanzas</h3>
+                <p>Facturacion anual >US$ 40 MM. Margen bruto estimado 15,5% (~US$ 6,5 MM). Caja promedio anual: US$ 6,3 MM con la que se generaron importaciones por US$ 25,7 MM. Gestion activa con lineas bancarias BNA/BAPRO. Sistema Finnegans como ERP. Formas de cobro: contado, financiado, canje, tarjetas agro y compensacion de facturas. Gobernanza de cuentas corrientes con aging y semaforos.</p>
+            </div>
+            <div class="card reveal reveal-delay-3">
+                <h3><span class="icon-circle">&#128674;</span> Comercio Exterior</h3>
+                <p>17 operaciones de buques/Zona Franca en 2025. 62.824 t importadas con diversificacion de origenes. Gestion de timing, fletes, riesgo pais y ventanas comerciales. Comite semanal con Comercial, Finanzas y Planta para decisiones de abastecimiento y stock objetivo.</p>
+            </div>
+            <div class="card reveal reveal-delay-4">
+                <h3><span class="icon-circle">&#128295;</span> Operaciones y Planta</h3>
+                <p>82.588 t despachadas (93,4% de lo vendido). 66.000 t recibidas directamente de buques. Dos turnos operativos con mandos medios consolidados. Sistema de cupos para planificacion de despachos. Capacidad: 820 t/dia liquidos, 150 t/dia solidos. Reclamos de calidad: solo 0,49%.</p>
+            </div>
+            <div class="card reveal reveal-delay-5">
+                <h3><span class="icon-circle">&#129514;</span> Bactools (Bioinsumos)</h3>
+                <p>Unidad de negocio con planta propia y sistema de fermentacion, esterilizacion y envasado validado. 3 productos (B4 y BSP registrados, BSN en tramite). I+D con universidades (FCV-UNL). Expansion a 5 paises: Ecuador, Peru, Brasil, Uruguay y Argentina.</p>
+            </div>
+            <div class="card reveal reveal-delay-6">
+                <h3><span class="icon-circle">&#9989;</span> Calidad e ISO</h3>
+                <p>Certificacion ISO 9001:2015. Habilitaciones ANMaC (Ex RENAR) para almacenamiento y comercializacion de nitrato de amonio. Trazabilidad completa con planta automatizada. Indicador de reclamos en 0,49% sobre volumen total operado.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── CONTACTO ─── -->
+<section id="contacto" class="alt-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Comunicacion</span>
+            <h2 class="section-title">Contacto</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Canales de comunicacion</p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-card reveal reveal-delay-1">
+                <div class="contact-icon">&#128205;</div>
+                <h4>Planta y Depositos</h4>
+                <p>Av. Central Energia Argentina 480<br>Complejo Industrial COMIRSA<br>Ramallo &ndash; San Nicolas, Buenos Aires</p>
+            </div>
+            <div class="contact-card reveal reveal-delay-2">
+                <div class="contact-icon">&#128231;</div>
+                <h4>Ventas</h4>
+                <p><a href="mailto:ventas@agrefert.com">ventas@agrefert.com</a></p>
+            </div>
+            <div class="contact-card reveal reveal-delay-3">
+                <div class="contact-icon">&#127760;</div>
+                <h4>Web y Redes</h4>
+                <p>
+                    <a href="https://agrefert.com" target="_blank">www.agrefert.com</a><br>
+                    <a href="https://ar.linkedin.com/company/agrefert" target="_blank">LinkedIn</a> &bull;
+                    <a href="https://www.instagram.com/agrefert/" target="_blank">Instagram</a> &bull;
+                    <a href="https://www.facebook.com/Agrefert/" target="_blank">Facebook</a>
+                </p>
+            </div>
+            <div class="contact-card reveal reveal-delay-4">
+                <div class="contact-icon">&#128218;</div>
+                <h4>Herramientas Internas</h4>
+                <p>ERP: Finnegans<br>CRM: HubSpot<br>Confluence (documentacion)</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+    <img src="img/logo_fert_white.png" alt="Agrefert Fertilizantes" style="max-width:180px; width:50%; margin-bottom:1rem; opacity:0.8;">
+    <p>Desde 1999 contribuyendo a la produccion de mas y mejores alimentos.</p>
+    <p style="margin-top:0.5rem; font-size:0.75rem; opacity:0.5;">Material de induccion &mdash; Uso interno &mdash; 2026</p>
+</footer>
+
+<!-- ─── BACK TO TOP ─── -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0})" aria-label="Volver arriba">&#8593;</button>
+
+<!-- ─── JAVASCRIPT ─── -->
+<script>
+(function() {
+    // Scroll reveal with IntersectionObserver
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right').forEach(function(el) { observer.observe(el); });
+
+    // Scroll progress bar
+    var progressBar = document.getElementById('scrollProgress');
+    var backToTop = document.getElementById('backToTop');
+    var topnav = document.getElementById('topnav');
+
+    window.addEventListener('scroll', function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = progress + '%';
+
+        // Back to top
+        if (scrollTop > 600) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+
+        // Nav shadow on scroll
+        if (scrollTop > 10) {
+            topnav.classList.add('scrolled');
+        } else {
+            topnav.classList.remove('scrolled');
+        }
+    });
+
+    // Close mobile menu on link click
+    var navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.remove('open');
+        });
+    });
+})();
+</script>
+
+<script>
+function toggleTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('agrefert-theme', next);
+    updateToggleIcon();
+}
+function updateToggleIcon() {
+    var btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    btn.innerHTML = isDark ? '&#9728;' : '&#9790;';
+    btn.title = isDark ? 'Modo claro' : 'Modo oscuro';
+}
+updateToggleIcon();
+</script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+{% block title %}Documentos ISO{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="mb-0">Documentos del Sistema de Gestión de Calidad</h1>
+            <p class="text-muted mt-2">Gestión centralizada de procedimientos, políticas y registros</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{{ url_for('document_new') }}" class="btn btn-success">
+                <i class="fas fa-plus"></i> Nuevo Documento
+            </a>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="card bg-dark border-success mb-4">
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label for="area_filter" class="form-label text-success fw-bold">Área</label>
+                    <select class="form-select form-select-sm bg-dark text-light border-success" id="area_filter" onchange="applyFilters()">
+                        <option value="">Todas las áreas</option>
+                        {% for area in areas %}
+                        <option value="{{ area.id }}" {% if area_filter == area.id|string %}selected{% endif %}>{{ area.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="type_filter" class="form-label text-success fw-bold">Tipo</label>
+                    <select class="form-select form-select-sm bg-dark text-light border-success" id="type_filter" onchange="applyFilters()">
+                        <option value="">Todos los tipos</option>
+                        {% for doc_type in doc_types %}
+                        <option value="{{ doc_type.id }}" {% if type_filter == doc_type.id|string %}selected{% endif %}>{{ doc_type.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="status_filter" class="form-label text-success fw-bold">Estado</label>
+                    <select class="form-select form-select-sm bg-dark text-light border-success" id="status_filter" onchange="applyFilters()">
+                        <option value="">Todos los estados</option>
+                        <option value="vigente" {% if status_filter == 'vigente' %}selected{% endif %}>Vigente</option>
+                        <option value="borrador" {% if status_filter == 'borrador' %}selected{% endif %}>Borrador</option>
+                        <option value="en_revision" {% if status_filter == 'en_revision' %}selected{% endif %}>En Revisión</option>
+                        <option value="obsoleto" {% if status_filter == 'obsoleto' %}selected{% endif %}>Obsoleto</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Documents Table -->
+    <div class="card bg-dark border-success">
+        <div class="table-responsive">
+            <table class="table table-dark table-hover mb-0">
+                <thead class="table-success">
+                    <tr>
+                        <th style="width: 60px;">Semáforo</th>
+                        <th>Código</th>
+                        <th>Título</th>
+                        <th>Tipo</th>
+                        <th>Área</th>
+                        <th style="width: 80px;">Versión</th>
+                        <th>Estado</th>
+                        <th>Próx. Revisión</th>
+                        <th style="width: 120px;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if docs %}
+                        {% for doc in docs %}
+                        <tr>
+                            <td>
+                                <span class="traffic-light {{ doc.alert_status }}"></span>
+                            </td>
+                            <td class="fw-bold text-success">{{ doc.code }}</td>
+                            <td>
+                                <a href="{{ url_for('document_detail', doc_id=doc.id) }}" class="text-light text-decoration-none">
+                                    {{ doc.title }}
+                                    {% if doc.drive_url %}
+                                    <i class="fas fa-external-link-alt text-muted ms-1" style="font-size: 0.8em;"></i>
+                                    {% endif %}
+                                </a>
+                            </td>
+                            <td>
+                                <small class="text-muted">{{ doc.doc_type.name }}</small>
+                            </td>
+                            <td>
+                                <small class="text-muted">{{ doc.area.name }}</small>
+                            </td>
+                            <td class="text-center">v{{ doc.version }}</td>
+                            <td>
+                                <span class="badge badge-status badge-{{ doc.status }}">{{ doc.get_status_display() }}</span>
+                            </td>
+                            <td>
+                                {% if doc.next_review_date %}
+                                    {% set days_until = (doc.next_review_date - now).days %}
+                                    <small class="{% if days_until < 30 %}text-danger fw-bold{% elif days_until < 90 %}text-warning{% else %}text-muted{% endif %}">
+                                        {{ doc.next_review_date.strftime('%d/%m/%Y') }}
+                                    </small>
+                                {% else %}
+                                    <small class="text-muted">—</small>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a href="{{ url_for('document_detail', doc_id=doc.id) }}" class="btn btn-outline-success" title="Ver">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="{{ url_for('document_edit', doc_id=doc.id) }}" class="btn btn-outline-success" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    {% if doc.drive_url %}
+                                    <a href="{{ doc.drive_url }}" target="_blank" class="btn btn-outline-success" title="Google Drive">
+                                        <i class="fab fa-google-drive"></i>
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="9" class="text-center py-4 text-muted">
+                            No se encontraron documentos con los filtros seleccionados
+                        </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    .traffic-light {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 2px solid rgba(255,255,255,0.3);
+    }
+
+    .traffic-light.verde {
+        background-color: #28a745;
+    }
+
+    .traffic-light.amarillo {
+        background-color: #ffc107;
+    }
+
+    .traffic-light.rojo {
+        background-color: #dc3545;
+    }
+
+    .traffic-light.gris {
+        background-color: #6c757d;
+    }
+
+    .badge-status {
+        font-weight: 600;
+        padding: 0.5em 0.75em;
+    }
+
+    .badge-vigente {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .badge-borrador {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .badge-en_revision {
+        background-color: #ffc107;
+        color: #333;
+    }
+
+    .badge-obsoleto {
+        background-color: #dc3545;
+        color: white;
+    }
+</style>
+
+<script>
+    function applyFilters() {
+        const areaFilter = document.getElementById('area_filter').value;
+        const typeFilter = document.getElementById('type_filter').value;
+        const statusFilter = document.getElementById('status_filter').value;
+
+        const params = new URLSearchParams();
+        if (areaFilter) params.append('area_filter', areaFilter);
+        if (typeFilter) params.append('type_filter', typeFilter);
+        if (statusFilter) params.append('status_filter', statusFilter);
+
+        window.location.href = '{{ url_for("documents") }}?' + params.toString();
+    }
+</script>
+{% endblock %}

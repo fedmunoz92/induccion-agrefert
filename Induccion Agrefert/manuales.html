@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuales | Agrefert Inducción</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Maven+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+    (function(){var t=localStorage.getItem('agrefert-theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark')}})();
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--brand-green) 0%, var(--brand-cyan) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .page-header h1 {
+            font-family: 'Maven Pro', sans-serif;
+            font-size: 2.5rem;
+            margin: 0 0 0.5rem 0;
+            font-weight: 700;
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            opacity: 0.8;
+        }
+
+        .breadcrumb span {
+            margin: 0 0.5rem;
+            opacity: 0.7;
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--brand-green), var(--brand-cyan), var(--brand-orange));
+            z-index: 1000;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .manuals-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem 2rem;
+        }
+
+        .manual-toc {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+            background: var(--surface-alt);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .manual-toc h3 {
+            font-family: 'Maven Pro', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--brand-green);
+            margin: 1.5rem 0 0.75rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .manual-toc h3:first-child {
+            margin-top: 0;
+        }
+
+        .manual-toc a {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-left: 3px solid transparent;
+            border-radius: 4px;
+            transition: var(--transition);
+            margin-bottom: 0.25rem;
+        }
+
+        .manual-toc a:hover {
+            background: rgba(27, 178, 117, 0.1);
+            border-left-color: var(--brand-green);
+            padding-left: 1.25rem;
+        }
+
+        .manual-toc a.active {
+            background: rgba(27, 178, 117, 0.15);
+            border-left-color: var(--brand-green);
+            color: var(--brand-green);
+            font-weight: 600;
+            padding-left: 1.25rem;
+        }
+
+        .manual-content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .manual-section {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+            scroll-margin-top: 100px;
+        }
+
+        .manual-section:last-child {
+            border-bottom: none;
+        }
+
+        .manual-section h2 {
+            font-family: 'Maven Pro', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--brand-green);
+            margin: 0 0 0.5rem 0;
+            padding-top: 1rem;
+        }
+
+        .manual-meta {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .manual-content h3 {
+            font-family: 'Maven Pro', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--brand-dark);
+            margin: 1.5rem 0 0.75rem 0;
+            padding-top: 0.5rem;
+        }
+
+        .manual-content h4 {
+            font-family: 'Maven Pro', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 1.25rem 0 0.5rem 0;
+        }
+
+        .manual-content p {
+            margin: 1rem 0;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .manual-content ul,
+        .manual-content ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+            line-height: 1.8;
+        }
+
+        .manual-content li {
+            margin: 0.5rem 0;
+            color: var(--text-primary);
+        }
+
+        .manual-content ul li:before {
+            content: "•";
+            color: var(--brand-green);
+            font-weight: bold;
+            display: inline-block;
+            width: 1rem;
+            margin-left: -1rem;
+        }
+
+        .manual-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: var(--surface);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .manual-content table th {
+            background: linear-gradient(135deg, var(--brand-green) 0%, var(--brand-cyan) 100%);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-family: 'Maven Pro', sans-serif;
+        }
+
+        .manual-content table td {
+            padding: 0.875rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .manual-content table tr:hover {
+            background: var(--surface-alt);
+        }
+
+        .manual-content table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .value-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .value-item {
+            background: var(--surface-alt);
+            padding: 1rem;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--brand-green);
+        }
+
+        .value-item strong {
+            color: var(--brand-green);
+            font-family: 'Maven Pro', sans-serif;
+        }
+
+        .highlight-box {
+            background: rgba(27, 178, 117, 0.08);
+            border-left: 4px solid var(--brand-green);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+        }
+
+        .toc-toggle {
+            display: none;
+            background: var(--brand-green);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            font-family: 'Maven Pro', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        .toc-toggle.active {
+            background: var(--brand-cyan);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 1024px) {
+            .manuals-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .manual-toc {
+                position: static;
+                max-height: 300px;
+                overflow-y: auto;
+            }
+
+            .manual-toc.collapsed {
+                max-height: 0;
+                overflow: hidden;
+                padding: 0;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            .toc-toggle {
+                display: block;
+            }
+        }
+
+        /* ─── Dark Mode overrides ─── */
+        [data-theme="dark"] .page-header {
+            background: linear-gradient(135deg, rgba(27,178,117,0.12) 0%, rgba(0,191,227,0.08) 100%);
+        }
+        [data-theme="dark"] .page-header h1 { color: var(--text-primary); }
+        [data-theme="dark"] .breadcrumb a { color: var(--brand-green); }
+        [data-theme="dark"] .manual-toc {
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+        }
+        [data-theme="dark"] .manual-content h3 { color: var(--text-primary); }
+        [data-theme="dark"] .manual-content table { background: var(--surface-alt); }
+        [data-theme="dark"] .manual-content table td { border-bottom-color: var(--border); }
+        [data-theme="dark"] .manual-content table tr:hover { background: var(--surface-subtle); }
+        [data-theme="dark"] .value-item { background: var(--surface-subtle); }
+        [data-theme="dark"] .highlight-box { background: rgba(27,178,117,0.06); }
+        [data-theme="dark"] .toc-toggle { background: var(--brand-green); }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .page-header {
+                padding: 2rem 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .manuals-layout {
+                padding: 0 1rem 2rem 1rem;
+                gap: 1.5rem;
+            }
+
+            .manual-section {
+                padding: 1.5rem 0;
+            }
+
+            .manual-section h2 {
+                font-size: 1.4rem;
+            }
+
+            .manual-content h3 {
+                font-size: 1.1rem;
+            }
+
+            .manual-content table {
+                font-size: 0.9rem;
+            }
+
+            .manual-content table td,
+            .manual-content table th {
+                padding: 0.75rem 0.5rem;
+            }
+
+            .value-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="logo"><img src="img/logo.png" alt="Agrefert"></a>
+            <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="empresa.html">La Empresa</a>
+                <a href="equipo.html">Equipo</a>
+                <a href="productos.html">Productos</a>
+                <a href="documentacion.html">Documentacion</a>
+                <a href="operaciones.html">Operaciones</a>
+                <a href="manuales.html" class="current">Manuales</a>
+                <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Cambiar tema" title="Modo oscuro / claro">&#9790;</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>→</span>
+            <span>Manuales</span>
+        </div>
+        <h1>Manuales Agrefert</h1>
+        <p>Todos los manuales, protocolos y políticas de la empresa</p>
+    </div>
+
+    <div class="manuals-layout">
+        <aside class="manual-toc" id="tocSidebar">
+            <button class="toc-toggle" id="tocToggle">📑 Mostrar Índice</button>
+
+            <h3>General / Institucional</h3>
+            <a href="#intro-general">Introducción General</a>
+            <a href="#codigo-conducta">Código de Conducta</a>
+            <a href="#manual-marca">Manual de Marca</a>
+
+            <h3>Recursos Humanos</h3>
+            <a href="#politica-sueldos">Política de Sueldos</a>
+            <a href="#job-descriptions">Job Descriptions</a>
+            <a href="#contrato-vehiculos">Vehículos Corporativos</a>
+
+            <h3>Comercial / Ventas</h3>
+            <a href="#manual-ventas">Manual General de Ventas</a>
+            <a href="#client-journey">Client Journey</a>
+            <a href="#segmentacion-zonal">Segmentación Zonal</a>
+            <a href="#protocolo-distribuidores">Protocolo Distribuidores</a>
+
+            <h3>Administración / Finanzas</h3>
+            <a href="#politica-compras">Política de Compras</a>
+
+            <h3>Planta / Producción</h3>
+            <a href="#protocolo-monoproducto">Protocolo Monoproducto</a>
+            <a href="#protocolo-muestra">Protocolo Extracción Muestra</a>
+        </aside>
+
+        <main class="manual-content-area">
+
+            <!-- 1. INTRODUCCIÓN GENERAL AGREFERT -->
+            <section class="manual-section reveal" id="intro-general">
+                <h2>Introducción General Agrefert</h2>
+                <div class="manual-meta">Fuente: Confluence | Última actualización: junio 24, 2022</div>
+                <div class="manual-content">
+                    <h3>Nuestra Misión</h3>
+                    <p>Contribuir a la producción de alimentos de forma responsable y eficiente, apoyando a nuestros clientes con productos y servicios de alta calidad.</p>
+
+                    <div class="value-list">
+                        <div class="value-item">
+                            <strong>Honestidad</strong>
+                            <p>Transparencia en todas nuestras acciones y comunicaciones</p>
+                        </div>
+                        <div class="value-item">
+                            <strong>Progreso Constante</strong>
+                            <p>Mejora continua en procesos y productos</p>
+                        </div>
+                        <div class="value-item">
+                            <strong>Creatividad</strong>
+                            <p>Innovación en soluciones para nuestros clientes</p>
+                        </div>
+                        <div class="value-item">
+                            <strong>Responsabilidad</strong>
+                            <p>Compromiso con el ambiente y la sociedad</p>
+                        </div>
+                        <div class="value-item">
+                            <strong>Innovación</strong>
+                            <p>Desarrollo de nuevas tecnologías y productos</p>
+                        </div>
+                        <div class="value-item">
+                            <strong>Transparencia y Compromiso</strong>
+                            <p>Claridad en nuestras operaciones</p>
+                        </div>
+                        <div class="value-item">
+                            <strong>Resiliencia</strong>
+                            <p>Capacidad de adaptación ante desafíos</p>
+                        </div>
+                    </div>
+
+                    <h3>Concepto de Marca: "El Protector"</h3>
+                    <p><strong>Somos campo igual que vos...</strong></p>
+                    <p>Agrefert es sinónimo de confianza, calidad y compromiso con el agro argentino. Nuestro concepto de marca refleja nuestra posición como aliado protector del productor agrícola.</p>
+
+                    <h3>Presencia Digital</h3>
+                    <ul>
+                        <li><a href="https://www.agrefert.com.ar" target="_blank">Sitio Web</a></li>
+                        <li><a href="https://www.linkedin.com/company/agrefert/" target="_blank">LinkedIn</a></li>
+                        <li><a href="https://www.instagram.com/agrefert/" target="_blank">Instagram</a></li>
+                        <li><a href="https://www.twitter.com/agrefert/" target="_blank">Twitter</a></li>
+                        <li><a href="https://www.facebook.com/agrefert/" target="_blank">Facebook</a></li>
+                    </ul>
+
+                    <h3>Introducción a la Agricultura</h3>
+                    <p>La agricultura argentina se divide en dos grandes ciclos de cosecha:</p>
+
+                    <h4>Cosecha Fina</h4>
+                    <ul>
+                        <li>Trigo</li>
+                        <li>Cebada</li>
+                    </ul>
+
+                    <h4>Cosecha Gruesa</h4>
+                    <ul>
+                        <li>Soja</li>
+                        <li>Maíz</li>
+                        <li>Sorgo</li>
+                        <li>Girasol</li>
+                    </ul>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cosecha</th>
+                                <th>Siembra</th>
+                                <th>Emergencia</th>
+                                <th>Aplicación Fertilizante</th>
+                                <th>Cosecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Fina (Trigo)</strong></td>
+                                <td>Abril-Mayo</td>
+                                <td>Mayo-Junio</td>
+                                <td>Junio-Agosto</td>
+                                <td>Noviembre-Diciembre</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gruesa (Soja/Maíz)</strong></td>
+                                <td>Octubre-Noviembre</td>
+                                <td>Noviembre-Diciembre</td>
+                                <td>Diciembre-Enero</td>
+                                <td>Abril-Mayo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Introducción a Fertilizantes</h3>
+                    <p>Los fertilizantes proporcionan nutrientes esenciales para el crecimiento de las plantas. Los principales elementos son:</p>
+
+                    <h4>Macronutrientes</h4>
+                    <ul>
+                        <li><strong>N (Nitrógeno):</strong> Crecimiento vegetativo</li>
+                        <li><strong>P (Fósforo):</strong> Desarrollo de raíces y energía</li>
+                        <li><strong>K (Potasio):</strong> Resistencia y calidad</li>
+                    </ul>
+
+                    <h4>Micronutrientes</h4>
+                    <ul>
+                        <li>Zinc (Zn)</li>
+                        <li>Cobre (Cu)</li>
+                        <li>Boro (B)</li>
+                        <li>Calcio (Ca)</li>
+                        <li>Azufre (S)</li>
+                    </ul>
+
+                    <p>La concentración de nutrientes se expresa típicamente como <strong>N-P-K</strong> (Nitrógeno-Fósforo-Potasio).</p>
+
+                    <h3>Paleta de Productos Agrefert</h3>
+
+                    <h4>Línea Zurko</h4>
+                    <ul>
+                        <li><strong>Zurko NS:</strong> Fertilizante líquido, N27-S3, sin volatilización, pH 6.6-6.7</li>
+                        <li><strong>Zurko MAX Zn:</strong> Con quelato de zinc, ideal para deficiencias micronutrientes</li>
+                    </ul>
+
+                    <h4>Línea ANSCA</h4>
+                    <ul>
+                        <li><strong>ANSCA N28-S4-Ca5:</strong> Fertilizante sólido, sin urea, con calcio</li>
+                    </ul>
+
+                    <h4>Línea ANSUL</h4>
+                    <ul>
+                        <li><strong>ANSUL N30-S8:</strong> Para fertirrigación, alta concentración de nitrógeno</li>
+                    </ul>
+
+                    <h4>Línea Chacarero</h4>
+                    <ul>
+                        <li><strong>Mezcla Química 8-40-0-5:</strong> Para aplicación directa de alta concentración de fósforo</li>
+                    </ul>
+
+                    <h4>Línea Commodities</h4>
+                    <p>Productos básicos de fertilizante granulado para mercado masivo.</p>
+
+                    <h3>Segmentación de Clientes</h3>
+
+                    <h4>Por Geolocalización (5 Zonas)</h4>
+                    <ul>
+                        <li><strong>NOA:</strong> Noroeste Argentino (Salta, Jujuy, Catamarca)</li>
+                        <li><strong>Litoral:</strong> Corrientes, Misiones, Entre Ríos</li>
+                        <li><strong>Córdoba:</strong> Provincia de Córdoba</li>
+                        <li><strong>Cuyo:</strong> Mendoza, San Juan, San Luis</li>
+                        <li><strong>Núcleo:</strong> Buenos Aires, La Pampa, centro productivo</li>
+                        <li><strong>Sudeste:</strong> Sur de Buenos Aires</li>
+                    </ul>
+
+                    <h4>Por Tamaño</h4>
+                    <ul>
+                        <li><strong>Cuenta Nacional:</strong> Clientes de escala nacional</li>
+                        <li><strong>Distribuidor Gold:</strong> Distribuidores con alta performance</li>
+                        <li><strong>Distribuidor:</strong> Distribuidores regulares</li>
+                        <li><strong>Productor Gold:</strong> Productores grandes con volúmenes significativos</li>
+                        <li><strong>Productor:</strong> Productores medianos y pequeños</li>
+                    </ul>
+
+                    <h4>Por Importancia Estratégica (Key Accounts)</h4>
+                    <ul>
+                        <li>Criterios: volumen, regularidad, potencial de crecimiento, relevancia geográfica</li>
+                    </ul>
+
+                    <h3>Etapas de Negocio</h3>
+                    <p><strong>Flujo:</strong> Prospecto → Cliente</p>
+                    <ul>
+                        <li><strong>Prospecto:</strong> Potencial cliente identificado, no ha realizado compra</li>
+                        <li><strong>Cliente:</strong> Ha realizado al menos una compra exitosa</li>
+                    </ul>
+
+                    <h3>Formas de Cobro</h3>
+                    <ul>
+                        <li><strong>Contado:</strong> Pago al momento de la compra</li>
+                        <li><strong>Financiado:</strong> Cuotas con condiciones comerciales</li>
+                        <li><strong>Canje:</strong> Cambio por otros productos/servicios</li>
+                        <li><strong>Tarjetas Agro:</strong> Financiación a través de tarjetas especializadas</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. CÓDIGO DE CONDUCTA -->
+            <section class="manual-section reveal" id="codigo-conducta">
+                <h2>Código de Conducta Agrefert</h2>
+                <div class="manual-meta">Fuente: Confluence | Última actualización: mayo 26, 2022</div>
+                <div class="manual-content">
+                    <h3>Misión y Valores</h3>
+                    <p>Agrefert está comprometida con los más altos estándares éticos y de responsabilidad social. Este código establece las expectativas para todos nuestros colaboradores y socios comerciales.</p>
+
+                    <h3>Expectativas para Socios de Negocio</h3>
+                    <p>Esperamos que nuestros proveedores, distribuidores y otros socios comerciales cumplan con estos mismos principios éticos y legales.</p>
+
+                    <h3>1. Respeto por las Personas</h3>
+                    <ul>
+                        <li><strong>Ambiente de Trabajo Seguro:</strong> Garantizar condiciones seguras e inclusivas</li>
+                        <li><strong>No Discriminación:</strong> Igualdad de oportunidades sin importar origen, género, religión, edad</li>
+                        <li><strong>Prohibición de Trabajo Infantil:</strong> No permitimos empleo de menores de edad bajo ninguna circunstancia</li>
+                        <li><strong>Libertad de Asociación:</strong> Respetamos el derecho de los trabajadores a organizarse</li>
+                        <li><strong>Trato Digno:</strong> Respeto mutuo en todas las interacciones</li>
+                    </ul>
+
+                    <h3>2. Protección del Medioambiente</h3>
+                    <ul>
+                        <li>Cumplimiento de regulaciones ambientales locales e internacionales</li>
+                        <li>Minimización de emisiones y residuos</li>
+                        <li>Uso responsable de recursos naturales</li>
+                        <li>Participación activa en iniciativas de sustentabilidad</li>
+                    </ul>
+
+                    <h3>3. Ética e Integridad</h3>
+
+                    <h4>Anti-Corrupción y Soborno</h4>
+                    <ul>
+                        <li>Prohibición absoluta de sobornos, comisiones ilegales o favores indebidos</li>
+                        <li>Cumplimiento con leyes anti-corrupción internacionales</li>
+                    </ul>
+
+                    <h4>Anti-Lavado de Dinero</h4>
+                    <ul>
+                        <li>Verificación de fuentes de fondos</li>
+                        <li>Reporte de transacciones sospechosas</li>
+                    </ul>
+
+                    <h4>Regalos y Entretenimiento</h4>
+                    <ul>
+                        <li>Regalos permitidos: máximo USD 75 en valor</li>
+                        <li>No se permiten regalos en efectivo</li>
+                        <li>Debe existir propósito comercial legítimo</li>
+                    </ul>
+
+                    <h4>Competencia Justa</h4>
+                    <ul>
+                        <li>Prácticas comerciales honestas</li>
+                        <li>Prohibición de monopolios abusivos</li>
+                        <li>Respeto a derechos intelectuales de terceros</li>
+                    </ul>
+
+                    <h4>Información Confidencial</h4>
+                    <ul>
+                        <li>Protección de secretos comerciales</li>
+                        <li>Acceso restringido a información sensible</li>
+                        <li>Obligación de confidencialidad durante y después del empleo</li>
+                    </ul>
+
+                    <h4>Conflictos de Interés</h4>
+                    <ul>
+                        <li>Disclosure obligatorio de conflictos potenciales</li>
+                        <li>Recusarse de decisiones donde existe conflicto</li>
+                        <li>No buscar beneficios personales que comprometan a Agrefert</li>
+                    </ul>
+
+                    <h3>4. Uso Indebido de Productos</h3>
+                    <ul>
+                        <li>Nuestros productos deben utilizarse únicamente para sus fines autorizados</li>
+                        <li>Prohibición de uso en actividades ilegales o peligrosas</li>
+                        <li>Cumplimiento con regulaciones de uso agrícola</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <strong>Reportar Violaciones</strong>
+                        <p>Si tienes conocimiento de una violación a este código, reporta a:</p>
+                        <p><strong>operaciones@agrefert.com</strong></p>
+                        <p>Los reportes serán investigados con confidencialidad y sin represalias.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. MANUAL DE MARCA -->
+            <section class="manual-section reveal" id="manual-marca">
+                <h2>Manual de Marca</h2>
+                <div class="manual-meta">Fuente: Confluence | Última actualización: julio 18, 2022</div>
+                <div class="manual-content">
+                    <h3>Concepto de Marca: "El Protector"</h3>
+                    <p>Nuestro concepto central es la protección y el apoyo al productor agrícola. Agrefert se posiciona como un aliado que entiende los desafíos del campo argentino y proporciona soluciones confiables.</p>
+
+                    <h3>Línea de Marca</h3>
+                    <p><strong>"Somos campo igual que vos..."</strong></p>
+                    <p>Esta frase encapsula nuestra identidad: no somos una empresa ajena al sector agrícola, sino parte del mismo. Compartimos los valores, desafíos y compromiso de nuestros clientes.</p>
+
+                    <h3>Mensajería Clave</h3>
+                    <ul>
+                        <li>Aliado confiable del productor argentino</li>
+                        <li>Productos de calidad comprobada</li>
+                        <li>Innovación permanente</li>
+                        <li>Compromiso con la sustentabilidad</li>
+                        <li>Servicio personalizado y cercano</li>
+                    </ul>
+
+                    <h3>Paleta de Colores</h3>
+                    <ul>
+                        <li><strong>Verde Agrefert (#1BB275):</strong> Renovación, crecimiento, naturaleza</li>
+                        <li><strong>Cyan (#00BFE3):</strong> Innovación, confianza, tecnología</li>
+                        <li><strong>Gris Oscuro (#212121):</strong> Solidez, profesionalismo</li>
+                        <li><strong>Naranja (#FF9239):</strong> Energía, dinamismo (uso secundario)</li>
+                    </ul>
+
+                    <h3>Tipografía</h3>
+                    <p><strong>Maven Pro:</strong> Fuente principal para títulos y elementos destacados. Transmite modernidad, claridad y profesionalismo.</p>
+                    <p><strong>Inter:</strong> Fuente secundaria para cuerpo de texto. Garantiza legibilidad en todos los tamaños.</p>
+
+                    <h3>Aplicaciones de Marca</h3>
+                    <ul>
+                        <li>Logotipos: en color, blanco y gris según contexto</li>
+                        <li>Papelería corporativa: cartas, tarjetas, sobre</li>
+                        <li>Comunicación digital: website, redes sociales, email</li>
+                        <li>Materiales de marketing: folletos, publicidades, eventos</li>
+                        <li>Uniformes y equipo corporativo</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 4. POLÍTICA DE SUELDOS Y PERFORMANCE -->
+            <section class="manual-section reveal" id="politica-sueldos">
+                <h2>Política de Sueldos y Performance</h2>
+                <div class="manual-meta">Fuente: Confluence | Última actualización: octubre 23, 2020</div>
+                <div class="manual-content">
+                    <h3>Determinación de Salarios</h3>
+                    <p>Los salarios en Agrefert se determinan considerando tres ejes principales:</p>
+                    <ol>
+                        <li><strong>Responsabilidades:</strong> Alcance y complejidad del rol</li>
+                        <li><strong>Antigüedad:</strong> Tiempo de servicio en la empresa (ver escala de antiguedad)</li>
+                        <li><strong>Competencias:</strong> Habilidades, conocimientos y desempeño</li>
+                    </ol>
+
+                    <h3>Escala de Antigüedad</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nivel</th>
+                                <th>Abreviatura</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Trainee</td>
+                                <td>TR</td>
+                                <td>Recién incorporado, período de aprendizaje</td>
+                            </tr>
+                            <tr>
+                                <td>Junior I/M/A</td>
+                                <td>JR I/M/A</td>
+                                <td>Inicial, Medio, Avanzado - primeros años</td>
+                            </tr>
+                            <tr>
+                                <td>Semi-Senior I/M/A</td>
+                                <td>SSR I/M/A</td>
+                                <td>Inicial, Medio, Avanzado - experiencia consolidada</td>
+                            </tr>
+                            <tr>
+                                <td>Senior I/M/A</td>
+                                <td>SR I/M/A</td>
+                                <td>Inicial, Medio, Avanzado - liderazgo técnico</td>
+                            </tr>
+                            <tr>
+                                <td>Líder I/M/A</td>
+                                <td>L I/M/A</td>
+                                <td>Inicial, Medio, Avanzado - liderazgo de equipo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Actualizaciones Salariales</h3>
+
+                    <h4>Marzo: Ajuste por Inflación</h4>
+                    <ul>
+                        <li>Todos los colaboradores reciben ajuste por inflación acumulada</li>
+                        <li>Basado en índice IPC oficial</li>
+                    </ul>
+
+                    <h4>Septiembre: Ajuste Inflacionario + Performance</h4>
+                    <ul>
+                        <li>Ajuste por inflación</li>
+                        <li>Incremento por performance evaluado</li>
+                    </ul>
+
+                    <h3>Evaluación de Performance</h3>
+                    <p><strong>Período de Evaluación:</strong> Cada 6 meses (marzo y septiembre)</p>
+
+                    <h3>Posibles Resultados</h3>
+                    <ul>
+                        <li><strong>Incremento por Mérito:</strong> Performance sobresaliente, incremento salarial adicional</li>
+                        <li><strong>Mantener:</strong> Performance acorde a expectativas, solo ajuste inflacionario</li>
+                        <li><strong>En Revisión:</strong> Performance por debajo, período de 2 meses para mejora</li>
+                    </ul>
+
+                    <h3>Período de Mejora</h3>
+                    <p>Si el resultado es "En Revisión", se establece un período de 2 meses para demostrar mejora en los aspectos deficitarios. Al finalizar, se realiza nueva evaluación.</p>
+                </div>
+            </section>
+
+            <!-- 5. CONTRATO DE VEHÍCULOS CORPORATIVOS -->
+            <section class="manual-section reveal" id="contrato-vehiculos">
+                <h2>Contrato de Uso de Vehículos Corporativos</h2>
+                <div class="manual-meta">Fuente: Confluence | Última actualización: diciembre 23, 2024</div>
+                <div class="manual-content">
+                    <h3>Introducción</h3>
+                    <p>Los vehículos corporativos son patrimonio de la empresa. Todos los usuarios deben cumplir con las normas de mantenimiento, presentación y uso establecidas en este contrato.</p>
+
+                    <h3>1. Cronograma de Mantenimiento</h3>
+                    <p>El mantenimiento preventivo es obligatorio según los siguientes intervalos:</p>
+
+                    <h4>Cada 10,000 km</h4>
+                    <ul>
+                        <li>Cambio de aceite y filtro</li>
+                        <li>Inspección de frenos</li>
+                        <li>Revisión de presión de neumáticos</li>
+                    </ul>
+
+                    <h4>Cada 30,000 km</h4>
+                    <ul>
+                        <li>Cambio de filtro de aire</li>
+                        <li>Inspección de suspensión</li>
+                        <li>Revisión de sistema de dirección</li>
+                    </ul>
+
+                    <h4>Cada 60,000 km</h4>
+                    <ul>
+                        <li>Cambio de filtro de aire acondicionado</li>
+                        <li>Revisión de emisiones</li>
+                        <li>Inspección de sistema eléctrico</li>
+                    </ul>
+
+                    <h3>2. Limpieza y Presentación</h3>
+                    <ul>
+                        <li>El vehículo debe mantenerse limpio internamente</li>
+                        <li>Limpieza exterior semanal recomendada</li>
+                        <li>Prohibido llevar alimentos o bebidas dentro del vehículo</li>
+                        <li>Fumar está permitido solo con ventilación adecuada</li>
+                    </ul>
+
+                    <h3>3. Distribución de Costos</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Concepto</th>
+                                <th>Cubierto por</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Combustible</td>
+                                <td>Agrefert</td>
+                            </tr>
+                            <tr>
+                                <td>Mantenimiento regular</td>
+                                <td>Agrefert</td>
+                            </tr>
+                            <tr>
+                                <td>Seguro</td>
+                                <td>Agrefert</td>
+                            </tr>
+                            <tr>
+                                <td>Multas de tránsito</td>
+                                <td>Empleado</td>
+                            </tr>
+                            <tr>
+                                <td>Daños por negligencia</td>
+                                <td>Empleado</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>4. Normas de Uso</h3>
+                    <ul>
+                        <li><strong>Uso Exclusivamente Comercial:</strong> El vehículo está destinado únicamente para actividades laborales</li>
+                        <li><strong>Prohibición de Uso Personal:</strong> No se permite uso personal, doméstico o para fines privados</li>
+                        <li><strong>Responsabilidad del Conductor:</strong> El usuario es responsable de infracciones de tránsito cometidas mientras conduce</li>
+                        <li><strong>Licencia Vigente:</strong> Debe mantenerse licencia de conducir válida y al día</li>
+                        <li><strong>Reporte de Daños:</strong> Reportar inmediatamente cualquier daño o accidente al área correspondiente</li>
+                    </ul>
+
+                    <h3>5. Disposiciones Finales</h3>
+                    <ul>
+                        <li>El incumplimiento de estas normas puede resultar en sanciones disciplinarias</li>
+                        <li>La empresa se reserva el derecho de auditar el uso del vehículo</li>
+                        <li>En caso de separación laboral, el vehículo debe devolverse en perfecto estado</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 6. MANUAL GENERAL DE VENTAS -->
+            <section class="manual-section reveal" id="manual-ventas">
+                <h2>Manual General de Ventas</h2>
+                <div class="manual-meta">Fuente: Confluence | Última actualización: junio 24, 2022</div>
+                <div class="manual-content">
+                    <h3>Introducción</h3>
+                    <p>Este manual proporciona una guía completa para el equipo comercial de Agrefert, incluyendo conceptos de productos, segmentación de clientes, etapas de negocio y formas de cobro.</p>
+
+                    <h3>Productos Agrefert</h3>
+                    <p>Nuestro portafolio abarca cuatro líneas principales de fertilizantes:</p>
+
+                    <h4>Commodities</h4>
+                    <p>Productos básicos de fertilizante granulado para el mercado masivo. Opción económica para productores con presupuesto limitado.</p>
+
+                    <h4>Zurko</h4>
+                    <p>Línea de fertilizantes líquidos de alta concentración, incluyendo variantes con micronutrientes. Ideal para fertirrigación y aplicación foliar.</p>
+
+                    <h4>Chacarero</h4>
+                    <p>Mezclas químicas especializadas formuladas para cultivos específicos y condiciones regionales.</p>
+
+                    <h4>Zafiro (Descontinuado)</h4>
+                    <p>Esta línea ya no se comercializa. Dirigir clientes a alternativas Zurko o Chacarero.</p>
+
+                    <h3>Nutrientes y Características</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Concentración</th>
+                                <th>Tipo</th>
+                                <th>Aplicación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Zurko NS</td>
+                                <td>N27-S3</td>
+                                <td>Líquido</td>
+                                <td>General, sin volatilización</td>
+                            </tr>
+                            <tr>
+                                <td>Zurko MAX Zn</td>
+                                <td>Con quelato Zn</td>
+                                <td>Líquido</td>
+                                <td>Deficiencias de micronutrientes</td>
+                            </tr>
+                            <tr>
+                                <td>ANSCA</td>
+                                <td>N28-S4-Ca5</td>
+                                <td>Sólido</td>
+                                <td>Sin urea, con calcio</td>
+                            </tr>
+                            <tr>
+                                <td>ANSUL</td>
+                                <td>N30-S8</td>
+                                <td>Líquido</td>
+                                <td>Fertirrigación</td>
+                            </tr>
+                            <tr>
+                                <td>Mezcla Chacarero</td>
+                                <td>8-40-0-5</td>
+                                <td>Sólido</td>
+                                <td>Alta concentración de fósforo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Segmentación de Clientes</h3>
+
+                    <h4>Por Tamaño y Tipo</h4>
+                    <ul>
+                        <li><strong>Cuenta Nacional:</strong> Clientes con presencia en múltiples zonas, volúmenes significativos</li>
+                        <li><strong>Distribuidor Gold:</strong> Distribuidores con excelente performance, historial de pagos impeccable</li>
+                        <li><strong>Distribuidor Regular:</strong> Distribuidores de volumen estándar</li>
+                        <li><strong>Productor Gold:</strong> Productores grandes con compras consistentes y volúmenes altos</li>
+                        <li><strong>Productor:</strong> Productores medianos y pequeños</li>
+                    </ul>
+
+                    <h4>Por Geolocalización</h4>
+                    <ul>
+                        <li>NOA (Comisionista)</li>
+                        <li>Litoral (Comercial Propia)</li>
+                        <li>Córdoba (Comercial Propia)</li>
+                        <li>Cuyo (Alianzas Estratégicas)</li>
+                        <li>Núcleo (Comercial Propia)</li>
+                        <li>Sudeste (Sin participación activa)</li>
+                    </ul>
+
+                    <h3>Etapas de Negocio</h3>
+
+                    <h4>Etapa Prospecto</h4>
+                    <ul>
+                        <li>Contacto inicial identificado</li>
+                        <li>Primera presentación de productos</li>
+                        <li>Desarrollo de relación comercial</li>
+                        <li>Cotizaciones y propuestas</li>
+                    </ul>
+
+                    <h4>Transición a Cliente</h4>
+                    <ul>
+                        <li>Primera compra completada</li>
+                        <li>Evaluación de cumplimiento de pagos</li>
+                        <li>Asignación de crédito (si corresponde)</li>
+                    </ul>
+
+                    <h4>Etapa Cliente</h4>
+                    <ul>
+                        <li>Compras recurrentes</li>
+                        <li>Seguimiento de relación</li>
+                        <li>Cross-selling de otros productos</li>
+                        <li>Mejora continua de condiciones</li>
+                    </ul>
+
+                    <h3>Formas de Cobro</h3>
+
+                    <h4>Contado</h4>
+                    <p>Pago completo al momento de la entrega. Opción preferida por la empresa, mejor flujo de caja.</p>
+
+                    <h4>Financiado</h4>
+                    <p>Plazo de pago acordado (típicamente 30-90 días). Requiere evaluación de crédito y condiciones comerciales claras.</p>
+
+                    <h4>Canje</h4>
+                    <p>Intercambio de productos o servicios. Menos frecuente, requiere aprobación especial.</p>
+
+                    <h4>Tarjetas Agro</h4>
+                    <p>Financiación a través de tarjetas de crédito especializadas en agro (ej: Tarjeta Agro de Banco, etc.). Facilita acceso a crédito para productores.</p>
+
+                    <h3>Flujo de Creación de Cliente y Asignación de Crédito</h3>
+                    <ol>
+                        <li>Prospecto realiza primera compra</li>
+                        <li>Áreas de Créditos y Cobranzas evalúan perfil crediticio</li>
+                        <li>Se asigna límite de crédito (si aplica)</li>
+                        <li>Cliente entra en ciclo de compra recurrente</li>
+                        <li>Seguimiento periódico de pagos y relación</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- 7. CLIENT JOURNEY & EXPERIENCIA AGREFERT -->
+            <section class="manual-section reveal" id="client-journey">
+                <h2>Client Journey & Experiencia Agrefert</h2>
+                <div class="manual-meta">Fuente: Confluence | Última actualización: mayo 4, 2021</div>
+                <div class="manual-content">
+                    <h3>Las 5 Etapas de la Experiencia del Cliente</h3>
+
+                    <h3>1. Conocimiento</h3>
+                    <p>Primera interacción y construcción de awareness de marca.</p>
+                    <ul>
+                        <li><strong>Awareness de Marca:</strong> El cliente se entera de Agrefert a través de diversos canales (digital, recomendación, eventos)</li>
+                        <li><strong>"Voz de Agrefert" Insights:</strong> Compartir conocimiento agrícola, tendencias de mercado, recomendaciones técnicas</li>
+                        <li><strong>Protocolos de Llamada/WhatsApp:</strong> Respuesta rápida, información clara, disponibilidad</li>
+                        <li><strong>Objetivo:</strong> Posicionar a Agrefert como aliado confiable del productor</li>
+                    </ul>
+
+                    <h3>2. Consideración</h3>
+                    <p>Evaluación y cierre de la venta.</p>
+                    <ul>
+                        <li><strong>Presentación de Productos:</strong> Demostrar ventajas competitivas, calidad, experiencia</li>
+                        <li><strong>Tipos de Perfil de Cliente:</strong>
+                            <ul>
+                                <li><strong>Rentabilidad:</strong> Busca máximo retorno financiero</li>
+                                <li><strong>Disponibilidad:</strong> Busca facilidad de acceso y logística</li>
+                                <li><strong>Calidad:</strong> Busca productos de excelencia técnica</li>
+                            </ul>
+                        </li>
+                        <li><strong>Cierre de Negocio:</strong> Confirmación de pedido, términos de pago</li>
+                    </ul>
+
+                    <h3>3. Compra</h3>
+                    <p>Concreción de la transacción.</p>
+                    <ul>
+                        <li><strong>Confirmación del Pedido:</strong> Detalles, cantidad, precio, plazo</li>
+                        <li><strong>Consideraciones de Facturación:</strong> Emisión de factura, verificación de datos fiscales</li>
+                        <li><strong>Refuerzo Post-Venta:</strong> Confirmar satisfacción, próxima comunicación</li>
+                    </ul>
+
+                    <h3>4. Entrega</h3>
+                    <p>Logística y cumplimiento del compromiso.</p>
+                    <ul>
+                        <li><strong>Asignación de Cupo:</strong> Disponibilidad de producto, programación de entrega
+                            <ul>
+                                <li>Prioridad a clientes con pagos al día</li>
+                                <li>Volumen del cliente</li>
+                                <li>Localización geográfica</li>
+                                <li>Temporada (demanda estacional)</li>
+                                <li>Antigüedad como cliente</li>
+                            </ul>
+                        </li>
+                        <li><strong>Confirmación de Entrega:</strong> Recepción, verificación de cantidad y calidad</li>
+                    </ul>
+
+                    <h3>5. Calidad</h3>
+                    <p>Aseguramiento de satisfacción post-compra.</p>
+                    <ul>
+                        <li><strong>Monitoreo de Resultados:</strong> Seguimiento de performance del producto en campo</li>
+                        <li><strong>Protocolo de Reclamo:</strong> En caso de insatisfacción o problema:
+                            <ul>
+                                <li>Recepción del reclamo con registros detallados</li>
+                                <li>Investigación técnica</li>
+                                <li>Respuesta en tiempo definido</li>
+                                <li>Resolución o compensación apropiada</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>Audiencias Clave</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Audiencia</th>
+                                <th>Característica Principal</th>
+                                <th>Mensaje Clave</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ingeniero Agrónomo</td>
+                                <td>Toma decisiones técnicas</td>
+                                <td>Calidad, especificaciones, innovación</td>
+                            </tr>
+                            <tr>
+                                <td>Productor Directo</td>
+                                <td>Usuario final, decisión económica</td>
+                                <td>Rentabilidad, facilidad, servicio</td>
+                            </tr>
+                            <tr>
+                                <td>Distribuidor</td>
+                                <td>Intermediario comercial</td>
+                                <td>Margen, rotación, apoyo logístico</td>
+                            </tr>
+                            <tr>
+                                <td>Cuenta Nacional</td>
+                                <td>Comprador institucional</td>
+                                <td>Escala, confiabilidad, partnering estratégico</td>
+                            </tr>
+                            <tr>
+                                <td>Campo en General</td>
+                                <td>Potencial amplio</td>
+                                <td>Presencia, credibilidad, educación</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 8. SEGMENTACIÓN ZONAL -->
+            <section class="manual-section reveal" id="segmentacion-zonal">
+                <h2>Segmentación Zonal - Plan de Trabajo</h2>
+                <div class="manual-meta">Fuente: Confluence | Última actualización: octubre 23, 2020</div>
+                <div class="manual-content">
+                    <h3>Propósito de la Segmentación Zonal</h3>
+                    <p>La estructura zonal permite organizar nuestras operaciones comerciales de manera geográfica, optimizando recursos y adaptando estrategias a características locales.</p>
+
+                    <h3>¿Qué Implica el Trabajo Zonal?</h3>
+                    <ul>
+                        <li>Conocimiento profundo de la geolocalización y capacidad productiva de la zona</li>
+                        <li>Identificación y mapeo de todos los clientes potenciales en la zona</li>
+                        <li>Establecimiento de objetivos comerciales específicos por zona</li>
+                        <li>Desarrollo de relaciones personales con actores clave (productores, distribuidores, asesores)</li>
+                        <li>Adaptación de productos y servicios a las necesidades locales</li>
+                        <li>Generación de reportes periódicos de actividad y resultados</li>
+                        <li>Participación en eventos, ferias y encuentros regionales</li>
+                        <li>Resolución de problemas operativos a nivel zonal</li>
+                    </ul>
+
+                    <h3>Tratamiento de Zonas</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Zona</th>
+                                <th>Cobertura Geográfica</th>
+                                <th>Modelo Comercial</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>NOA</strong></td>
+                                <td>Salta, Jujuy, Catamarca, Tucumán</td>
+                                <td>Comisionista (terceros)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Litoral</strong></td>
+                                <td>Corrientes, Misiones, Entre Ríos</td>
+                                <td>Comercial Propia</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Córdoba</strong></td>
+                                <td>Provincia de Córdoba</td>
+                                <td>Comercial Propia</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cuyo</strong></td>
+                                <td>Mendoza, San Juan, San Luis</td>
+                                <td>Alianzas Estratégicas</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Núcleo</strong></td>
+                                <td>Buenos Aires, La Pampa, centro productivo</td>
+                                <td>Comercial Propia</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sudeste</strong></td>
+                                <td>Sur de Buenos Aires y alrededores</td>
+                                <td>Sin participación activa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Modelos Comerciales</h3>
+                    <h4>Comercial Propia</h4>
+                    <p>Agrefert mantiene equipo propio de ventas y gestión comercial en la zona.</p>
+
+                    <h4>Comisionista</h4>
+                    <p>Terceros actúan como distribuidores o representantes con estructura de comisiones.</p>
+
+                    <h4>Alianzas Estratégicas</h4>
+                    <p>Asociaciones con distribuidores o empresas locales para penetrar mercado.</p>
+                </div>
+            </section>
+
+            <!-- 9. PROTOCOLO DISTRIBUIDORES ZONALES -->
+            <section class="manual-section reveal" id="protocolo-distribuidores">
+                <h2>Protocolo de Trabajo Distribuidores Zonales</h2>
+                <div class="manual-meta">Fuente: Confluence | Última actualización: octubre 23, 2020</div>
+                <div class="manual-content">
+                    <h3>Introducción</h3>
+                    <p>Este protocolo establece las reglas de operación entre Agrefert y sus distribuidores zonales autorizados.</p>
+
+                    <h3>1. Política de Precios</h3>
+                    <ul>
+                        <li><strong>Listado de Precios Semanal:</strong> Se emite cada lunes con vigencia desde el martes</li>
+                        <li><strong>Validez:</strong> Los precios son válidos por 7 días hábiles</li>
+                        <li><strong>Cambios Inesperados:</strong> En caso de variación de mercado importante, se puede revisar antes de 7 días</li>
+                        <li><strong>Comunicación:</strong> Cambios deben ser comunicados por escrito 24 horas antes</li>
+                    </ul>
+
+                    <h3>2. Cierre de Negocio</h3>
+                    <p>Flujo paso a paso:</p>
+                    <ol>
+                        <li>Distribuidor solicita cotización con especificaciones de producto, cantidad, destino</li>
+                        <li>Agrefert emite cotización con precio, plazo, forma de pago</li>
+                        <li>Distribuidor confirma aceptación (verbal o escrita)</li>
+                        <li>Se emite Orden de Compra con referencia</li>
+                        <li>Se genera Factura correspondiente</li>
+                        <li>Se programa Logística y Entrega</li>
+                    </ol>
+
+                    <h4>Responsabilidad de Precio</h4>
+                    <ul>
+                        <li>Una vez confirmada la cotización, el distribuidor es responsable del precio</li>
+                        <li>No se admiten cambios posteriores sin autorización expresa</li>
+                    </ul>
+
+                    <h4>Financiación</h4>
+                    <ul>
+                        <li>Se establece plazo de pago (típicamente 30 días)</li>
+                        <li>Pago a través de transferencia, cheque diferido, o tarjeta agro</li>
+                        <li>Se pueden ofrecer descuentos por pago contado</li>
+                    </ul>
+
+                    <h3>3. Logística y Cupos</h3>
+                    <ul>
+                        <li><strong>Avance de 12 horas:</strong> Los distribuidores deben solicitar cupo con 12 horas de anticipación</li>
+                        <li><strong>Horarios de Carga:</strong>
+                            <ul>
+                                <li>Sacos: hasta las 12:00 (mediodía)</li>
+                                <li>Granel: hasta las 15:00 (3 PM)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Disponibilidad:</strong> Está sujeta a stock disponible en planta</li>
+                        <li><strong>Confirmación:</strong> Se confirma de manera verbal o por email</li>
+                    </ul>
+
+                    <h3>4. Política de Mora (Atrasos)</h3>
+                    <ul>
+                        <li><strong>Responsabilidad:</strong> El distribuidor es responsable por pagos atrasados</li>
+                        <li><strong>Interés Compensatorio:</strong> Se cobra interés por días de atraso (según ley argentina)</li>
+                        <li><strong>Comunicación:</strong> Se contacta al distribuidor 3 días antes de vencimiento para recordatorio</li>
+                        <li><strong>Suspensión de Crédito:</strong> Pagos atrasados pueden resultar en suspensión de nuevas operaciones</li>
+                    </ul>
+
+                    <h3>Condiciones Especiales</h3>
+                    <ul>
+                        <li>Distribuidores Gold pueden acceder a bonificaciones por volumen</li>
+                        <li>Se pueden establecer acuerdos especiales con distribuidores estratégicos</li>
+                        <li>Todo debe formalizarse por escrito</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 10. POLÍTICA INTEGRAL DE COMPRAS, GASTOS Y RENDICIONES -->
+            <section class="manual-section reveal" id="politica-compras">
+                <h2>Política Integral de Compras, Gastos y Rendiciones</h2>
+                <div class="manual-meta">Fuente: Confluence | Última actualización: diciembre 17, 2025</div>
+                <div class="manual-content">
+                    <h3>1. Principios Fundamentales</h3>
+                    <ul>
+                        <li><strong>Necesidad:</strong> Todo gasto debe responder a una necesidad real y justificada</li>
+                        <li><strong>Razonabilidad:</strong> El monto debe ser proporcional y competitivo en el mercado</li>
+                        <li><strong>Trazabilidad:</strong> Debe haber registro documentado de todo gasto</li>
+                        <li><strong>Separación Empresa/Personal:</strong> Prohibido mezclar gastos personales con corporativos</li>
+                        <li><strong>Control Previo:</strong> Autorización antes de incurrir en el gasto</li>
+                        <li><strong>Ejemplo de Liderazgo:</strong> Los líderes deben ser los primeros en cumplir</li>
+                    </ul>
+
+                    <h3>2. Definiciones Clave</h3>
+                    <ul>
+                        <li><strong>Gasto:</strong> Salida de efectivo para adquisición de bienes o servicios de consumo inmediato</li>
+                        <li><strong>Compra:</strong> Adquisición de bienes para uso operativo o inventario</li>
+                        <li><strong>Gasto Extraordinario:</strong> Gasto no previsto que requiere aprobación especial</li>
+                        <li><strong>Rendición:</strong> Presentación de comprobantes y justificación de gastos para reembolso</li>
+                    </ul>
+
+                    <h3>3. Proceso General de Aprobación</h3>
+                    <p><strong>Flujo Estándar:</strong> Gasto → Formulario → Aprobación Líder → Aprobación Admin → Reintegro</p>
+                    <ol>
+                        <li>Colaborador identifica necesidad de gasto</li>
+                        <li>Completa formulario de gasto con detalles (qué, cuánto, por qué, proveedor)</li>
+                        <li>Envía a aprobación de Líder directo</li>
+                        <li>Líder evalúa necesidad y razonabilidad, aprueba o rechaza</li>
+                        <li>Si aprobado, va a Administración para control de documentación</li>
+                        <li>Administración verifica recibos, autorización, cumplimiento de política</li>
+                        <li>Se autoriza reembolso o pago directo al proveedor</li>
+                    </ol>
+
+                    <h3>4. Responsables y Funciones</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rol</th>
+                                <th>Responsabilidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Solicitante</strong></td>
+                                <td>Identificar necesidad, completar formulario, proveer comprobantes, justificar</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Líder Directo</strong></td>
+                                <td>Evaluar necesidad, verificar presupuesto disponible, aprobar o rechazar</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Administración</strong></td>
+                                <td>Verificar documentación, cumplimiento de thresholds, autorizar pago</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Finanzas</strong></td>
+                                <td>Aprobación de gastos mayores, auditoría, reporting financiero</td>
+                            </tr>
+                            <tr>
+                                <td><strong>COO</strong></td>
+                                <td>Gastos extraordinarios o excepcionales que superen autoridades delegadas</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>5. Tabla de Thresholds de Aprobación</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Monto</th>
+                                <th>Cotizaciones Requeridas</th>
+                                <th>Aprobaciones Requeridas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hasta $500</td>
+                                <td>1 proveedor</td>
+                                <td>Líder + Administración</td>
+                            </tr>
+                            <tr>
+                                <td>$500 - $2,000</td>
+                                <td>2 proveedores</td>
+                                <td>Líder + Administración</td>
+                            </tr>
+                            <tr>
+                                <td>$2,000 - $5,000</td>
+                                <td>3 proveedores</td>
+                                <td>Líder + Administración + Finanzas</td>
+                            </tr>
+                            <tr>
+                                <td>Más de $5,000</td>
+                                <td>3 proveedores + mercado</td>
+                                <td>Líder + Administración + Finanzas + CEO</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>6. Políticas por Área</h3>
+
+                    <h4>Área Administrativa</h4>
+                    <ul>
+                        <li>Suministros de oficina: necesidad operativa, presupuesto anual</li>
+                        <li>Reparaciones: obtener 3 cotizaciones para obras mayores (>$1,000)</li>
+                        <li>Servicios: internet, telefonía, seguros: aprobación anual de contratos</li>
+                    </ul>
+
+                    <h4>Área Comercial</h4>
+                    <ul>
+                        <li><strong>Vehículos:</strong> Combustible (tarjeta corporativa), mantenimiento (ver tabla mantenimiento), reparaciones (3 cotizaciones si >$1,000)</li>
+                        <li><strong>Comidas y Entretención:</strong>
+                            <ul>
+                                <li>Almuerzo/cena de trabajo con clientes: USD 25 por persona máximo</li>
+                                <li>Café/desayuno: USD 5 por persona máximo</li>
+                                <li>Alcoholismo permitido en contexto social, cantidad razonable</li>
+                            </ul>
+                        </li>
+                        <li><strong>Alojamiento:</strong> USD 100-150 por noche según ciudad</li>
+                        <li><strong>Viajes:</strong> Pasajes aéreos, buses (clase regular), tren (clase turista)</li>
+                        <li><strong>Eventos y Ferias:</strong> Participación con proveedores, gastos de booth, materiales</li>
+                    </ul>
+
+                    <h4>Área Planta</h4>
+                    <ul>
+                        <li><strong>Mantenimiento:</strong> Preventivo (programado), correctivo (imprevisto)</li>
+                        <li><strong>Materias Primas:</strong> Compras de insumos de producción</li>
+                        <li><strong>Suministros Planta:</strong> Materiales, repuestos, equipo de protección</li>
+                    </ul>
+
+                    <h3>7. Documentación Requerida</h3>
+                    <ul>
+                        <li>Factura o recibo del proveedor</li>
+                        <li>Comprobante de pago (transferencia, cheque, tarjeta)</li>
+                        <li>Formulario de gasto completado</li>
+                        <li>Justificación escrita si no es evidente</li>
+                        <li>Aprobaciones de acuerdo a threshold</li>
+                    </ul>
+
+                    <h3>8. Plazos</h3>
+                    <ul>
+                        <li><strong>Rendición:</strong> Dentro de 48 horas de incurrido el gasto</li>
+                        <li><strong>Aprobación Líder:</strong> Dentro de 24 horas</li>
+                        <li><strong>Aprobación Admin:</strong> Dentro de 48 horas</li>
+                        <li><strong>Reintegro:</strong> Siguiente ciclo de nómina</li>
+                    </ul>
+
+                    <h3>9. Gastos Extraordinarios</h3>
+                    <ul>
+                        <li>Requieren pre-aprobación del COO antes de incurrir</li>
+                        <li>Ejemplos: viajes adicionales no previstos, eventos especiales, equipamiento no presupuestado</li>
+                    </ul>
+
+                    <h3>10. Cumplimiento y Auditoría</h3>
+                    <ul>
+                        <li>Finanzas realiza auditoría mensual de gastos</li>
+                        <li>Incumplimiento de política puede resultar en rechazo de reembolso</li>
+                        <li>Gastos recurrentes no autorizados pueden llevar a medidas disciplinarias</li>
+                    </ul>
+
+                    <h3>11. Excepciones</h3>
+                    <ul>
+                        <li>Solo el CEO puede autorizar excepciones a esta política</li>
+                        <li>Toda excepción debe documentarse formalmente</li>
+                    </ul>
+
+                    <h3>12. Gastos Personales Prohibidos</h3>
+                    <ul>
+                        <li>Comidas personales en horario de trabajo no autorizado</li>
+                        <li>Ropa o vestuario personal (excepto uniforme corporativo)</li>
+                        <li>Gastos personales de transporte o vivienda</li>
+                        <li>Entretenimiento personal (cine, espectáculos)</li>
+                    </ul>
+
+                    <h3>13. Revisión de Política</h3>
+                    <p>Esta política se revisa anualmente o cuando cambios organizacionales lo justifiquen.</p>
+
+                    <h3>14. Contacto y Consultas</h3>
+                    <p>Para consultas sobre esta política, dirigirse a: <strong>administracion@agrefert.com</strong></p>
+                </div>
+            </section>
+
+            <!-- 11. PROTOCOLO MONOPRODUCTO Y MEZCLAS SÓLIDAS -->
+            <section class="manual-section reveal" id="protocolo-monoproducto">
+                <h2>Protocolo Monoproducto y Mezclas Sólidas</h2>
+                <div class="manual-meta">Fuente: Confluence | Última actualización: enero 29, 2021</div>
+                <div class="manual-content">
+                    <h3>1. Alcance</h3>
+                    <p>Este protocolo aplica a <strong>todos los fertilizantes sólidos granulados</strong> producidos en la planta de Ramallo, Agrefert.</p>
+
+                    <h3>2. Productos Aplicables</h3>
+                    <ul>
+                        <li>ANSCA N28-S4-Ca5</li>
+                        <li>Commodities (varios)</li>
+                        <li>Chacarero (mezclas químicas)</li>
+                        <li>Zurko (línea sólida cuando aplique)</li>
+                        <li>Cualquier monoproducto granulado o mezcla sólida</li>
+                    </ul>
+
+                    <h3>3. Objetivo</h3>
+                    <p>Establecer procedimiento para aceptación o rechazo de lotes de producto basado en características físicas. El objetivo es garantizar que solo producto de calidad salga de planta.</p>
+
+                    <h3>4. Parámetros de Aceptación</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parámetro</th>
+                                <th>Límite Máximo Aceptable</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Polvo/Fines (%)</td>
+                                <td>2%</td>
+                            </tr>
+                            <tr>
+                                <td>Retenido en malla ASTM 4</td>
+                                <td>1.5%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>5. Responsables</h3>
+                    <ul>
+                        <li><strong>Operador de Línea:</strong> Realiza muestreo inicial y pruebas</li>
+                        <li><strong>Jefe de Planta:</strong> Supervisa y autoriza aceptación/rechazo</li>
+                        <li><strong>Sector Comercial:</strong> Notificado de resultados</li>
+                    </ul>
+
+                    <h3>6. Herramientas Requeridas</h3>
+                    <ul>
+                        <li>Juego de tamices (mallas ASTM correspondientes)</li>
+                        <li>Muestreador de granos/fertilizantes</li>
+                        <li>Balanza de precisión (±0.1g)</li>
+                        <li>Formulario de control de intake</li>
+                    </ul>
+
+                    <h3>7. Procedimiento de Muestreo y Testing (12 pasos)</h3>
+                    <ol>
+                        <li><strong>Verificación de Lote:</strong> Confirmar código de lote, producto, cantidad</li>
+                        <li><strong>Toma de Muestra:</strong> Extraer muestra representativa con muestreador (mínimo 5 puntos diferentes del lote)</li>
+                        <li><strong>Homogeneización:</strong> Mezclar muestras en contenedor limpio</li>
+                        <li><strong>Pesaje de Muestra:</strong> Pesar cantidad de muestra para análisis (típicamente 500g-1kg)</li>
+                        <li><strong>Cribado Inicial:</strong> Pasar por malla gruesa para remover contaminantes evidentes</li>
+                        <li><strong>Pesaje Pre-Tamizado:</strong> Registrar peso de muestra antes de tamizado</li>
+                        <li><strong>Tamizado Mecánico:</strong> Pasar por juego de mallas durante tiempo estándar (típicamente 5-10 minutos)</li>
+                        <li><strong>Separación de Fracciones:</strong> Recolectar polvo, granos y gruesos en envases separados</li>
+                        <li><strong>Pesaje de Fracciones:</strong> Pesar cada fracción con precisión</li>
+                        <li><strong>Cálculo de Porcentajes:</strong> Calcular % de polvo y % retenido en ASTM 4</li>
+                        <li><strong>Comparación con Límites:</strong> Verificar si cumple criterios de aceptación</li>
+                        <li><strong>Registro y Documentación:</strong> Completar formulario, firmar por responsable, archivar resultado</li>
+                    </ol>
+
+                    <h3>8. Criterios de Decisión</h3>
+                    <ul>
+                        <li><strong>Aceptado:</strong> Ambos parámetros dentro de límites → Producto liberado a comercial</li>
+                        <li><strong>Rechazado:</strong> Uno o ambos parámetros fuera de límites → Lote remitido a reproceso o descarte</li>
+                        <li><strong>Zona Gris:</strong> Muy cerca de límites → Tomar segunda muestra para confirmación</li>
+                    </ul>
+
+                    <h3>9. Acciones Post-Rechazo</h3>
+                    <ul>
+                        <li>Separar lote rechazado en zona de cuarentena</li>
+                        <li>Notificar a Jefe de Planta y Sector Comercial</li>
+                        <li>Evaluar si es reprocesable o debe descartarse</li>
+                        <li>Investigar causa raíz de problema de calidad</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 12. PROTOCOLO EXTRACCIÓN MUESTRA -->
+            <section class="manual-section reveal" id="protocolo-muestra">
+                <h2>Protocolo Extracción Muestra de Fertilizantes</h2>
+                <div class="manual-meta">Fuente: Confluence | Última actualización: noviembre 3, 2020</div>
+                <div class="manual-content">
+                    <h3>1. Objetivos</h3>
+                    <ul>
+                        <li>Monitoreo periódico de calidad de fertilizantes (cada 90 días)</li>
+                        <li>Verificación de cumplimiento de especificaciones nutricionales</li>
+                        <li>Detección temprana de problemas de calidad</li>
+                        <li>Generación de data para mejora continua</li>
+                    </ul>
+
+                    <h3>2. Tipos de Fertilizantes y Nutrients a Analizar</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fertilizante</th>
+                                <th>Nutrientes a Determinar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Urea</td>
+                                <td>N (Nitrógeno), Humedad, Biuret</td>
+                            </tr>
+                            <tr>
+                                <td>Nitrato de Amonio</td>
+                                <td>N, Humedad, Densidad aparente</td>
+                            </tr>
+                            <tr>
+                                <td>Sulfato de Amonio</td>
+                                <td>N, S (Azufre), Humedad, Granulometría</td>
+                            </tr>
+                            <tr>
+                                <td>MAP (Monoamónico)</td>
+                                <td>N, P₂O₅, Humedad, Solubilidad</td>
+                            </tr>
+                            <tr>
+                                <td>DAP (Diamónico)</td>
+                                <td>N, P₂O₅, Humedad, Solubilidad</td>
+                            </tr>
+                            <tr>
+                                <td>Sulfato de Calcio</td>
+                                <td>Ca, S, Humedad, Granulometría</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>3. Mecanismo de Muestreo</h3>
+                    <ul>
+                        <li><strong>Cantidad de Submuestras:</strong> Mínimo 5-10 submuestras por lote</li>
+                        <li><strong>Tamaño de Submuestra:</strong> Aproximadamente 500g cada una</li>
+                        <li><strong>Localización:</strong> Extraer de diferentes puntos del lote (arriba, centro, abajo)</li>
+                        <li><strong>Homogeneización:</strong> Mezclar todas las submuestras en un contenedor limpio</li>
+                        <li><strong>Muestra Final:</strong> Extraer 1kg de la mezcla homogeneizada como muestra para análisis</li>
+                    </ul>
+
+                    <h3>4. Identificación y Etiquetado</h3>
+                    <p>Cada muestra debe incluir etiqueta con:</p>
+                    <ul>
+                        <li>Código de lote</li>
+                        <li>Tipo de fertilizante</li>
+                        <li>Fecha de muestreo</li>
+                        <li>Nombre de persona que realizó muestreo</li>
+                        <li>Destino (para envío a análisis)</li>
+                    </ul>
+
+                    <h3>5. Frecuencia de Muestreo</h3>
+                    <ul>
+                        <li><strong>Estándar:</strong> Cada 90 días por tipo de fertilizante</li>
+                        <li><strong>Mayor Frecuencia:</strong> Si hay cambio de proveedor o problemas detectados previos</li>
+                        <li><strong>Documentación:</strong> Mantener calendario de muestreos realizados</li>
+                    </ul>
+
+                    <h3>6. Cadena de Custodia</h3>
+                    <ul>
+                        <li>Muestras deben ser transportadas en bolsas identificadas</li>
+                        <li>Mantener registro de quién entrega y quién recibe muestra</li>
+                        <li>Guardar en área protegida hasta envío a laboratorio</li>
+                    </ul>
+
+                    <h3>7. Análisis de Laboratorio</h3>
+                    <ul>
+                        <li><strong>Laboratorio Autorizado:</strong> Uso de laboratorio externo certificado</li>
+                        <li><strong>Tiempo de Análisis:</strong> Resultados disponibles dentro de 48 horas de recibida muestra</li>
+                        <li><strong>Métodos:</strong> Métodos analíticos estándar AOAC o equivalentes</li>
+                    </ul>
+
+                    <h3>8. Reportes de Resultados</h3>
+                    <ul>
+                        <li><strong>Recepción de Resultados:</strong> El sector comercial recibe resultados del análisis dentro de 48h</li>
+                        <li><strong>Notificación:</strong> Si hay desviaciones, se notifica inmediatamente a Jefe de Planta y Finanzas</li>
+                        <li><strong>Archivo:</strong> Todos los reportes se archivan por referencia histórica</li>
+                    </ul>
+
+                    <h3>9. Acciones Correctivas</h3>
+                    <ul>
+                        <li>Si nutrientes están fuera de especificación → Investigación con proveedor</li>
+                        <li>Si es problema interno → Revisión de proceso de recepción</li>
+                        <li>En caso grave → Retiro de lote del mercado</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 13. JOB DESCRIPTIONS -->
+            <section class="manual-section reveal" id="job-descriptions">
+                <h2>Job Descriptions</h2>
+                <div class="manual-meta">Fuente: Confluence | Última actualización: marzo 10, 2022</div>
+                <div class="manual-content">
+                    <h3>Estructura Organizacional</h3>
+                    <p>Agrefert se organiza en áreas funcionales, cada una con un Líder responsable y analistas/operadores especializados.</p>
+
+                    <h3>Área de Contabilidad</h3>
+                    <p><strong>Descripción del Área:</strong> Responsable de registro de operaciones financieras, conciliaciones bancarias, gestión de pasivos, y generación de reportes contables. Asegura cumplimiento normativo fiscal.</p>
+
+                    <h4>Posición: Líder Contabilidad</h4>
+                    <ul>
+                        <li><strong>Dependencia:</strong> COO</li>
+                        <li><strong>Responsabilidades:</strong>
+                            <ul>
+                                <li>Supervisión del equipo contable</li>
+                                <li>Registro de operaciones complejas</li>
+                                <li>Análisis de varianzas contables</li>
+                                <li>Reporte a inversores (si aplica)</li>
+                                <li>Cumplimiento de obligaciones fiscales</li>
+                            </ul>
+                        </li>
+                        <li><strong>Requisitos:</strong> Contador Público, mínimo 5 años experiencia, conocimiento de software contable</li>
+                    </ul>
+
+                    <h4>Posición: Analista Contabilidad</h4>
+                    <ul>
+                        <li><strong>Dependencia:</strong> Líder Contabilidad</li>
+                        <li><strong>Responsabilidades:</strong>
+                            <ul>
+                                <li>Registro diario de operaciones (facturas, comprobantes)</li>
+                                <li>Conciliación de cuentas por cobrar y pagar</li>
+                                <li>Gestión de inventario contable</li>
+                                <li>Apoyo administrativo general</li>
+                                <li>Entrenamiento de personal nuevo</li>
+                            </ul>
+                        </li>
+                        <li><strong>Requisitos:</strong> Formación en contabilidad, conocimiento de software contable, atención al detalle</li>
+                    </ul>
+
+                    <h3>Área de Planta</h3>
+                    <p><strong>Descripción del Área:</strong> Responsable de producción, empaque y despacho de fertilizantes. Garantiza calidad del producto y cumplimiento de estándares de seguridad.</p>
+
+                    <h4>Posición: Jefe de Planta</h4>
+                    <ul>
+                        <li><strong>Dependencia:</strong> COO</li>
+                        <li><strong>Responsabilidades:</strong>
+                            <ul>
+                                <li>Dirección operacional de la planta</li>
+                                <li>Supervisión de producción y calidad</li>
+                                <li>Seguridad industrial y cumplimiento normativo</li>
+                                <li>Mantenimiento preventivo de equipos</li>
+                                <li>Gestión de personal de planta</li>
+                                <li>Optimización de costos operativos</li>
+                            </ul>
+                        </li>
+                        <li><strong>Requisitos:</strong> Ingeniero, 10+ años experiencia en manufactura/agroindustria, conocimiento de seguridad industrial</li>
+                    </ul>
+
+                    <h4>Posición: Analista de Planta</h4>
+                    <ul>
+                        <li><strong>Dependencia:</strong> Jefe de Planta</li>
+                        <li><strong>Responsabilidades:</strong>
+                            <ul>
+                                <li>Control de calidad del producto (muestreo, testing)</li>
+                                <li>Reporte de producción diaria</li>
+                                <li>Documentación de procesos</li>
+                                <li>Soporte técnico en línea de producción</li>
+                                <li>Cumplimiento de protocolos de calidad</li>
+                            </ul>
+                        </li>
+                        <li><strong>Requisitos:</strong> Técnico en química o similar, 2+ años experiencia, conocimiento de control de calidad</li>
+                    </ul>
+
+                    <h3>Área de Finanzas</h3>
+                    <p><strong>Descripción del Área:</strong> Responsable de gestión de tesorería, análisis financiero, relaciones bancarias y presupuestos.</p>
+
+                    <h4>Posición: Líder Finanzas</h4>
+                    <ul>
+                        <li><strong>Dependencia:</strong> CEO</li>
+                        <li><strong>Responsabilidades:</strong>
+                            <ul>
+                                <li>Gestión de flujo de caja</li>
+                                <li>Análisis financiero y presupuestos</li>
+                                <li>Relaciones bancarias y líneas de crédito</li>
+                                <li>Tesorería (pagos, cobranzas)</li>
+                                <li>Reportes financieros a CEO</li>
+                            </ul>
+                        </li>
+                        <li><strong>Requisitos:</strong> Licenciado en Administración o Finanzas, 8+ años experiencia, conocimiento de análisis financiero</li>
+                    </ul>
+
+                    <h3>Área Comercial</h3>
+                    <p><strong>Descripción del Área:</strong> Responsable de ventas, relaciones con clientes, gestión de créditos y cobranzas.</p>
+
+                    <h4>Posición: Líder de Producto</h4>
+                    <ul>
+                        <li><strong>Dependencia:</strong> CEO</li>
+                        <li><strong>Responsabilidades:</strong>
+                            <ul>
+                                <li>Definición de estrategia de productos</li>
+                                <li>Desarrollo de nuevos productos</li>
+                                <li>Posicionamiento y comunicación de marca</li>
+                                <li>Análisis de mercado y competencia</li>
+                                <li>Coordinación con áreas comercial y planta</li>
+                            </ul>
+                        </li>
+                        <li><strong>Requisitos:</strong> Ingeniero Agrónomo o similar, 5+ años experiencia en producto/marketing, conocimiento de mercado agrícola</li>
+                    </ul>
+
+                    <h4>Posición: Business Development</h4>
+                    <ul>
+                        <li><strong>Dependencia:</strong> Líder Comercial (si existe) o CEO</li>
+                        <li><strong>Responsabilidades:</strong>
+                            <ul>
+                                <li>Identificación de nuevas oportunidades de negocio</li>
+                                <li>Desarrollo de alianzas estratégicas</li>
+                                <li>Análisis de mercado y competencia</li>
+                                <li>Prospectación de nuevos clientes clave</li>
+                                <li>Seguimiento de tendencias del sector</li>
+                            </ul>
+                        </li>
+                        <li><strong>Requisitos:</strong> Licenciado en administración o similar, 3+ años en ventas/negocio, habilidades de comunicación</li>
+                    </ul>
+
+                    <h4>Posición: Analista Créditos y Cobranzas</h4>
+                    <ul>
+                        <li><strong>Dependencia:</strong> Líder Finanzas</li>
+                        <li><strong>Responsabilidades:</strong>
+                            <ul>
+                                <li>Evaluación crediticia de clientes nuevos</li>
+                                <li>Seguimiento de cobranzas (atrasos, notificaciones)</li>
+                                <li>Gestión de límites de crédito</li>
+                                <li>Reportes de cartera de clientes</li>
+                                <li>Coordinación con clientes en mora</li>
+                            </ul>
+                        </li>
+                        <li><strong>Requisitos:</strong> Formación en finanzas/administración, 2+ años experiencia, excelentes habilidades de negociación</li>
+                    </ul>
+
+                    <h3>Posición: Líder Operaciones</h3>
+                    <ul>
+                        <li><strong>Dependencia:</strong> CEO (COO)</li>
+                        <li><strong>Responsabilidades:</strong>
+                            <ul>
+                                <li>Dirección de operaciones generales</li>
+                                <li>Supervisión de áreas administrativas</li>
+                                <li>Coordinación entre departamentos</li>
+                                <li>Cumplimiento de objetivos operativos</li>
+                                <li>Gestión de recursos (humanos, materiales, financieros)</li>
+                                <li>Reportes al CEO</li>
+                            </ul>
+                        </li>
+                        <li><strong>Requisitos:</strong> Ingeniero o Licenciado en Administración, 10+ años experiencia operacional, liderazgo probado</li>
+                    </ul>
+
+                    <h3>Niveles y Salarios</h3>
+                    <p>Ver documento "Política de Sueldos y Performance" para detalles de escala salarial (TR, JR, SSR, SR, Líder) y ajustes de actualización.</p>
+
+                    <h3>Desarrollo y Capacitación</h3>
+                    <ul>
+                        <li>Cada posición tiene plan de capacitación inicial (onboarding)</li>
+                        <li>Evaluaciones periódicas de desempeño (marzo y septiembre)</li>
+                        <li>Oportunidades de desarrollo según performance y antigüedad</li>
+                    </ul>
+
+                    <h3>Beneficios Generales</h3>
+                    <ul>
+                        <li>Aporte a obra social/prepaga</li>
+                        <li>Seguro de vida</li>
+                        <li>Flexibilidad horaria donde sea posible</li>
+                        <li>Ambiente de trabajo inclusivo</li>
+                        <li>Oportunidades de crecimiento interno</li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container" style="text-align:center;">
+            <img src="img/logo_fert_white.png" alt="Agrefert" style="height:40px; margin-bottom:1rem; opacity:0.9;">
+            <p style="opacity:0.7; font-size:0.85rem;">© 2026 Agrefert AR SA — Ruta Nacional 9 Km 234, Ramallo, Buenos Aires</p>
+            <p style="opacity:0.5; font-size:0.75rem; margin-top:0.5rem;">Sitio de inducción — Uso interno exclusivo</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll progress bar
+        const scrollProgress = document.getElementById('scrollProgress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
+
+        // IntersectionObserver for reveal animations
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const revealOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, revealOptions);
+
+        reveals.forEach(reveal => {
+            revealOnScroll.observe(reveal);
+        });
+
+        // TOC toggle on mobile
+        const tocToggle = document.getElementById('tocToggle');
+        const tocSidebar = document.getElementById('tocSidebar');
+
+        if (tocToggle) {
+            tocToggle.addEventListener('click', () => {
+                tocSidebar.classList.toggle('collapsed');
+                tocToggle.classList.toggle('active');
+                tocToggle.textContent = tocSidebar.classList.contains('collapsed') ? '📑 Mostrar Índice' : '📑 Ocultar Índice';
+            });
+        }
+
+        // TOC active link highlighting on scroll
+        const sections = document.querySelectorAll('.manual-section');
+        const tocLinks = document.querySelectorAll('.manual-toc a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollTop >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for TOC links
+        tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').slice(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    // Theme toggle
+    function toggleTheme() {
+        var html = document.documentElement;
+        var current = html.getAttribute('data-theme');
+        var next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('agrefert-theme', next);
+        updateToggleIcon();
+    }
+    function updateToggleIcon() {
+        var btn = document.getElementById('themeToggle');
+        if (!btn) return;
+        var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        btn.innerHTML = isDark ? '&#9728;' : '&#9790;';
+        btn.title = isDark ? 'Modo claro' : 'Modo oscuro';
+    }
+    updateToggleIcon();
+    </script>
+</body>
+</html>

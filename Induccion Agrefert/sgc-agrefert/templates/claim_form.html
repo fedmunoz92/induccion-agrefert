@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if claim %}Editar Reclamo{% else %}Nuevo Reclamo{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="text-white mb-0">
+                {% if claim %}Editar Reclamo de Cliente{% else %}Nuevo Reclamo de Cliente{% endif %}
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card bg-dark border-secondary">
+                <div class="card-body">
+                    <form method="POST" action="{% if claim %}{{ url_for('claim_form', claim_id=claim.id) }}{% else %}{{ url_for('claim_form') }}{% endif %}">
+
+                        <!-- Customer Name -->
+                        <div class="mb-3">
+                            <label for="customer_name" class="form-label text-white">Nombre del Cliente *</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-dark"
+                                id="customer_name"
+                                name="customer_name"
+                                value="{{ claim.customer_name if claim else '' }}"
+                                required
+                                placeholder="Nombre completo del cliente">
+                        </div>
+
+                        <!-- Product -->
+                        <div class="mb-3">
+                            <label for="product" class="form-label text-white">Producto *</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-dark"
+                                id="product"
+                                name="product"
+                                value="{{ claim.product if claim else '' }}"
+                                required
+                                placeholder="Nombre del producto reclamado">
+                        </div>
+
+                        <!-- Lot Number -->
+                        <div class="mb-3">
+                            <label for="lot_number" class="form-label text-white">Lote/Número de Serie</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-dark"
+                                id="lot_number"
+                                name="lot_number"
+                                value="{{ claim.lot_number if claim else '' }}"
+                                placeholder="Lote o número de serie (opcional)">
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label text-white">Descripción del Reclamo *</label>
+                            <textarea
+                                class="form-control form-control-dark"
+                                id="description"
+                                name="description"
+                                rows="4"
+                                required
+                                placeholder="Detalles completos del reclamo del cliente">{{ claim.description if claim else '' }}</textarea>
+                            <small class="form-text text-muted">Describe exactamente qué fue el problema reportado</small>
+                        </div>
+
+                        <!-- Claim Type -->
+                        <div class="mb-3">
+                            <label for="claim_type" class="form-label text-white">Tipo de Reclamo *</label>
+                            <select
+                                class="form-select form-select-dark"
+                                id="claim_type"
+                                name="claim_type"
+                                required>
+                                <option value="">-- Selecciona un tipo --</option>
+                                <option value="defecto" {% if claim and claim.claim_type == 'defecto' %}selected{% endif %}>Defecto del Producto</option>
+                                <option value="entrega" {% if claim and claim.claim_type == 'entrega' %}selected{% endif %}>Problema de Entrega</option>
+                                <option value="rotulacion" {% if claim and claim.claim_type == 'rotulacion' %}selected{% endif %}>Rotulación/Embalaje</option>
+                                <option value="otro" {% if claim and claim.claim_type == 'otro' %}selected{% endif %}>Otro</option>
+                            </select>
+                        </div>
+
+                        <!-- Severity -->
+                        <div class="mb-3">
+                            <label for="severity" class="form-label text-white">Severidad *</label>
+                            <select
+                                class="form-select form-select-dark"
+                                id="severity"
+                                name="severity"
+                                required>
+                                <option value="">-- Selecciona severidad --</option>
+                                <option value="critica" {% if claim and claim.severity == 'critica' %}selected{% endif %}>Crítica (riesgo sanitario)</option>
+                                <option value="alta" {% if claim and claim.severity == 'alta' %}selected{% endif %}>Alta (cliente afectado)</option>
+                                <option value="media" {% if claim and claim.severity == 'media' %}selected{% endif %}>Media (afecta calidad)</option>
+                                <option value="baja" {% if claim and claim.severity == 'baja' %}selected{% endif %}>Baja (problema menor)</option>
+                            </select>
+                        </div>
+
+                        <!-- Assigned To -->
+                        <div class="mb-3">
+                            <label for="assigned_to" class="form-label text-white">Responsable de Investigación *</label>
+                            <select
+                                class="form-select form-select-dark"
+                                id="assigned_to"
+                                name="assigned_to"
+                                required>
+                                <option value="">-- Selecciona un usuario --</option>
+                                {% for user in users %}
+                                    <option value="{{ user.id }}" {% if claim and claim.assigned_to == user.id %}selected{% endif %}>
+                                        {{ user.username }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Due Date -->
+                        <div class="mb-3">
+                            <label for="due_date" class="form-label text-white">Fecha de Vencimiento *</label>
+                            <input
+                                type="date"
+                                class="form-control form-control-dark"
+                                id="due_date"
+                                name="due_date"
+                                value="{% if claim and claim.due_date %}{{ claim.due_date.strftime('%Y-%m-%d') }}{% endif %}"
+                                required>
+                            <small class="form-text text-muted">Fecha límite para resolver el reclamo</small>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i>
+                                {% if claim %}Actualizar Reclamo{% else %}Crear Reclamo{% endif %}
+                            </button>
+                            <a href="{{ url_for('claims') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle"></i> Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Panel -->
+        <div class="col-lg-4">
+            <div class="card bg-dark border-danger">
+                <div class="card-header bg-danger bg-opacity-25 border-danger">
+                    <h6 class="text-white mb-0">
+                        <i class="bi bi-exclamation-triangle"></i> Información Importante
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h6 class="text-warning">Severidades</h6>
+                        <ul class="small text-muted list-unstyled">
+                            <li><strong class="text-danger">Crítica:</strong> Riesgo sanitario inmediato</li>
+                            <li><strong class="text-warning">Alta:</strong> Cliente significativamente afectado</li>
+                            <li><strong>Media:</strong> Afecta calidad del producto</li>
+                            <li><strong class="text-success">Baja:</strong> Problema menor o cosmético</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="text-info">Recomendaciones</h6>
+                        <ul class="small text-muted list-unstyled">
+                            <li>Registra el reclamo lo antes posible</li>
+                            <li>Sé específico en la descripción</li>
+                            <li>Incluye datos de contacto del cliente</li>
+                            <li>Conserva evidencia (producto, embalaje)</li>
+                            <li>Evalúa correctamente la severidad</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <small>
+                            <strong>Nota:</strong> Los campos marcados con * son obligatorios
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.form-control-dark {
+    background-color: #495057;
+    border-color: #495057;
+    color: #ffffff;
+}
+
+.form-control-dark:focus {
+    background-color: #495057;
+    border-color: #80bdff;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control-dark::placeholder {
+    color: #adb5bd;
+}
+
+.form-select-dark {
+    background-color: #495057;
+    border-color: #495057;
+    color: #ffffff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.form-select-dark:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-select-dark option {
+    background-color: #495057;
+    color: #ffffff;
+}
+</style>
+{% endblock %}

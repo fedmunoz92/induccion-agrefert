@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if audit %}Editar Auditoría{% else %}Nueva Auditoría{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="text-white mb-0">
+                {% if audit %}Editar Auditoría{% else %}Nueva Auditoría{% endif %}
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card bg-dark border-secondary">
+                <div class="card-body">
+                    <form method="POST" action="{% if audit %}{{ url_for('audit_form', audit_id=audit.id) }}{% else %}{{ url_for('audit_form') }}{% endif %}">
+
+                        <!-- Audit Type -->
+                        <div class="mb-3">
+                            <label for="audit_type" class="form-label text-white">Tipo de Auditoría *</label>
+                            <select
+                                class="form-select form-select-dark"
+                                id="audit_type"
+                                name="audit_type"
+                                required>
+                                <option value="">-- Selecciona un tipo --</option>
+                                <option value="interna" {% if audit and audit.audit_type == 'interna' %}selected{% endif %}>Auditoría Interna</option>
+                                <option value="externa" {% if audit and audit.audit_type == 'externa' %}selected{% endif %}>Auditoría Externa</option>
+                                <option value="seguimiento" {% if audit and audit.audit_type == 'seguimiento' %}selected{% endif %}>Auditoría de Seguimiento</option>
+                            </select>
+                        </div>
+
+                        <!-- Area -->
+                        <div class="mb-3">
+                            <label for="area_id" class="form-label text-white">Área a Auditar *</label>
+                            <select
+                                class="form-select form-select-dark"
+                                id="area_id"
+                                name="area_id"
+                                required>
+                                <option value="">-- Selecciona un área --</option>
+                                {% for area in areas %}
+                                    <option value="{{ area.id }}" {% if audit and audit.area_id == area.id %}selected{% endif %}>
+                                        {{ area.name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Scheduled Date -->
+                        <div class="mb-3">
+                            <label for="scheduled_date" class="form-label text-white">Fecha Programada *</label>
+                            <input
+                                type="date"
+                                class="form-control form-control-dark"
+                                id="scheduled_date"
+                                name="scheduled_date"
+                                value="{% if audit and audit.scheduled_date %}{{ audit.scheduled_date.strftime('%Y-%m-%d') }}{% endif %}"
+                                required>
+                            <small class="form-text text-muted">Fecha en que se ejecutará la auditoría</small>
+                        </div>
+
+                        <!-- Auditor -->
+                        <div class="mb-3">
+                            <label for="auditor_id" class="form-label text-white">Auditor Responsable *</label>
+                            <select
+                                class="form-select form-select-dark"
+                                id="auditor_id"
+                                name="auditor_id"
+                                required>
+                                <option value="">-- Selecciona un auditor --</option>
+                                {% for user in users %}
+                                    <option value="{{ user.id }}" {% if audit and audit.auditor_id == user.id %}selected{% endif %}>
+                                        {{ user.username }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Scope -->
+                        <div class="mb-3">
+                            <label for="scope" class="form-label text-white">Alcance de la Auditoría *</label>
+                            <textarea
+                                class="form-control form-control-dark"
+                                id="scope"
+                                name="scope"
+                                rows="4"
+                                required
+                                placeholder="Describe el alcance y objetivos de la auditoría">{{ audit.scope if audit else '' }}</textarea>
+                            <small class="form-text text-muted">Qué se va a auditar, objetivos y criterios</small>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i>
+                                {% if audit %}Actualizar Auditoría{% else %}Crear Auditoría{% endif %}
+                            </button>
+                            <a href="{{ url_for('audits') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle"></i> Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Panel -->
+        <div class="col-lg-4">
+            <div class="card bg-dark border-info">
+                <div class="card-header bg-info bg-opacity-25 border-info">
+                    <h6 class="text-white mb-0">
+                        <i class="bi bi-info-circle"></i> Tipos de Auditoría
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h6 class="text-info">Auditoría Interna</h6>
+                        <p class="small text-muted">Realizada por el equipo interno para verificar el cumplimiento del SGC</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="text-info">Auditoría Externa</h6>
+                        <p class="small text-muted">Realizada por auditores externos, organismos certificadores o clientes</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="text-info">Auditoría de Seguimiento</h6>
+                        <p class="small text-muted">Para verificar el cierre de hallazgos de auditorías anteriores</p>
+                    </div>
+
+                    <hr class="border-secondary">
+
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <small>
+                            <strong>Nota:</strong> Los campos marcados con * son obligatorios
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.form-control-dark {
+    background-color: #495057;
+    border-color: #495057;
+    color: #ffffff;
+}
+
+.form-control-dark:focus {
+    background-color: #495057;
+    border-color: #80bdff;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control-dark::placeholder {
+    color: #adb5bd;
+}
+
+.form-select-dark {
+    background-color: #495057;
+    border-color: #495057;
+    color: #ffffff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.form-select-dark:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-select-dark option {
+    background-color: #495057;
+    color: #ffffff;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,2530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Induccion Agrefert — Bienvenido al equipo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════════
+           AGREFERT INDUCCION — Premium Design System v3
+           Brand-aligned · Animated · Polished
+           ═══════════════════════════════════════════════════ */
+        :root {
+            --brand-green: #1BB275;
+            --brand-green-dark: #148f5e;
+            --brand-green-deeper: #0d7a4e;
+            --brand-cyan: #00BFE3;
+            --brand-dark: #212121;
+            --brand-orange: #FF9239;
+            --brand-blue: #1877F2;
+            --brand-blue-dark: #0A50CC;
+            --brand-yellow: #FFBC00;
+            --accent-green-1: #90F1AC;
+            --accent-green-2: #CFFCDE;
+            --accent-cyan-1: #83F6FF;
+            --accent-cyan-2: #AEF9FF;
+            --surface: #FFFFFF;
+            --surface-alt: #F6FAF8;
+            --surface-subtle: #EDF3F0;
+            --text-primary: #1A1F1C;
+            --text-secondary: #4D5B53;
+            --text-muted: #8A9790;
+            --border: #D8E2DC;
+            --border-light: #E8F0EB;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-xs: 6px;
+            --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+            --shadow-md: 0 4px 20px rgba(27,178,117,0.06), 0 2px 6px rgba(0,0,0,0.04);
+            --shadow-lg: 0 16px 48px rgba(27,178,117,0.08), 0 4px 16px rgba(0,0,0,0.05);
+            --shadow-xl: 0 24px 64px rgba(27,178,117,0.10), 0 8px 24px rgba(0,0,0,0.06);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* ─── RESET & BASE ─── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        body {
+            font-family: 'Inter', 'Maven Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            background: var(--surface);
+            line-height: 1.7;
+            font-size: 15px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6, .section-title, .hero h1 {
+            font-family: 'Maven Pro', sans-serif;
+        }
+
+        /* ─── SCROLL ANIMATIONS ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.08s; }
+        .reveal-delay-2 { transition-delay: 0.16s; }
+        .reveal-delay-3 { transition-delay: 0.24s; }
+        .reveal-delay-4 { transition-delay: 0.32s; }
+        .reveal-delay-5 { transition-delay: 0.40s; }
+        .reveal-delay-6 { transition-delay: 0.48s; }
+
+        /* ─── NAV ─── */
+        .topnav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom: 1px solid rgba(232,240,235,0.8);
+            transition: all var(--transition);
+        }
+        .topnav.scrolled {
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+        }
+        .topnav-inner {
+            max-width: 1200px; margin: auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 2rem; height: 64px;
+        }
+        .topnav .logo { display: flex; align-items: center; text-decoration: none; }
+        .topnav .logo img { height: 30px; width: auto; transition: transform var(--transition); }
+        .topnav .logo:hover img { transform: scale(1.04); }
+        .nav-links { display: flex; gap: 0.1rem; align-items: center; }
+        .nav-group {
+            position: relative;
+        }
+        .nav-group-label {
+            display: flex; align-items: center; gap: 0.25rem;
+            text-decoration: none; color: var(--text-secondary);
+            font-size: 0.8rem; font-weight: 600;
+            padding: 0.4rem 0.7rem; border-radius: var(--radius-xs);
+            transition: all var(--transition);
+            cursor: pointer; border: none; background: none;
+            font-family: 'Maven Pro', sans-serif;
+            white-space: nowrap;
+        }
+        .nav-group-label::after {
+            content: ''; display: inline-block;
+            width: 0; height: 0;
+            border-left: 3.5px solid transparent;
+            border-right: 3.5px solid transparent;
+            border-top: 4px solid currentColor;
+            opacity: 0.5;
+            transition: transform var(--transition-fast);
+        }
+        .nav-group:hover .nav-group-label,
+        .nav-group-label:hover { color: var(--brand-green-dark); background: rgba(27,178,117,0.06); }
+        .nav-group-label.active { color: var(--brand-green); }
+        .nav-group:hover .nav-group-label::after { transform: rotate(180deg); opacity: 0.8; }
+        .nav-dropdown {
+            display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            padding: 0.4rem;
+            min-width: 160px;
+            box-shadow: var(--shadow-lg);
+            z-index: 100;
+            margin-top: 0.2rem;
+        }
+        .nav-group:hover .nav-dropdown { display: flex; flex-direction: column; }
+        .nav-dropdown a {
+            text-decoration: none; color: var(--text-secondary);
+            font-size: 0.78rem; font-weight: 500;
+            padding: 0.45rem 0.8rem; border-radius: var(--radius-xs);
+            transition: all var(--transition);
+            font-family: 'Maven Pro', sans-serif;
+            white-space: nowrap;
+        }
+        .nav-dropdown a:hover { color: var(--brand-green-dark); background: rgba(27,178,117,0.08); }
+        .nav-dropdown a.active { color: var(--brand-green); font-weight: 600; }
+        .nav-links > a {
+            text-decoration: none; color: var(--text-secondary);
+            font-size: 0.8rem; font-weight: 600;
+            padding: 0.4rem 0.7rem; border-radius: var(--radius-xs);
+            transition: all var(--transition);
+            font-family: 'Maven Pro', sans-serif;
+        }
+        .nav-links > a:hover { color: var(--brand-green-dark); background: rgba(27,178,117,0.06); }
+        .nav-links > a.active { color: var(--brand-green); }
+        .hamburger {
+            display: none; background: none; border: none;
+            font-size: 1.4rem; cursor: pointer; color: var(--text-primary);
+            width: 40px; height: 40px; border-radius: var(--radius-xs);
+            transition: all var(--transition);
+        }
+        .hamburger:hover { background: var(--surface-alt); }
+
+        /* ─── SCROLL PROGRESS ─── */
+        .scroll-progress {
+            position: fixed; top: 64px; left: 0; height: 2px; z-index: 999;
+            background: linear-gradient(90deg, var(--brand-green), var(--brand-cyan));
+            width: 0%; transition: width 0.1s linear;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            margin-top: 64px;
+            background: var(--brand-green);
+            background-image:
+                radial-gradient(ellipse at 15% 80%, rgba(0,191,227,0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 15%, rgba(144,241,172,0.25) 0%, transparent 40%),
+                radial-gradient(circle at 50% 120%, rgba(13,122,78,0.4) 0%, transparent 60%),
+                linear-gradient(160deg, #0d7a4e 0%, var(--brand-green) 35%, #23c484 70%, var(--brand-cyan) 100%);
+            color: white; text-align: center;
+            padding: 6rem 2rem 5.5rem;
+            position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 1;
+        }
+        .hero::after {
+            content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 80px;
+            background: var(--surface);
+            clip-path: ellipse(60% 100% at 50% 100%);
+        }
+        .hero-content { position: relative; z-index: 1; }
+        .hero img { filter: brightness(1.05); margin-bottom: 1.5rem; }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 0.75rem;
+            letter-spacing: -0.8px; line-height: 1.1;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+        .hero p {
+            font-size: 1.05rem; opacity: 0.9; max-width: 620px;
+            margin: 0 auto 2.5rem; font-weight: 400; line-height: 1.75;
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-stats {
+            display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: var(--radius);
+            padding: 1.75rem 2.5rem; max-width: 720px; margin: 0 auto;
+            backdrop-filter: blur(12px);
+        }
+        .hero-stat { text-align: center; min-width: 100px; }
+        .hero-stat .num {
+            font-size: 2rem; font-weight: 900; display: block; line-height: 1.1;
+            font-family: 'Maven Pro', sans-serif;
+        }
+        .hero-stat .label {
+            font-size: 0.72rem; opacity: 0.75; font-weight: 500;
+            letter-spacing: 0.3px; margin-top: 0.25rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Floating decorative elements */
+        .hero-float {
+            position: absolute; border-radius: 50%; opacity: 0.07;
+            background: white; z-index: 0;
+            animation: heroFloat 20s ease-in-out infinite;
+        }
+        .hero-float:nth-child(1) { width: 300px; height: 300px; top: -80px; right: -60px; animation-delay: 0s; }
+        .hero-float:nth-child(2) { width: 200px; height: 200px; bottom: 40px; left: -40px; animation-delay: -7s; }
+        .hero-float:nth-child(3) { width: 120px; height: 120px; top: 30%; right: 15%; animation-delay: -14s; }
+        @keyframes heroFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(20px, -15px) scale(1.05); }
+            66% { transform: translate(-10px, 10px) scale(0.95); }
+        }
+
+        /* ─── SECTIONS ─── */
+        section { padding: 5.5rem 2rem; position: relative; }
+        .container { max-width: 1080px; margin: auto; }
+        .section-tag {
+            display: inline-block; font-size: 0.68rem; font-weight: 700;
+            letter-spacing: 2.5px; text-transform: uppercase;
+            color: var(--brand-green); margin-bottom: 0.6rem;
+            padding: 0.3rem 0.75rem; border-radius: 20px;
+            background: rgba(27,178,117,0.08);
+            border: 1px solid rgba(27,178,117,0.12);
+        }
+        .section-title {
+            font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--text-primary);
+            margin-bottom: 0.4rem; letter-spacing: -0.5px; line-height: 1.2;
+        }
+        .section-subtitle {
+            color: var(--text-secondary); margin-bottom: 2.75rem;
+            font-size: 0.95rem; font-weight: 400; line-height: 1.6;
+            max-width: 600px;
+        }
+        .alt-bg { background: var(--surface-alt); }
+
+        /* Section dividers */
+        .section-divider {
+            width: 48px; height: 3px; border-radius: 3px;
+            background: linear-gradient(90deg, var(--brand-green), var(--brand-cyan));
+            margin-bottom: 1.5rem;
+        }
+
+        /* ─── CARDS ─── */
+        .card-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .card {
+            background: var(--surface); border: 1px solid var(--border-light);
+            border-radius: var(--radius); padding: 1.75rem;
+            transition: all var(--transition);
+            position: relative; overflow: hidden;
+        }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--brand-green), var(--brand-cyan));
+            opacity: 0; transition: opacity var(--transition);
+        }
+        .card:hover { box-shadow: var(--shadow-md); border-color: var(--border); transform: translateY(-2px); }
+        .card:hover::before { opacity: 1; }
+        .card h3 {
+            font-size: 1rem; font-weight: 700; color: var(--text-primary);
+            margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.65rem;
+        }
+        .card p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.7; }
+        .icon-circle {
+            width: 42px; height: 42px; border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-green-2), rgba(27,178,117,0.12));
+            color: var(--brand-green);
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 1.15rem; flex-shrink: 0;
+        }
+
+        /* ─── MISSION / VISION / VALUES ─── */
+        .mission-box {
+            background: var(--brand-green);
+            background-image:
+                radial-gradient(ellipse at 20% 50%, rgba(0,191,227,0.15) 0%, transparent 50%),
+                linear-gradient(135deg, var(--brand-green-deeper), var(--brand-green), #23c484);
+            color: white; border-radius: var(--radius); padding: 3.5rem;
+            margin-bottom: 1.75rem; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .mission-box::before {
+            content: ''; position: absolute; inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2l2-1v8l-2-1z' fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        .mission-box h3 {
+            font-size: 0.72rem; opacity: 0.7; margin-bottom: 1rem;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 3.5px;
+            position: relative;
+        }
+        .mission-box p {
+            font-size: 1.1rem; max-width: 700px; margin: 0 auto; line-height: 1.85;
+            font-weight: 400; position: relative;
+        }
+
+        .vision-box {
+            background: linear-gradient(135deg, var(--accent-green-2), rgba(174,249,255,0.3));
+            border: 1px solid rgba(27,178,117,0.12);
+            border-radius: var(--radius); padding: 2.75rem; margin-bottom: 2.5rem; text-align: center;
+        }
+        .vision-box h3 {
+            font-size: 0.72rem; color: var(--brand-green-dark); margin-bottom: 0.75rem;
+            text-transform: uppercase; letter-spacing: 3.5px; font-weight: 700;
+        }
+        .vision-box p { font-size: 1rem; color: var(--text-primary); max-width: 700px; margin: 0 auto; line-height: 1.8; }
+
+        /* ─── VALUES ─── */
+        .values-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+        .value-card {
+            background: var(--surface); border: 1px solid var(--border-light);
+            border-left: 3px solid var(--brand-green);
+            padding: 1.35rem 1.5rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            transition: all var(--transition);
+        }
+        .value-card:hover { box-shadow: var(--shadow-sm); border-left-color: var(--brand-cyan); transform: translateX(3px); }
+        .value-card h4 { color: var(--text-primary); margin-bottom: 0.35rem; font-size: 0.92rem; font-weight: 700; }
+        .value-card p { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.65; }
+
+        /* ─── TIMELINE ─── */
+        .timeline { position: relative; padding-left: 2.5rem; max-width: 750px; }
+        .timeline::before {
+            content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--brand-green), var(--brand-cyan), var(--brand-green));
+            border-radius: 2px;
+        }
+        .timeline-item { position: relative; margin-bottom: 2.25rem; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -2.5rem; top: 7px;
+            width: 14px; height: 14px; border-radius: 50%;
+            background: var(--surface); border: 3px solid var(--brand-green);
+            box-shadow: 0 0 0 5px rgba(27,178,117,0.1);
+            transition: all var(--transition);
+        }
+        .timeline-item:hover::before {
+            background: var(--brand-green); box-shadow: 0 0 0 6px rgba(27,178,117,0.15);
+        }
+        .timeline-item .year {
+            font-weight: 800; color: var(--brand-green-dark); font-size: 0.95rem; margin-bottom: 0.25rem;
+            font-family: 'Maven Pro', sans-serif;
+        }
+        .timeline-item p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.7; }
+
+        /* ─── PRODUCT TABLES ─── */
+        .product-line {
+            margin-bottom: 1.5rem; background: var(--surface);
+            border: 1px solid var(--border-light); border-radius: var(--radius); overflow: hidden;
+            transition: all var(--transition);
+        }
+        .product-line:hover { box-shadow: var(--shadow-sm); }
+        .product-line-header {
+            padding: 1rem 1.5rem; font-weight: 700; font-size: 0.95rem;
+            display: flex; align-items: center; gap: 0.6rem;
+            font-family: 'Maven Pro', sans-serif;
+        }
+        .line-commodities .product-line-header { background: linear-gradient(135deg, var(--brand-blue-dark), #1060DD); color: white; }
+        .line-zurko .product-line-header { background: linear-gradient(135deg, var(--brand-blue), #3B8FF5); color: white; }
+        .line-chacarero .product-line-header { background: linear-gradient(135deg, var(--brand-orange), #FFa85a); color: white; }
+        .line-bactools .product-line-header { background: linear-gradient(135deg, var(--brand-green-dark), var(--brand-green)); color: white; }
+        .product-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .product-table th {
+            text-align: left; padding: 0.65rem 1.25rem; font-weight: 600;
+            color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase;
+            letter-spacing: 1px; border-bottom: 1px solid var(--border);
+            background: var(--surface-alt);
+        }
+        .product-table td {
+            padding: 0.65rem 1.25rem; border-bottom: 1px solid var(--border-light);
+            color: var(--text-secondary); transition: background var(--transition-fast);
+        }
+        .product-table tr:last-child td { border-bottom: none; }
+        .product-table tr:hover td { background: rgba(27,178,117,0.04); }
+        .product-name { font-weight: 600; color: var(--text-primary); }
+
+        /* ─── KPI GRID ─── */
+        .kpi-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+        .kpi-card {
+            background: var(--surface); border: 1px solid var(--border-light);
+            border-radius: var(--radius); padding: 1.5rem; text-align: center;
+            transition: all var(--transition); position: relative; overflow: hidden;
+        }
+        .kpi-card::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--brand-green), var(--brand-cyan));
+            transform: scaleX(0); transition: transform var(--transition);
+            transform-origin: left;
+        }
+        .kpi-card:hover { border-color: var(--brand-green); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+        .kpi-card:hover::after { transform: scaleX(1); }
+        .kpi-card .kpi-value {
+            font-size: 1.6rem; font-weight: 900; color: var(--brand-green-dark);
+            display: block; margin-bottom: 0.2rem; line-height: 1.2;
+            font-family: 'Maven Pro', sans-serif;
+        }
+        .kpi-card .kpi-label { font-size: 0.76rem; color: var(--text-muted); font-weight: 500; }
+
+        /* ─── VOLUME CHART ─── */
+        .volume-chart {
+            display: flex; align-items: flex-end; gap: 2.5rem;
+            justify-content: center; padding: 2.5rem 0; height: 300px;
+        }
+        .bar-group { text-align: center; flex: 0 0 auto; }
+        .bar {
+            width: 76px; border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            background: linear-gradient(180deg, var(--brand-cyan), var(--brand-green), var(--brand-green-dark));
+            margin: 0 auto 0.5rem; position: relative; min-height: 20px;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 12px rgba(27,178,117,0.15);
+        }
+        .bar:hover { transform: scaleY(1.03); filter: brightness(1.08); }
+        .bar-label {
+            position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
+            font-size: 0.82rem; font-weight: 800; color: var(--text-primary); white-space: nowrap;
+            font-family: 'Maven Pro', sans-serif;
+        }
+        .bar-year { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); }
+
+        /* ─── PIE ─── */
+        .mix-visual {
+            display: flex; align-items: center; gap: 3rem; flex-wrap: wrap;
+            justify-content: center; margin: 2.5rem 0;
+        }
+        .pie-chart {
+            width: 210px; height: 210px; border-radius: 50%;
+            background: conic-gradient(var(--brand-blue-dark) 0% 46.4%, var(--brand-blue) 46.4% 85.4%, var(--brand-orange) 85.4% 100%);
+            position: relative; flex-shrink: 0;
+            box-shadow: var(--shadow-lg);
+            transition: transform var(--transition);
+        }
+        .pie-chart:hover { transform: scale(1.03); }
+        .pie-center {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+            width: 100px; height: 100px; border-radius: 50%; background: var(--surface);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 0.85rem; color: var(--text-primary); text-align: center;
+            box-shadow: inset 0 0 12px rgba(0,0,0,0.04);
+            font-family: 'Maven Pro', sans-serif;
+        }
+        .pie-legend { display: flex; flex-direction: column; gap: 0.85rem; }
+        .legend-item { display: flex; align-items: center; gap: 0.65rem; font-size: 0.88rem; color: var(--text-secondary); }
+        .legend-dot { width: 16px; height: 16px; border-radius: 5px; flex-shrink: 0; box-shadow: var(--shadow-xs); }
+
+        /* ─── TABLES ─── */
+        .import-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 0; }
+        .import-table th {
+            text-align: left; padding: 0.75rem 1.25rem;
+            background: var(--brand-dark); color: white;
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
+        }
+        .import-table td { padding: 0.65rem 1.25rem; border-bottom: 1px solid var(--border-light); transition: background var(--transition-fast); }
+        .import-table tr:nth-child(even) td { background: var(--surface-alt); }
+        .import-table tr:hover td { background: rgba(27,178,117,0.06); }
+        .number { text-align: right; font-variant-numeric: tabular-nums; font-family: 'Maven Pro', sans-serif; }
+
+        /* ─── AGRICULTURAL CALENDAR (Gantt) ─── */
+        .agcal { width: 100%; overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border-light); }
+        .agcal-grid {
+            display: grid; grid-template-columns: 140px repeat(12, 1fr);
+            min-width: 820px; gap: 0; font-size: 0.78rem;
+        }
+        .agcal-header {
+            background: var(--brand-dark); color: white; padding: 0.7rem 0.4rem;
+            font-weight: 600; font-size: 0.68rem; text-align: center;
+            text-transform: uppercase; letter-spacing: 0.8px;
+            font-family: 'Maven Pro', sans-serif;
+        }
+        .agcal-header:first-child { text-align: left; padding-left: 1rem; border-radius: var(--radius-xs) 0 0 0; }
+        .agcal-header:last-child { border-radius: 0 var(--radius-xs) 0 0; }
+        .agcal-crop {
+            padding: 0.7rem 0.85rem; font-weight: 700; color: var(--text-primary);
+            background: var(--surface); border-bottom: 1px solid var(--border-light);
+            display: flex; align-items: center; gap: 0.5rem;
+            font-family: 'Maven Pro', sans-serif;
+        }
+        .agcal-tag {
+            font-size: 0.58rem; font-weight: 700; padding: 0.15rem 0.45rem;
+            border-radius: 3px; letter-spacing: 0.3px;
+        }
+        .agcal-tag-fina { background: #E8F0FE; color: var(--brand-blue); }
+        .agcal-tag-gruesa { background: #FFF0E0; color: var(--brand-orange); }
+        .agcal-cell {
+            padding: 0.55rem 0.25rem; text-align: center;
+            border-bottom: 1px solid var(--border-light); background: var(--surface);
+            font-size: 0.66rem; font-weight: 500; color: var(--text-muted);
+            position: relative; transition: background var(--transition-fast);
+        }
+        .agcal-cell.s { background: var(--accent-green-2); color: var(--brand-green-dark); font-weight: 700; }
+        .agcal-cell.f { background: #FFF7E0; color: #8B6914; font-weight: 700; }
+        .agcal-cell.c { background: #FFE8E8; color: #A82828; font-weight: 700; }
+        .agcal-legend {
+            display: flex; gap: 1.5rem; margin-top: 1.25rem; flex-wrap: wrap; justify-content: center;
+        }
+        .agcal-legend-item {
+            display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--text-secondary);
+        }
+        .agcal-legend-dot { width: 14px; height: 14px; border-radius: 4px; }
+
+        /* ─── ORG CHART v2 ─── */
+        .org-top {
+            display: flex; flex-direction: column; align-items: center; gap: 0; margin-bottom: 0;
+        }
+        .org-connector {
+            width: 2px; height: 32px; background: var(--border); position: relative;
+        }
+        .org-connector-h {
+            height: 2px; background: var(--border); position: relative; align-self: stretch;
+            margin: 0 auto; max-width: 85%;
+        }
+        .org-person {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.7rem 1rem; border-radius: var(--radius-sm);
+            border: 1.5px solid var(--border-light); background: var(--surface);
+            transition: all var(--transition); cursor: default;
+            min-width: 0;
+        }
+        .org-person:hover {
+            box-shadow: var(--shadow-md); border-color: var(--brand-green);
+            transform: translateY(-2px);
+        }
+        .org-avatar {
+            width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 0.82rem; font-family: 'Maven Pro', sans-serif;
+            color: white; letter-spacing: 0.5px;
+        }
+        .org-avatar-lg { width: 56px; height: 56px; font-size: 1rem; }
+        .org-info { min-width: 0; }
+        .org-name {
+            font-weight: 700; font-size: 0.82rem; color: var(--text-primary);
+            font-family: 'Maven Pro', sans-serif; white-space: nowrap;
+            overflow: hidden; text-overflow: ellipsis;
+        }
+        .org-role {
+            font-size: 0.7rem; color: var(--text-muted); margin-top: 1px;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .org-badge {
+            font-size: 0.58rem; font-weight: 700; padding: 2px 7px; border-radius: 20px;
+            display: inline-block; margin-top: 3px; letter-spacing: 0.3px;
+        }
+
+        /* CEO card */
+        .org-person-ceo {
+            background: linear-gradient(135deg, var(--brand-green-dark), var(--brand-green));
+            border-color: var(--brand-green); padding: 1rem 1.5rem;
+            box-shadow: 0 8px 24px rgba(27,178,117,0.2);
+        }
+        .org-person-ceo .org-name, .org-person-ceo .org-role { color: white; }
+        .org-person-ceo .org-avatar { background: rgba(255,255,255,0.2); }
+        .org-person-ceo .org-role { color: rgba(255,255,255,0.85); }
+
+        /* COO card */
+        .org-person-coo {
+            background: linear-gradient(135deg, #FFF8EE, #FFF0DD);
+            border-color: var(--brand-orange); padding: 0.9rem 1.3rem;
+            box-shadow: 0 4px 16px rgba(255,146,57,0.1);
+        }
+        .org-person-coo .org-avatar { background: var(--brand-orange); }
+
+        /* Area group */
+        .org-areas {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem; margin-top: 0; width: 100%;
+        }
+        .org-area {
+            border-radius: var(--radius); border: 1.5px solid var(--border-light);
+            background: var(--surface); overflow: hidden;
+            transition: all var(--transition);
+        }
+        .org-area:hover { box-shadow: var(--shadow-lg); border-color: var(--border); }
+        .org-area-header {
+            padding: 1rem 1.25rem; display: flex; align-items: center; gap: 0.65rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .org-area-icon {
+            width: 36px; height: 36px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; flex-shrink: 0;
+        }
+        .org-area-title {
+            font-weight: 800; font-size: 0.82rem; font-family: 'Maven Pro', sans-serif;
+            color: var(--text-primary); letter-spacing: 0.3px;
+        }
+        .org-area-count {
+            font-size: 0.65rem; color: var(--text-muted); font-weight: 500;
+        }
+        .org-area-body { padding: 0.75rem; }
+        .org-area-body .org-person { margin-bottom: 0.5rem; }
+        .org-area-body .org-person:last-child { margin-bottom: 0; }
+
+        /* Leader highlight */
+        .org-person-leader {
+            background: var(--surface-alt); border-color: var(--border);
+            margin-bottom: 0.65rem !important; position: relative;
+        }
+        .org-person-leader::after {
+            content: ''; position: absolute; left: 1.75rem; bottom: -0.65rem;
+            width: 2px; height: 0.65rem; background: var(--border);
+        }
+        .org-person-leader:last-child::after { display: none; }
+
+        /* Area colors */
+        .org-area-admin .org-area-header { background: linear-gradient(135deg, #F0F4FF, #E8EFFE); }
+        .org-area-admin .org-area-icon { background: #DCE4FF; color: var(--brand-blue); }
+        .org-area-admin .org-avatar { background: var(--brand-blue); }
+
+        .org-area-comercial .org-area-header { background: linear-gradient(135deg, var(--accent-green-2), #E4FDE9); }
+        .org-area-comercial .org-area-icon { background: #B8F0CC; color: var(--brand-green-dark); }
+        .org-area-comercial .org-avatar { background: var(--brand-green); }
+
+        .org-area-planta .org-area-header { background: linear-gradient(135deg, #FFF7E0, #FFF0CC); }
+        .org-area-planta .org-area-icon { background: #FFE8A0; color: #8B6914; }
+        .org-area-planta .org-avatar { background: var(--brand-orange); }
+
+        .org-area-bactools .org-area-header { background: linear-gradient(135deg, #F0FEFF, #E0F9FC); }
+        .org-area-bactools .org-area-icon { background: #B0EFFA; color: #0891B2; }
+        .org-area-bactools .org-avatar { background: #0891B2; }
+
+        /* Operarios strip */
+        .org-operarios {
+            margin-top: 1.5rem; padding: 1rem 1.25rem;
+            background: var(--surface-alt); border-radius: var(--radius-sm);
+            border: 1px solid var(--border-light);
+        }
+        .org-operarios-title {
+            font-weight: 700; font-size: 0.75rem; color: var(--text-secondary);
+            font-family: 'Maven Pro', sans-serif; margin-bottom: 0.6rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .org-operarios-list {
+            display: flex; flex-wrap: wrap; gap: 0.4rem;
+        }
+        .org-operario-chip {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.3rem 0.65rem; border-radius: 20px; font-size: 0.72rem;
+            background: var(--surface); border: 1px solid var(--border-light);
+            color: var(--text-secondary); font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+        .org-operario-chip:hover { border-color: var(--brand-orange); background: #FFF8EE; }
+        .org-operario-chip .org-mini-avatar {
+            width: 22px; height: 22px; border-radius: 50%; font-size: 0.55rem;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--brand-orange); color: white; font-weight: 800;
+            font-family: 'Maven Pro', sans-serif;
+        }
+
+        /* New hire pulse */
+        .org-person-new {
+            border-color: #4CAF50; background: linear-gradient(135deg, #F0FFF0, #E8FFE8);
+            box-shadow: 0 0 0 3px rgba(76,175,80,0.1);
+            animation: orgNewPulse 2.5s ease-in-out infinite;
+        }
+        .org-person-new .org-badge { background: #4CAF50; color: white; }
+        @keyframes orgNewPulse {
+            0%, 100% { box-shadow: 0 0 0 3px rgba(76,175,80,0.1); }
+            50% { box-shadow: 0 0 0 6px rgba(76,175,80,0.05); }
+        }
+
+        @media (max-width: 700px) {
+            .org-areas { grid-template-columns: 1fr; }
+        }
+
+        /* ─── PROCESS MAP ─── */
+        .pmap { margin: 1.5rem 0; }
+        .pmap-band {
+            border-radius: var(--radius); padding: 1.5rem 1.75rem;
+            margin-bottom: 0.85rem; position: relative;
+            transition: all var(--transition);
+        }
+        .pmap-band:hover { transform: translateX(3px); }
+        .pmap-band-title {
+            font-weight: 700; font-size: 0.82rem; text-transform: uppercase;
+            letter-spacing: 1.5px; margin-bottom: 0.85rem;
+            font-family: 'Maven Pro', sans-serif;
+        }
+        .pmap-strat { background: linear-gradient(135deg, #F0F4FF, #E8EFFE); border: 1px solid #D0DAFA; }
+        .pmap-strat .pmap-band-title { color: var(--brand-blue-dark); }
+        .pmap-core { background: linear-gradient(135deg, var(--accent-green-2), #E4FDE9); border: 1px solid #A0E8BD; }
+        .pmap-core .pmap-band-title { color: var(--brand-green-dark); }
+        .pmap-support { background: linear-gradient(135deg, var(--surface-alt), #EDF3F0); border: 1px solid var(--border); }
+        .pmap-support .pmap-band-title { color: var(--text-secondary); }
+        .pmap-ext { background: linear-gradient(135deg, #FFF9EE, #FFF4DD); border: 1px solid #F0D98C; }
+        .pmap-ext .pmap-band-title { color: #8B6914; }
+        .pmap-flow { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+        .pmap-step {
+            padding: 0.5rem 0.9rem; border-radius: var(--radius-xs);
+            font-size: 0.78rem; font-weight: 600; text-align: center;
+            transition: all var(--transition-fast);
+        }
+        .pmap-step:hover { transform: translateY(-1px); }
+        .pmap-step-green { background: var(--brand-green); color: white; box-shadow: 0 2px 6px rgba(27,178,117,0.2); }
+        .pmap-step-dark { background: var(--brand-dark); color: white; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+        .pmap-step-outline { background: var(--surface); color: var(--text-secondary); border: 1.5px solid var(--border); }
+        .pmap-step-support { background: var(--surface); color: var(--text-secondary); border: 1px solid var(--border); }
+        .pmap-step-ext { background: #FFF3D6; color: #8B6914; border: 1px solid #F0D98C; }
+        .pmap-arr { color: var(--brand-green); font-weight: 700; font-size: 1rem; }
+        .pmap-sub { margin-top: 0.75rem; padding: 0.9rem; background: rgba(255,255,255,0.7); border-radius: var(--radius-xs); border: 1px solid rgba(0,0,0,0.06); }
+        .pmap-sub-title { font-weight: 700; font-size: 0.75rem; color: var(--text-primary); margin-bottom: 0.4rem; font-family: 'Maven Pro', sans-serif; }
+        .pmap-io { display: flex; align-items: center; gap: 0.6rem; margin: 1rem 0; }
+        .pmap-io-label {
+            writing-mode: vertical-rl; text-orientation: mixed;
+            font-size: 0.66rem; font-weight: 700; color: var(--text-muted);
+            letter-spacing: 1.5px; text-transform: uppercase;
+            padding: 0.85rem 0.3rem; border-radius: var(--radius-xs);
+            background: rgba(27,178,117,0.06); border: 1px solid rgba(27,178,117,0.12);
+            text-align: center; min-height: 80px;
+        }
+
+        /* ─── SEGMENTATION ─── */
+        .seg-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin: 1.5rem 0; }
+        .seg-card {
+            border: 1px solid var(--border-light); border-radius: var(--radius);
+            padding: 1.35rem; background: var(--surface); text-align: center;
+            transition: all var(--transition); position: relative; overflow: hidden;
+        }
+        .seg-card:hover { border-color: var(--brand-green); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+        .seg-card h4 { color: var(--text-primary); font-size: 0.9rem; margin-bottom: 0.4rem; font-weight: 700; }
+        .seg-card p { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.55; }
+        .seg-card .seg-vol {
+            font-weight: 900; color: var(--brand-green); font-size: 1.1rem;
+            display: block; margin-bottom: 0.3rem;
+            font-family: 'Maven Pro', sans-serif;
+        }
+
+        /* ─── OBJECTIVES ─── */
+        .obj-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-top: 1.5rem; }
+        .obj-card {
+            background: var(--surface); border: 1px solid var(--border-light);
+            border-radius: var(--radius); padding: 1.5rem; position: relative;
+            overflow: hidden; transition: all var(--transition);
+        }
+        .obj-card:hover { box-shadow: var(--shadow-sm); border-color: var(--border); transform: translateY(-2px); }
+        .obj-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+            background: linear-gradient(180deg, var(--brand-green), var(--brand-cyan));
+        }
+        .obj-card h4 { color: var(--text-primary); margin-bottom: 0.4rem; padding-left: 0.85rem; font-size: 0.92rem; font-weight: 700; }
+        .obj-card p { color: var(--text-secondary); font-size: 0.85rem; padding-left: 0.85rem; line-height: 1.65; }
+
+        /* ─── BRAND IDENTITY ─── */
+        .brand-colors { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1rem 0; }
+        .color-group { margin-bottom: 1.75rem; }
+        .color-group-title { font-weight: 700; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 0.6rem; letter-spacing: 0.3px; font-family: 'Maven Pro', sans-serif; }
+        .color-swatch {
+            display: inline-flex; flex-direction: column; align-items: center;
+            width: 100px; border-radius: var(--radius-sm); overflow: hidden;
+            border: 1px solid var(--border-light); background: var(--surface);
+            transition: all var(--transition);
+        }
+        .color-swatch:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+        .swatch-color { width: 100%; height: 68px; }
+        .swatch-info { padding: 0.45rem; text-align: center; }
+        .swatch-name { font-size: 0.68rem; font-weight: 600; color: var(--text-primary); display: block; font-family: 'Maven Pro', sans-serif; }
+        .swatch-hex { font-size: 0.62rem; color: var(--text-muted); font-family: 'SF Mono', 'Fira Code', monospace; }
+        .logo-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+        .logo-card {
+            background: var(--surface); border: 1px solid var(--border-light);
+            border-radius: var(--radius); padding: 2rem 1.5rem; text-align: center;
+            transition: all var(--transition);
+        }
+        .logo-card:hover { box-shadow: var(--shadow-md); border-color: var(--border); transform: translateY(-3px); }
+        .logo-card img { max-width: 180px; height: auto; margin-bottom: 0.75rem; transition: transform var(--transition); }
+        .logo-card:hover img { transform: scale(1.05); }
+        .logo-card .logo-name { font-weight: 700; font-size: 0.85rem; color: var(--text-primary); font-family: 'Maven Pro', sans-serif; }
+        .logo-card .logo-desc { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.15rem; }
+        .typo-sample { margin: 1.5rem 0; }
+        .typo-row {
+            display: flex; align-items: baseline; gap: 2rem;
+            margin-bottom: 1.25rem; flex-wrap: wrap;
+            padding: 1.35rem; background: var(--surface-alt);
+            border-radius: var(--radius-sm); border: 1px solid var(--border-light);
+            transition: all var(--transition);
+        }
+        .typo-row:hover { border-color: var(--border); box-shadow: var(--shadow-xs); }
+        .typo-label { font-size: 0.75rem; color: var(--text-muted); min-width: 140px; line-height: 1.5; }
+        .typo-preview-bold { font-family: 'Maven Pro', sans-serif; font-weight: 700; font-size: 1.5rem; color: var(--text-primary); }
+        .typo-preview-regular { font-family: 'Maven Pro', sans-serif; font-weight: 400; font-size: 1.25rem; color: var(--text-primary); }
+        .typo-preview-body { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.95rem; color: var(--text-secondary); max-width: 500px; }
+
+        /* ─── DOCUMENTATION CENTER ─── */
+        .doc-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); margin-top: 2rem; }
+        .doc-area {
+            background: var(--surface); border: 1px solid var(--border-light);
+            border-radius: var(--radius); overflow: hidden;
+            transition: all var(--transition);
+            position: relative;
+        }
+        .doc-area::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--brand-green), var(--brand-cyan));
+            opacity: 0; transition: opacity var(--transition);
+        }
+        .doc-area:hover { box-shadow: var(--shadow-lg); border-color: var(--border); transform: translateY(-4px); }
+        .doc-area:hover::before { opacity: 1; }
+        .doc-area-header {
+            padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 0.85rem;
+            border-bottom: 1px solid var(--border-light);
+            font-family: 'Maven Pro', sans-serif;
+        }
+        .doc-area-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.15rem; flex-shrink: 0;
+            transition: all var(--transition-spring);
+        }
+        .doc-area:hover .doc-area-icon { transform: scale(1.1) rotate(-5deg); }
+        .doc-area-icon.green { background: linear-gradient(135deg, var(--accent-green-2), rgba(27,178,117,0.18)); color: var(--brand-green); }
+        .doc-area-icon.blue { background: linear-gradient(135deg, #E8F0FE, rgba(24,119,242,0.15)); color: var(--brand-blue); }
+        .doc-area-icon.orange { background: linear-gradient(135deg, #FFF0E0, rgba(255,146,57,0.15)); color: var(--brand-orange); }
+        .doc-area-icon.cyan { background: linear-gradient(135deg, var(--accent-cyan-2), rgba(0,191,227,0.15)); color: var(--brand-cyan); }
+        .doc-area-icon.dark { background: linear-gradient(135deg, #E8E8E8, rgba(33,33,33,0.10)); color: var(--brand-dark); }
+        .doc-area-title { font-weight: 700; font-size: 0.95rem; color: var(--text-primary); }
+        .doc-area-subtitle { font-size: 0.73rem; color: var(--text-muted); margin-top: 2px; }
+        .doc-area-body { padding: 1rem 1.5rem; }
+        .doc-source-label {
+            display: flex; align-items: center; gap: 0.4rem;
+            font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+            color: var(--text-muted); padding: 0.6rem 0 0.25rem; margin-top: 0.3rem;
+            border-top: 1px dashed var(--border-light);
+        }
+        .doc-source-label:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+        .doc-source-label svg { width: 14px; height: 14px; }
+        .doc-link {
+            display: flex; align-items: center; gap: 0.65rem;
+            padding: 0.6rem 0.85rem; margin: 0.15rem -0.85rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none; color: var(--text-secondary);
+            font-size: 0.82rem; transition: all var(--transition-fast);
+            position: relative;
+        }
+        .doc-link:hover { background: rgba(27,178,117,0.06); color: var(--brand-green-dark); transform: translateX(4px); }
+        .doc-link-icon {
+            width: 30px; height: 30px; border-radius: 8px;
+            background: var(--surface-alt); border: 1px solid var(--border-light);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; flex-shrink: 0;
+            transition: all var(--transition-fast);
+        }
+        .doc-link:hover .doc-link-icon { background: var(--accent-green-2); border-color: rgba(27,178,117,0.2); }
+        .doc-link-name { font-weight: 600; color: var(--text-primary); font-size: 0.82rem; }
+        .doc-link-type { font-size: 0.68rem; color: var(--text-muted); }
+        .doc-link-arrow { margin-left: auto; font-size: 0.85rem; color: var(--text-muted); transition: all var(--transition-fast); }
+        .doc-link:hover .doc-link-arrow { color: var(--brand-green); transform: translateX(3px); }
+        .doc-badge {
+            display: inline-flex; align-items: center; gap: 0.25rem;
+            padding: 0.12rem 0.45rem; border-radius: 4px;
+            font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+        }
+        .doc-badge.drive { background: rgba(66,133,244,0.1); color: #4285F4; }
+        .doc-badge.confluence { background: rgba(0,82,204,0.1); color: #0052CC; }
+        .doc-count {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: var(--surface-alt); border: 1px solid var(--border-light);
+            border-radius: 20px; padding: 0.15rem 0.55rem; font-size: 0.65rem; font-weight: 600;
+            color: var(--text-muted); margin-left: auto;
+        }
+
+
+        /* ─── ENHANCED ANIMATIONS ─── */
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(27,178,117,0.3); } 70% { box-shadow: 0 0 0 12px rgba(27,178,117,0); } 100% { box-shadow: 0 0 0 0 rgba(27,178,117,0); } }
+        @keyframes count-up { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+        @keyframes slide-in-right { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .float-anim { animation: float 6s ease-in-out infinite; }
+        .float-anim-delay { animation: float 6s ease-in-out 2s infinite; }
+        .shimmer-text {
+            background: linear-gradient(90deg, var(--brand-green), var(--brand-cyan), var(--brand-green));
+            background-size: 200% auto;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 4s linear infinite;
+        }
+        .pulse-ring { animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        .doc-area.visible .doc-count { animation: count-up 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        .reveal-scale {
+            opacity: 0; transform: scale(0.92);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-scale.visible { opacity: 1; transform: scale(1); }
+        .reveal-left {
+            opacity: 0; transform: translateX(-32px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-left.visible { opacity: 1; transform: translateX(0); }
+        .reveal-right {
+            opacity: 0; transform: translateX(32px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+        /* ─── CONTACT ─── */
+        .contact-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+        .contact-card {
+            background: var(--surface); border: 1px solid var(--border-light);
+            border-radius: var(--radius); padding: 2rem; text-align: center;
+            transition: all var(--transition);
+        }
+        .contact-card:hover { box-shadow: var(--shadow-md); border-color: var(--border); transform: translateY(-2px); }
+        .contact-card .contact-icon {
+            font-size: 1.6rem; margin-bottom: 0.85rem;
+            width: 52px; height: 52px; border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent-green-2), rgba(27,178,117,0.1));
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+        .contact-card h4 { color: var(--text-primary); margin-bottom: 0.4rem; font-size: 0.95rem; font-weight: 700; }
+        .contact-card p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.65; }
+        .contact-card a {
+            color: var(--brand-green); text-decoration: none; font-weight: 600;
+            transition: color var(--transition);
+        }
+        .contact-card a:hover { color: var(--brand-green-dark); text-decoration: underline; }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--brand-dark);
+            background-image: linear-gradient(160deg, #1a1a1a, var(--brand-dark), #2a2a2a);
+            color: rgba(255,255,255,0.6);
+            text-align: center; padding: 3.5rem 2rem; font-size: 0.85rem;
+            position: relative;
+        }
+        footer::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--brand-green), var(--brand-cyan), var(--brand-green));
+        }
+        footer img { transition: opacity var(--transition); }
+        footer img:hover { opacity: 1 !important; }
+
+        /* ─── BACK TO TOP ─── */
+        .back-to-top {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 900;
+            width: 44px; height: 44px; border-radius: 50%;
+            background: var(--brand-green); color: white;
+            border: none; cursor: pointer; font-size: 1.1rem;
+            box-shadow: var(--shadow-md);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transform: translateY(16px);
+            transition: all var(--transition);
+            pointer-events: none;
+        }
+        .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+        .back-to-top:hover { background: var(--brand-green-dark); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+        /* ─── PROSE ─── */
+        .prose { color: var(--text-secondary); font-size: 0.9rem; max-width: 750px; line-height: 1.75; }
+        .prose p { margin-bottom: 1rem; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .hero { padding: 4.5rem 1.5rem 4rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero-stats { gap: 1.25rem; padding: 1.25rem; }
+            .hero-stat .num { font-size: 1.5rem; }
+            .nav-links {
+                display: none; flex-direction: column;
+                position: absolute; top: 64px; left: 0; right: 0;
+                background: rgba(255,255,255,0.98);
+                backdrop-filter: blur(20px);
+                padding: 1rem;
+                border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                gap: 0;
+            }
+            .nav-links.open { display: flex; }
+            .hamburger { display: block; }
+            .nav-group-label::after { display: none; }
+            .nav-group-label {
+                font-size: 0.7rem; color: var(--text-muted);
+                text-transform: uppercase; letter-spacing: 0.06em;
+                padding: 0.6rem 0.5rem 0.2rem; cursor: default;
+            }
+            .nav-group-label:hover { background: none; color: var(--text-muted); }
+            .nav-dropdown {
+                display: flex !important; flex-direction: column;
+                position: static; transform: none;
+                background: none; border: none; box-shadow: none;
+                backdrop-filter: none; padding: 0 0 0.3rem 0.5rem;
+                min-width: 0; margin-top: 0;
+            }
+            .nav-dropdown a { font-size: 0.85rem; padding: 0.4rem 0.8rem; }
+            .bar { width: 54px; }
+            .volume-chart { gap: 1.25rem; }
+            .mix-visual { flex-direction: column; }
+            section { padding: 4rem 1.25rem; }
+            .back-to-top { bottom: 1.25rem; right: 1.25rem; }
+            .card-grid, .obj-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ─── SELECTION COLOR ─── */
+        ::selection { background: rgba(27,178,117,0.15); color: var(--text-primary); }
+
+        /* ─── SMOOTH SCROLLBAR (WebKit) ─── */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--surface-alt); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--brand-green); }
+    </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="topnav" id="topnav">
+    <div class="topnav-inner">
+        <a href="#" class="logo"><img src="img/logo.png" alt="Agrefert"></a>
+        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+        <div class="nav-links">
+            <div class="nav-group">
+                <span class="nav-group-label">La Empresa</span>
+                <div class="nav-dropdown">
+                    <a href="#mision">Mision</a>
+                    <a href="#historia">Historia</a>
+                    <a href="#organigrama">Organigrama</a>
+                </div>
+            </div>
+            <div class="nav-group">
+                <span class="nav-group-label">Productos</span>
+                <div class="nav-dropdown">
+                    <a href="#productos">Catalogo</a>
+                    <a href="#bactools">Bactools</a>
+                    <a href="#marca">Marca</a>
+                </div>
+            </div>
+            <div class="nav-group">
+                <span class="nav-group-label">Operaciones</span>
+                <div class="nav-dropdown">
+                    <a href="#planta">Planta</a>
+                    <a href="#operaciones">Logistica</a>
+                    <a href="#comex">Comex</a>
+                    <a href="#calendario">Calendario</a>
+                </div>
+            </div>
+            <div class="nav-group">
+                <span class="nav-group-label">Gestion</span>
+                <div class="nav-dropdown">
+                    <a href="#documentacion">Manuales</a>
+                    <a href="#procesos">Procesos</a>
+                    <a href="#numeros">Cifras</a>
+                    <a href="#objetivos">Objetivos</a>
+                </div>
+            </div>
+            <a href="#contacto">Contacto</a>
+        </div>
+    </div>
+</nav>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+    <div class="hero-float"></div>
+    <div class="hero-float"></div>
+    <div class="hero-float"></div>
+    <div class="hero-content">
+        <img src="img/logo_fert_white.png" alt="Agrefert Fertilizantes" style="max-width:320px; width:75%;">
+        <h1>Bienvenido al equipo</h1>
+        <p>Somos una empresa argentina dedicada a la elaboracion y distribucion de fertilizantes solidos y liquidos, contribuyendo con el sector agropecuario a la produccion de mas y mejores alimentos desde 1999.</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><span class="num">88.412</span><span class="label">Toneladas vendidas 2025</span></div>
+            <div class="hero-stat"><span class="num">246</span><span class="label">Clientes activos</span></div>
+            <div class="hero-stat"><span class="num">21</span><span class="label">Provincias</span></div>
+            <div class="hero-stat"><span class="num">34</span><span class="label">Productos (SKUs)</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── MISION, VISION, VALORES ─── -->
+<section id="mision">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Nuestra Identidad</span>
+            <h2 class="section-title">Quienes Somos</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Lo que nos mueve, nuestra vision a futuro y los valores que guian cada decision</p>
+        </div>
+
+        <div class="mission-box reveal">
+            <h3>Mision</h3>
+            <p>Responder a la creciente demanda de fertilizantes, proporcionando a nuestros clientes productos de calidad y servicios personalizados siendo respetuosos del medio ambiente, y a nuestros empleados la posibilidad de ejecutar sus competencias profesionales.</p>
+        </div>
+
+        <div class="vision-box reveal">
+            <h3>Vision</h3>
+            <p>Vemos una economia donde el campo es el motor de la prosperidad economica. Donde la demanda de alimentos a nivel mundial tiene un crecimiento exponencial ano a ano y la produccion debe aumentar utilizando mejor tecnologia. Somos lideres en nutricion vegetal. Elaboramos y distribuimos fertilizantes liquidos y solidos de calidad y brindamos apoyo agronomico permanente.</p>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin-bottom:1.25rem; font-size:1.15rem; font-weight:700;" class="reveal">Nuestros Valores</h3>
+        <div class="values-grid">
+            <div class="value-card reveal reveal-delay-1">
+                <h4>Legalidad</h4>
+                <p>Operamos con todas las habilitaciones y cumplimiento normativo. Certificacion ISO 9001 y habilitaciones ANMaC.</p>
+            </div>
+            <div class="value-card reveal reveal-delay-2">
+                <h4>Creatividad</h4>
+                <p>Desarrollamos soluciones innovadoras en formulaciones y procesos para responder a las necesidades del productor.</p>
+            </div>
+            <div class="value-card reveal reveal-delay-3">
+                <h4>Responsabilidad</h4>
+                <p>Compromiso con la calidad, el medio ambiente y la entrega en tiempo y forma a cada cliente.</p>
+            </div>
+            <div class="value-card reveal reveal-delay-4">
+                <h4>Innovacion</h4>
+                <p>Bactools, bioinsumos, formulaciones liquidas avanzadas y expansion constante de nuestro portfolio tecnologico.</p>
+            </div>
+            <div class="value-card reveal reveal-delay-5">
+                <h4>Transparencia y Compromiso</h4>
+                <p>Comunicacion abierta con clientes, equipo y socios. Compartimos conocimiento y datos agronomicos.</p>
+            </div>
+            <div class="value-card reveal reveal-delay-6">
+                <h4>Credibilidad</h4>
+                <p>Mas de 25 anos cumpliendo compromisos, con trazabilidad completa y reclamos de calidad en solo 0,49%.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── HISTORIA ─── -->
+<section id="historia" class="alt-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Trayectoria</span>
+            <h2 class="section-title">Nuestra Historia</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Mas de 25 anos transformando la nutricion vegetal en Argentina</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="year">1999 — Fundacion</div>
+                <p>Norberto Munoz funda Agrefert en Rosario, con oficina administrativa en Capital Federal, comercializando fertilizantes solidos a granel. La empresa nace para llenar un vacio en el mercado de fertilizantes multinutrientes liquidos.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="year">2010 — Planta propia en COMIRSA</div>
+                <p>Se inaugura la planta de produccion y distribucion en el Complejo Industrial Ramallo &ndash; San Nicolas (COMIRSA), Buenos Aires. Predio de 50.000 m2 totalmente automatizado con sistemas completos de trazabilidad. Liderada por Ing. Jose Maria Llorens y Norberto Munoz.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="year">2011-2020 — Consolidacion y crecimiento</div>
+                <p>Se duplica la capacidad de almacenaje. Se incorporan lineas de produccion de fertilizantes liquidos. Se consolidan las marcas propias Zurko (liquidos) y Chacarero (mezclas solidas). Se obtiene la certificacion ISO 9001:2015 y habilitaciones ANMaC.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="year">2022 — 22.300 t vendidas</div>
+                <p>La empresa alcanza las 22.300 toneladas vendidas, iniciando una etapa de crecimiento acelerado con base comercial diversificada.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="year">2023 — 28.500 t vendidas</div>
+                <p>Crecimiento sostenido a 28.500 toneladas. Se fortalece la red de distribucion y el equipo comercial.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="year">2024 — 50.000 t vendidas</div>
+                <p>Salto a 50.000 toneladas, mas que duplicando el volumen en dos anos. Expansion nacional y nuevos segmentos de clientes. Primer ano de crecimiento compuesto positivo desde 2017.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="year">2025 — Record historico: 88.412 t</div>
+                <p>El ano del salto de escala. 88.412 toneladas vendidas, 246 clientes, 21 provincias, 34 SKUs. Facturacion >US$ 40 MM. Se instala la segunda linea de reactores de liquidos (+70% capacidad), equipo de despacho a granel (+50% productividad). Se valida la planta de Bactools (bioinsumos). 62.824 t importadas en 17 operaciones. Mix de 53,6% marcas propias.</p>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="year">2026 — Objetivo: 110.000+ t</div>
+                <p>Consolidar el crecimiento y superar 110.000 t. Lanzamiento de mezclas fisicas con nueva mezcladora. Inicio comercial de Bactools. Foco en eficiencia, margen y gobernanza de procesos.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── ORGANIGRAMA ─── -->
+<section id="organigrama">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Equipo</span>
+            <h2 class="section-title">Estructura de la Empresa</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Areas clave y su funcion dentro de Agrefert</p>
+        </div>
+
+        <!-- Direccion -->
+        <div class="org-top reveal">
+            <div class="org-person org-person-ceo" style="min-width:260px;">
+                <div class="org-avatar org-avatar-lg">NM</div>
+                <div class="org-info">
+                    <div class="org-name">Norberto Mu&ntilde;oz</div>
+                    <div class="org-role">CEO &amp; Board Director</div>
+                </div>
+            </div>
+            <div class="org-connector"></div>
+            <div class="org-person org-person-coo" style="min-width:260px;">
+                <div class="org-avatar org-avatar-lg" style="background:var(--brand-orange);">FM</div>
+                <div class="org-info">
+                    <div class="org-name">Federico Mu&ntilde;oz</div>
+                    <div class="org-role">COO &mdash; Direcci&oacute;n Operativa</div>
+                </div>
+            </div>
+            <div class="org-connector"></div>
+            <div class="org-connector-h"></div>
+        </div>
+        <!-- Areas -->
+        <div class="org-areas reveal">
+            <!-- Admin & Finanzas -->
+            <div class="org-area org-area-admin">
+                <div class="org-area-header">
+                    <div class="org-area-icon">&#128176;</div>
+                    <div><div class="org-area-title">Admin &amp; Finanzas</div><div class="org-area-count">7 personas</div></div>
+                </div>
+                <div class="org-area-body">
+                    <div class="org-person org-person-leader"><div class="org-avatar">FT</div><div class="org-info"><div class="org-name">Facundo Tomasella</div><div class="org-role">Gerente de Admin &amp; Finanzas</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">LP</div><div class="org-info"><div class="org-name">Luciana Posco</div><div class="org-role">L&iacute;der Admin &amp; Contabilidad</div></div></div>
+                    <div class="org-person" style="margin-left:2rem;"><div class="org-avatar" style="width:28px;height:28px;font-size:0.58rem;">LA</div><div class="org-info"><div class="org-name">Luc&iacute;a Ayala</div><div class="org-role">Aux. admin. contable</div></div></div>
+                    <div class="org-person" style="margin-left:2rem;"><div class="org-avatar" style="width:28px;height:28px;font-size:0.58rem;">HD</div><div class="org-info"><div class="org-name">H&eacute;ctor Di Tullio</div><div class="org-role">Aux. admin. contable</div></div></div>
+                    <div class="org-person org-person-new" style="margin-left:2rem;"><div class="org-avatar" style="width:28px;height:28px;font-size:0.58rem;background:#4CAF50;">NA</div><div class="org-info"><div class="org-name">Nazareno Aon</div><div class="org-role">Auxiliar contable</div><span class="org-badge" style="background:#4CAF50;color:white;">NUEVO</span></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">SM</div><div class="org-info"><div class="org-name">Santiago Mayotti</div><div class="org-role">L&iacute;der de Finanzas</div></div></div>
+                    <div class="org-person" style="margin-left:2rem;"><div class="org-avatar" style="width:28px;height:28px;font-size:0.58rem;">YA</div><div class="org-info"><div class="org-name">Yuliana Alfo</div><div class="org-role">Analista Cr&eacute;d. &amp; Cbzas.</div></div></div>
+                    <div class="org-person" style="margin-left:2rem;"><div class="org-avatar" style="width:28px;height:28px;font-size:0.58rem;">LL</div><div class="org-info"><div class="org-name">Lucas Lypka</div><div class="org-role">Analista Cr&eacute;d. &amp; Cbzas.</div></div></div>
+                </div>
+            </div>
+            <!-- Comercial -->
+            <div class="org-area org-area-comercial">
+                <div class="org-area-header">
+                    <div class="org-area-icon">&#128200;</div>
+                    <div><div class="org-area-title">Comercial</div><div class="org-area-count">7 personas</div></div>
+                </div>
+                <div class="org-area-body">
+                    <div class="org-person org-person-leader"><div class="org-avatar">NH</div><div class="org-info"><div class="org-name">Nicol&aacute;s Hern&aacute;ndez</div><div class="org-role">L&iacute;der Comercial</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">LC</div><div class="org-info"><div class="org-name">Luis Cano</div><div class="org-role">Business Developer</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">AA</div><div class="org-info"><div class="org-name">Alejandro Allen</div><div class="org-role">Business Developer</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">ML</div><div class="org-info"><div class="org-name">Mario L&oacute;pez</div><div class="org-role">Business Developer</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">AR</div><div class="org-info"><div class="org-name">Agust&iacute;n Raffa</div><div class="org-role">Biz Dev &amp; Log&iacute;stica</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">ES</div><div class="org-info"><div class="org-name">Eugenio Sanmartino</div><div class="org-role">Business Developer</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;">MC</div><div class="org-info"><div class="org-name">Mateo Castanier</div><div class="org-role">Business Developer</div></div></div>
+                </div>
+            </div>
+            <!-- Planta & Operaciones -->
+            <div class="org-area org-area-planta">
+                <div class="org-area-header">
+                    <div class="org-area-icon">&#128295;</div>
+                    <div><div class="org-area-title">Planta &amp; Operaciones</div><div class="org-area-count">7 personas + 10 operarios</div></div>
+                </div>
+                <div class="org-area-body">
+                    <div class="org-person org-person-leader"><div class="org-avatar" style="background:var(--brand-orange);">CI</div><div class="org-info"><div class="org-name">Christian Insua</div><div class="org-role">Jefe de Planta</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;background:var(--brand-orange);">AD</div><div class="org-info"><div class="org-name">Agust&iacute;n Daniele</div><div class="org-role">Analista de planta</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;background:var(--brand-orange);">GK</div><div class="org-info"><div class="org-name">Ger&oacute;nimo Kukurelo</div><div class="org-role">Analista de planta</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;background:var(--brand-orange);">JF</div><div class="org-info"><div class="org-name">Juan C. Farr&eacute;s</div><div class="org-role">Supervisor</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;background:var(--brand-orange);">JM</div><div class="org-info"><div class="org-name">Juan I. Maggio</div><div class="org-role">Supervisor</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;background:var(--brand-orange);">WD</div><div class="org-info"><div class="org-name">Walter Duarte</div><div class="org-role">Resp. Mantenimiento</div></div></div>
+                    <div class="org-person" style="margin-left:2rem;"><div class="org-avatar" style="width:28px;height:28px;font-size:0.58rem;background:var(--brand-orange);">JL</div><div class="org-info"><div class="org-name">Juan Lucero</div><div class="org-role">Mantenimiento</div></div></div>
+                    <div class="org-person" style="margin-left:2rem;"><div class="org-avatar" style="width:28px;height:28px;font-size:0.58rem;background:var(--brand-orange);">LN</div><div class="org-info"><div class="org-name">Luciano Novik</div><div class="org-role">Mantenimiento</div></div></div>
+                </div>
+            </div>
+            <!-- Bactools -->
+            <div class="org-area org-area-bactools">
+                <div class="org-area-header">
+                    <div class="org-area-icon">&#129514;</div>
+                    <div><div class="org-area-title">Bactools</div><div class="org-area-count">Bioinsumos</div></div>
+                </div>
+                <div class="org-area-body">
+                    <div class="org-person org-person-leader"><div class="org-avatar" style="background:#0891B2;">FZ</div><div class="org-info"><div class="org-name">Franco Ziraldo</div><div class="org-role">Comercial Bactools</div></div></div>
+                    <div class="org-person" style="margin-left:1rem;"><div class="org-avatar" style="width:32px;height:32px;font-size:0.65rem;background:#0891B2;">WR</div><div class="org-info"><div class="org-name">Walter Ram&iacute;rez</div><div class="org-role">RRHH &amp; T&eacute;cnico</div></div></div>
+                </div>
+            </div>
+        </div>
+        <!-- Operarios -->
+        <div class="org-operarios reveal">
+            <div class="org-operarios-title"><span>&#128119;</span> Operarios de Planta &mdash; Ramallo</div>
+            <div class="org-operarios-list">
+                <span class="org-operario-chip"><span class="org-mini-avatar">GC</span> Guillermo Contreras</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">LR</span> Lucas Rodr&iacute;guez</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">DA</span> Daniel Ag&uuml;ero</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">ER</span> Emanuel Reynoso</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">AR</span> Alexis Ruiz D&iacute;az</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">LR</span> Lucas Rol&oacute;n</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">LG</span> Leandro G&oacute;mez</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">CP</span> C&eacute;sar Peralta</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">MG</span> Mario J. G&oacute;mez</span>
+                <span class="org-operario-chip"><span class="org-mini-avatar">FC</span> Fabi&aacute;n Carrizo</span>
+            </div>
+        </div>
+        <!-- old orgchart hidden -->
+        <div style="display:none;"><ul class="oc-tree">
+          <li>
+            <div class="oc-node oc-ceo"><div class="oc-name">Norberto Mu&ntilde;oz</div><div class="oc-role">CEO &amp; Board Director</div></div>
+            <ul>
+              <li>
+                <div class="oc-node oc-coo"><div class="oc-name">Federico Mu&ntilde;oz</div><div class="oc-role">COO</div></div>
+                <ul>
+                  <li>
+                    <div class="oc-node oc-mgr"><div class="oc-name">Facundo Tomasella</div><div class="oc-role">Gte. Admin y Finanzas</div></div>
+                    <ul>
+                      <li>
+                        <div class="oc-node oc-lead"><div class="oc-name">Luciana Posco</div><div class="oc-role">L&iacute;der Admin &amp; Contabilidad</div></div>
+                        <ul>
+                          <li class="oc-leaf"><div class="oc-node"><div class="oc-name">Luc&iacute;a Ayala</div><div class="oc-role">Aux. admin. contable</div></div></li>
+                          <li class="oc-leaf"><div class="oc-node"><div class="oc-name">H&eacute;ctor Di Tullio</div><div class="oc-role">Aux. admin. contable</div></div></li>
+                          <li class="oc-leaf"><div class="oc-node oc-new"><div class="oc-name">Nazareno Aon</div><div class="oc-role">Auxiliar contable</div></div></li>
+                        </ul>
+                      </li>
+                      <li>
+                        <div class="oc-node oc-lead"><div class="oc-name">Santiago Mayotti</div><div class="oc-role">L&iacute;der de Finanzas</div></div>
+                        <ul>
+                          <li class="oc-leaf"><div class="oc-node"><div class="oc-name">Yuliana Alfo</div><div class="oc-role">Analista Cr&eacute;d. &amp; Cbzas.</div></div></li>
+                          <li class="oc-leaf"><div class="oc-node"><div class="oc-name">Lucas Lypka</div><div class="oc-role">Analista Cr&eacute;d. &amp; Cbzas.</div></div></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="oc-node oc-lead"><div class="oc-name">Nicol&aacute;s Hernandez</div><div class="oc-role">L&iacute;der Comercial</div></div>
+                    <ul>
+                      <li class="oc-leaf"><div class="oc-node"><div class="oc-name">Luis Cano</div><div class="oc-role">Business Developer</div></div></li>
+                      <li class="oc-leaf"><div class="oc-node"><div class="oc-name">Alejandro Allen</div><div class="oc-role">Business Developer</div></div></li>
+                      <li class="oc-leaf"><div class="oc-node"><div class="oc-name">Mario Lopez</div><div class="oc-role">Business Developer</div></div></li>
+                      <li class="oc-leaf"><div class="oc-node"><div class="oc-name">Agust&iacute;n Raffa</div><div class="oc-role">Biz Dev &amp; Log&iacute;stica</div></div></li>
+                      <li class="oc-leaf"><div class="oc-node"><div class="oc-name">Eugenio Sanmartino</div><div class="oc-role">Business Developer</div></div></li>
+                      <li class="oc-leaf"><div class="oc-node"><div class="oc-name">Mateo Castanier</div><div class="oc-role">Business Developer</div></div></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="oc-node oc-mgr"><div class="oc-name">Christian Insua</div><div class="oc-role">Jefe de Planta</div></div>
+                    <ul>
+                      <li class="oc-leaf"><div class="oc-node oc-planta"><div class="oc-name">Agust&iacute;n Daniele</div><div class="oc-role">Analista de planta</div></div></li>
+                      <li class="oc-leaf"><div class="oc-node oc-planta"><div class="oc-name">Ger&oacute;nimo Kukurelo</div><div class="oc-role">Analista de planta</div></div></li>
+                      <li class="oc-leaf"><div class="oc-node oc-planta"><div class="oc-name">Juan C. Farr&eacute;s</div><div class="oc-role">Supervisor</div></div></li>
+                      <li class="oc-leaf"><div class="oc-node oc-planta"><div class="oc-name">Juan I. Maggio</div><div class="oc-role">Supervisor</div></div></li>
+                      <li>
+                        <div class="oc-node oc-planta"><div class="oc-name">Walter Duarte</div><div class="oc-role">Resp. Mantenimiento</div></div>
+                        <ul>
+                          <li class="oc-leaf"><div class="oc-node"><div class="oc-name">Juan Lucero</div><div class="oc-role">Mantenimiento</div></div></li>
+                          <li class="oc-leaf"><div class="oc-node"><div class="oc-name">Novik Luciano</div><div class="oc-role">Mantenimiento</div></div></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        </div></div>
+
+        <div class="card-grid" style="margin-top:2.5rem;">
+            <div class="card reveal reveal-delay-1">
+                <h3><span class="icon-circle">&#128200;</span> Area Comercial</h3>
+                <p>Gestion de 246 clientes en 21 provincias. 23 cuentas con negocios >1.000 t y 120 con <100 t. Segmentacion por geolocalizacion (5 zonas), por tamano (Cuenta Nacional, Distribuidor Gold, Distribuidor, Productor Gold, Productor) y por importancia estrategica (Key Account vs Normal). CRM para seguimiento de cotizaciones y cierres. Proceso: Prospecto &rarr; Contacto &rarr; Calificacion &rarr; Envio de info &rarr; Reunion &rarr; Cotizacion &rarr; Nota de Venta.</p>
+            </div>
+            <div class="card reveal reveal-delay-2">
+                <h3><span class="icon-circle">&#128176;</span> Administracion y Finanzas</h3>
+                <p>Facturacion anual >US$ 40 MM. Margen bruto estimado 15,5% (~US$ 6,5 MM). Caja promedio anual: US$ 6,3 MM con la que se generaron importaciones por US$ 25,7 MM. Gestion activa con lineas bancarias BNA/BAPRO. Sistema Finnegans como ERP. Formas de cobro: contado, financiado, canje, tarjetas agro y compensacion de facturas. Gobernanza de cuentas corrientes con aging y semaforos.</p>
+            </div>
+            <div class="card reveal reveal-delay-3">
+                <h3><span class="icon-circle">&#128674;</span> Comercio Exterior</h3>
+                <p>17 operaciones de buques/Zona Franca en 2025. 62.824 t importadas con diversificacion de origenes. Gestion de timing, fletes, riesgo pais y ventanas comerciales. Comite semanal con Comercial, Finanzas y Planta para decisiones de abastecimiento y stock objetivo.</p>
+            </div>
+            <div class="card reveal reveal-delay-4">
+                <h3><span class="icon-circle">&#128295;</span> Operaciones y Planta</h3>
+                <p>82.588 t despachadas (93,4% de lo vendido). 66.000 t recibidas directamente de buques. Dos turnos operativos con mandos medios consolidados. Sistema de cupos para planificacion de despachos. Capacidad: 820 t/dia liquidos, 150 t/dia solidos. Reclamos de calidad: solo 0,49%.</p>
+            </div>
+            <div class="card reveal reveal-delay-5">
+                <h3><span class="icon-circle">&#129514;</span> Bactools (Bioinsumos)</h3>
+                <p>Unidad de negocio con planta propia y sistema de fermentacion, esterilizacion y envasado validado. 3 productos (B4 y BSP registrados, BSN en tramite). I+D con universidades (FCV-UNL). Expansion a 5 paises: Ecuador, Peru, Brasil, Uruguay y Argentina.</p>
+            </div>
+            <div class="card reveal reveal-delay-6">
+                <h3><span class="icon-circle">&#9989;</span> Calidad e ISO</h3>
+                <p>Certificacion ISO 9001:2015. Habilitaciones ANMaC (Ex RENAR) para almacenamiento y comercializacion de nitrato de amonio. Trazabilidad completa con planta automatizada. Indicador de reclamos en 0,49% sobre volumen total operado.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── CENTRO DE DOCUMENTACION ─── -->
+<section id="documentacion" class="alt-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Base de Conocimiento</span>
+            <h2 class="section-title">Centro de Manuales y Procedimientos</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Acceso directo a los manuales, procedimientos e instructivos de cada area — integrado con Google Drive y Confluence</p>
+        </div>
+
+        <div class="doc-grid">
+            <!-- Direccion -->
+            <div class="doc-area reveal reveal-delay-1">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon green">&#127919;</div>
+                    <div><div class="doc-area-title">Direccion General</div><div class="doc-area-subtitle">Norberto &amp; Federico Munoz</div></div>
+                    <span class="doc-count">6 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://drive.google.com/drive/folders/1DEpY5EV-64cHr6Q-2G0X65ysRtzrTxcg" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Procedimientos de Direccion</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/1AcbuAKxG5xFD3lQvtHDgwvdVC8TdFVlCoslsasGMBsE/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128202;</div>
+                        <div><div class="doc-link-name">Bajada ISO 2026</div><div class="doc-link-type">Estrategia</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/1FAfl6Ymd57sMA0gBfdcXYHEHUehsKN3ckJcPyHbLsZk/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#127919;</div>
+                        <div><div class="doc-link-name">OKRs 2026</div><div class="doc-link-type">Objetivos</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/1VeBtVe-4gfSC81jhTdZNUyiifhR46cYNiYme8LIKRmo/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#9989;</div>
+                        <div><div class="doc-link-name">Sistema de Gestion de Calidad</div><div class="doc-link-type">Manual principal</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="#0052CC"><path d="M11.17 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.83L15.17 2H11.17zM14 8V3l5 5h-5z"/></svg> Confluence</div>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/948076545" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128220;</div>
+                        <div><div class="doc-link-name">Politica de Compras, Gastos y Rendiciones</div><div class="doc-link-type">Politica integral</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/33183/Manuales" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128218;</div>
+                        <div><div class="doc-link-name">Manuales (Indice general)</div><div class="doc-link-type">Pagina raiz</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Comercial -->
+            <div class="doc-area reveal reveal-delay-2">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon blue">&#128200;</div>
+                    <div><div class="doc-area-title">Area Comercial</div><div class="doc-area-subtitle">Nicolas Hernandez &middot; Equipo BizDev</div></div>
+                    <span class="doc-count">9 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://drive.google.com/drive/folders/1yNV-kL3p9ZYSu_tfWq3DsW3i-VH2foZD" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Procedimientos Comerciales</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1tIQSnk0Q8JB5TylQ9JvN_bJmYZ5h5eVL" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128203;</div>
+                        <div><div class="doc-link-name">Instructivos Comerciales</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/1CZ5vkUpfYhaZPcfoO5Wak4HMg7uJQGryl-ZHtqs0_F4/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128230;</div>
+                        <div><div class="doc-link-name">Catalogo de Productos 2025</div><div class="doc-link-type">Referencia</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/1uJS1sGd5bWZa8Dq2RH0AzdaCr0JaBP12gmGcV6psBk0/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#127793;</div>
+                        <div><div class="doc-link-name">Guia Comercial Foliares (Soja y Maiz)</div><div class="doc-link-type">Argumentario</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="#0052CC"><path d="M11.17 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.83L15.17 2H11.17zM14 8V3l5 5h-5z"/></svg> Confluence</div>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/360808/Comercial+Manuales" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128218;</div>
+                        <div><div class="doc-link-name">Comercial — Manuales</div><div class="doc-link-type">Indice de area</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/360826/Manual+General+de+Ventas" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128214;</div>
+                        <div><div class="doc-link-name">Manual General de Ventas</div><div class="doc-link-type">Manual completo</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/22118503" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128101;</div>
+                        <div><div class="doc-link-name">Protocolo Distribuidores Zonales</div><div class="doc-link-type">Protocolo comercial</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/186056705/Manual+de+Marca" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#127912;</div>
+                        <div><div class="doc-link-name">Manual de Marca</div><div class="doc-link-type">Branding</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/791773192" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128205;</div>
+                        <div><div class="doc-link-name">Informe Misiones (Campo)</div><div class="doc-link-type">Reporte de zona</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Admin y Finanzas -->
+            <div class="doc-area reveal reveal-delay-3">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon orange">&#128176;</div>
+                    <div><div class="doc-area-title">Administracion y Finanzas</div><div class="doc-area-subtitle">Facundo Tomasella &middot; L. Posco &middot; S. Mayotti</div></div>
+                    <span class="doc-count">5 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://drive.google.com/drive/folders/1ANajpi07PffYqFN76BqrFVfW0SeN9ohI" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Documentacion Ventas &amp; Finanzas</div><div class="doc-link-type">Carpeta principal</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/1b8vYXbx2DomYfbypvjZEP2dmCVyl78XvCSE0tzLRtww/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128202;</div>
+                        <div><div class="doc-link-name">Reporte Anual Agrefert 2025</div><div class="doc-link-type">Reporte integral</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="#0052CC"><path d="M11.17 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.83L15.17 2H11.17zM14 8V3l5 5h-5z"/></svg> Confluence</div>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/17727489/Admin+Manuales" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128218;</div>
+                        <div><div class="doc-link-name">Admin — Manuales</div><div class="doc-link-type">Indice de area</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/460554360/Finanzas+Manuales" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128176;</div>
+                        <div><div class="doc-link-name">Finanzas — Manuales</div><div class="doc-link-type">Indice de area</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/17858729" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128179;</div>
+                        <div><div class="doc-link-name">Facturacion &amp; Cobranzas — Manuales</div><div class="doc-link-type">Indice de area</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Planta / Produccion -->
+            <div class="doc-area reveal reveal-delay-4">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon cyan">&#128295;</div>
+                    <div><div class="doc-area-title">Operaciones y Planta</div><div class="doc-area-subtitle">Christian Insua &middot; Equipo de planta</div></div>
+                    <span class="doc-count">7 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://drive.google.com/drive/folders/1rOQziiv__yP5NPLJwv9sySy-qpbS9rmp" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Procedimientos de Produccion</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1-L5VQw7Q2yjI78-pBuWmsLIh2-qTVhdj" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128203;</div>
+                        <div><div class="doc-link-name">Instructivos de Produccion</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1TTuYaL7SLSTvyjOMStwPSR1Id5Te208O" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#127981;</div>
+                        <div><div class="doc-link-name">Documentacion de Planta</div><div class="doc-link-type">Carpeta general</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1GNxkYDo2Je6OlktNzLuTnywEypLo7M-G" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#9888;</div>
+                        <div><div class="doc-link-name">Hojas de Seguridad (SDS)</div><div class="doc-link-type">Fichas tecnicas</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="#0052CC"><path d="M11.17 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.83L15.17 2H11.17zM14 8V3l5 5h-5z"/></svg> Confluence</div>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/27197441/Planta+-+Manuales" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128218;</div>
+                        <div><div class="doc-link-name">Planta — Manuales</div><div class="doc-link-type">Indice de area</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/27263008" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128300;</div>
+                        <div><div class="doc-link-name">Protocolo Monoproducto y Mezclas Solidas</div><div class="doc-link-type">Protocolo planta</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/27262977" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#129514;</div>
+                        <div><div class="doc-link-name">Protocolo Extraccion Muestra Fertilizantes</div><div class="doc-link-type">Protocolo laboratorio</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Compras y COMEX -->
+            <div class="doc-area reveal reveal-delay-5">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon dark">&#128674;</div>
+                    <div><div class="doc-area-title">Compras y Comercio Exterior</div><div class="doc-area-subtitle">Proveedores &middot; Importaciones</div></div>
+                    <span class="doc-count">2 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://drive.google.com/drive/folders/1mMV_uQkT6EXDu7b7Olr1VIHxqAfbQ_lD" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Procedimientos Compras y Proveedores</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="#0052CC"><path d="M11.17 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.83L15.17 2H11.17zM14 8V3l5 5h-5z"/></svg> Confluence</div>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/948076545" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128220;</div>
+                        <div><div class="doc-link-name">Politica de Compras, Gastos y Rendiciones</div><div class="doc-link-type">Politica integral</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- RRHH -->
+            <div class="doc-area reveal reveal-delay-6">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon green">&#129333;</div>
+                    <div><div class="doc-area-title">Recursos Humanos</div><div class="doc-area-subtitle">Induccion &middot; Evaluaciones</div></div>
+                    <span class="doc-count">4 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://drive.google.com/drive/folders/1llaO3I6GGDz9yiCIR5iu8hDSvzuLBAeW" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Procedimientos de RRHH</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/14MA6bdDIBnI6lLaVwbCeV5eA1HzljhPBmi2mGvg7zf4/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128218;</div>
+                        <div><div class="doc-link-name">Modelo de Induccion</div><div class="doc-link-type">Template</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="#0052CC"><path d="M11.17 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.83L15.17 2H11.17zM14 8V3l5 5h-5z"/></svg> Confluence</div>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/540016641/Recursos+Humanos" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#129333;</div>
+                        <div><div class="doc-link-name">Recursos Humanos</div><div class="doc-link-type">Pagina de area</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/22118532" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128178;</div>
+                        <div><div class="doc-link-name">Politica de Sueldos y Performance</div><div class="doc-link-type">Politica interna</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ISO / Calidad -->
+            <div class="doc-area reveal">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon green">&#9989;</div>
+                    <div><div class="doc-area-title">Sistema de Gestion ISO 9001</div><div class="doc-area-subtitle">Certificacion &middot; ANMaC &middot; Auditorias</div></div>
+                    <span class="doc-count">3 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://drive.google.com/drive/folders/1FUK1cLU4pUYn1bc_bLIGzQf_EClgI_o_" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Procedimientos del SGC</div><div class="doc-link-type">Carpeta ISO</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/14BmforUR5yov5mLVc6AhG4TNxo9xmaTU" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128451;</div>
+                        <div><div class="doc-link-name">Arbol completo ISO (Todos los docs)</div><div class="doc-link-type">Carpeta raiz</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1GgxYIZpQo-NAhHj7e45xs1cH96gb0A3q" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128203;</div>
+                        <div><div class="doc-link-name">Registros ISO</div><div class="doc-link-type">Formularios y registros</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bactools -->
+            <div class="doc-area reveal">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon green">&#129514;</div>
+                    <div><div class="doc-area-title">Bactools (Bioinsumos)</div><div class="doc-area-subtitle">Biotecnologia &middot; I+D</div></div>
+                    <span class="doc-count">4 docs</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 1.485c-1.42.046-2.65 1.084-3.13 2.515L4.36 17.41l1.47.85 4.51-13.39c.25-.73.76-1.23 1.32-1.38.53-.14 1.13.02 1.59.52l7.42 12.86 1.47-.85-7.42-12.86c-.78-1.36-2.15-2.17-3.72-2.13z"/><path d="M8.64 7.06L3 17.42l1.47.85L10.1 7.91l-1.46-.85z"/><path d="M7.2 18.51c0 1.35 1.1 2.44 2.44 2.44h4.72c1.35 0 2.44-1.1 2.44-2.44H7.2z"/></svg> Google Drive</div>
+                    <a href="https://docs.google.com/document/d/17CllWA4I0FVnBfUDm7_O4gZDsZkxR-7_UEdc58wxUYI/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128218;</div>
+                        <div><div class="doc-link-name">Manual Comercial Bactools</div><div class="doc-link-type">Argumentario completo</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://docs.google.com/document/d/17XZ5mcvUONBr2kNXqMy4FDIOmcmoTx4AME_UWi7Z7PY/edit" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#127793;</div>
+                        <div><div class="doc-link-name">Plan Comercial Pack Soja B4+BSP</div><div class="doc-link-type">Estrategia</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1P5pI8WFwHF3NnF72qYXaCWFw_X-3GErc" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128196;</div>
+                        <div><div class="doc-link-name">Procedimientos de Planta Bactools</div><div class="doc-link-type">Carpeta</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/1tt9bvuJ9mU2zgLqNpBZgECgFg4sxbU9S" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128202;</div>
+                        <div><div class="doc-link-name">Comercial Bactools (Completo)</div><div class="doc-link-type">Carpeta</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Reportes Semanales Confluence -->
+            <div class="doc-area reveal">
+                <div class="doc-area-header">
+                    <div class="doc-area-icon blue">&#128202;</div>
+                    <div><div class="doc-area-title">Reportes Semanales</div><div class="doc-area-subtitle">Seguimiento semanal por area en Confluence</div></div>
+                    <span class="doc-count">100+ reportes</span>
+                </div>
+                <div class="doc-area-body">
+                    <div class="doc-source-label"><svg viewBox="0 0 24 24" fill="#0052CC"><path d="M11.17 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.83L15.17 2H11.17zM14 8V3l5 5h-5z"/></svg> Confluence &middot; Reportes mas recientes</div>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/1002111097" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#127981;</div>
+                        <div><div class="doc-link-name">Planta Semanal (W11 — mas reciente)</div><div class="doc-link-type">Christian Insua</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/990740481" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128200;</div>
+                        <div><div class="doc-link-name">Comercial Semanal (W7 — mas reciente)</div><div class="doc-link-type">Nicolas Hernandez</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/955318273" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128202;</div>
+                        <div><div class="doc-link-name">Reporte General Semanal (W53)</div><div class="doc-link-type">Agustin Raffa</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/951812097" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128176;</div>
+                        <div><div class="doc-link-name">Admin y Finanzas Semanal (W51)</div><div class="doc-link-type">Facundo Tomasella</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                    <a href="https://agrefert.atlassian.net/wiki/spaces/AGREFERT/pages/955351041/2026+-+Reportes" target="_blank" class="doc-link">
+                        <div class="doc-link-icon">&#128197;</div>
+                        <div><div class="doc-link-name">Indice de Reportes 2026</div><div class="doc-link-type">Pagina indice</div></div>
+                        <span class="doc-link-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── MAPA DE PROCESOS ─── -->
+<section id="procesos">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">ISO 9001</span>
+            <h2 class="section-title">Mapa de Procesos</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Estructura ISO 9001 de Agrefert: desde el requerimiento del cliente hasta su satisfaccion</p>
+        </div>
+
+        <div class="pmap reveal">
+            <div class="pmap-band pmap-strat">
+                <div class="pmap-band-title">Direccion Estrategica</div>
+                <div class="pmap-flow">
+                    <div class="pmap-step pmap-step-outline">Politica de Calidad</div>
+                    <div class="pmap-step pmap-step-outline">Objetivos e Indicadores</div>
+                    <div class="pmap-step pmap-step-outline">Revision por la Direccion</div>
+                    <div class="pmap-step pmap-step-outline">Analisis de Ambiente</div>
+                    <div class="pmap-step pmap-step-outline">Gestion de Calidad</div>
+                </div>
+            </div>
+
+            <div class="pmap-band pmap-core">
+                <div class="pmap-band-title">Proceso Principal (Cadena de valor)</div>
+                <div class="pmap-io">
+                    <div class="pmap-io-label">Requisitos del cliente</div>
+                    <div style="flex:1;">
+                        <div class="pmap-flow" style="margin-bottom:0.6rem;">
+                            <div class="pmap-step pmap-step-green">Comercial</div>
+                            <span class="pmap-arr">&rarr;</span>
+                            <div class="pmap-step pmap-step-green">Diseno y Desarrollo</div>
+                            <span class="pmap-arr">&rarr;</span>
+                            <div class="pmap-step pmap-step-green">Planificacion</div>
+                            <span class="pmap-arr">&rarr;</span>
+                            <div class="pmap-step pmap-step-green">Compras y COMEX</div>
+                            <span class="pmap-arr">&rarr;</span>
+                            <div class="pmap-step pmap-step-green">Recepcion</div>
+                            <span class="pmap-arr">&rarr;</span>
+                            <div class="pmap-step pmap-step-green" style="background:var(--brand-green-dark);">Deposito</div>
+                        </div>
+                        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:0.5rem;">
+                            <div class="pmap-sub">
+                                <div class="pmap-sub-title">Mezclas Solidas</div>
+                                <div class="pmap-flow">
+                                    <div class="pmap-step pmap-step-green" style="font-size:0.72rem;">Formulacion</div>
+                                    <span class="pmap-arr">&rarr;</span>
+                                    <div class="pmap-step pmap-step-green" style="font-size:0.72rem;">Tolva</div>
+                                    <span class="pmap-arr">&rarr;</span>
+                                    <div class="pmap-step pmap-step-green" style="font-size:0.72rem;">Mezcladora</div>
+                                </div>
+                            </div>
+                            <div class="pmap-sub">
+                                <div class="pmap-sub-title">Liquidos</div>
+                                <div class="pmap-flow">
+                                    <div class="pmap-step pmap-step-green" style="font-size:0.72rem;">Formulacion</div>
+                                    <span class="pmap-arr">&rarr;</span>
+                                    <div class="pmap-step pmap-step-green" style="font-size:0.72rem;">Reactor</div>
+                                    <span class="pmap-arr">&rarr;</span>
+                                    <div class="pmap-step pmap-step-green" style="font-size:0.72rem;">Acopio</div>
+                                </div>
+                            </div>
+                            <div class="pmap-sub">
+                                <div class="pmap-sub-title">Mono Producto</div>
+                                <div class="pmap-flow">
+                                    <div class="pmap-step pmap-step-green" style="font-size:0.72rem;">Embolsado / Granel</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pmap-flow" style="margin-top:0.6rem; justify-content:flex-end;">
+                            <div class="pmap-step pmap-step-dark">Carga a Camion</div>
+                            <span class="pmap-arr">&rarr;</span>
+                            <div class="pmap-step pmap-step-dark">Despacho</div>
+                        </div>
+                    </div>
+                    <div class="pmap-io-label">Satisfaccion del cliente</div>
+                </div>
+            </div>
+
+            <div class="pmap-band pmap-support">
+                <div class="pmap-band-title">Procesos de Soporte</div>
+                <div class="pmap-flow">
+                    <div class="pmap-step pmap-step-support">RRHH</div>
+                    <div class="pmap-step pmap-step-support">Mantenimiento</div>
+                    <div class="pmap-step pmap-step-support">Compras</div>
+                    <div class="pmap-step pmap-step-support">Seguridad e Higiene</div>
+                </div>
+            </div>
+
+            <div class="pmap-band pmap-ext">
+                <div class="pmap-band-title">Actividades por Terceros</div>
+                <div class="pmap-flow">
+                    <div class="pmap-step pmap-step-ext">Consultoria de Calidad</div>
+                    <div class="pmap-step pmap-step-ext">Consultoria Legal</div>
+                    <div class="pmap-step pmap-step-ext">SENASA / ANMaC</div>
+                    <div class="pmap-step pmap-step-ext">Despachante COMEX</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── PLANTA ─── -->
+<section id="planta">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Infraestructura</span>
+            <h2 class="section-title">Nuestra Planta</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Complejo Industrial Ramallo &ndash; San Nicolas (COMIRSA), Buenos Aires</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card reveal reveal-delay-1">
+                <h3><span class="icon-circle">&#127981;</span> Infraestructura</h3>
+                <p>Predio de 50.000 m2 con planta totalmente automatizada. Ubicacion: Av. Central Energia Argentina 480, COMIRSA. 3 depositos para fertilizante solido no peligroso (45.000 t) + 1 deposito de nitrato de amonio (10.000 t, certificado ANMaC). Total solidos: 52.000 t. Liquidos: 4.500 t.</p>
+            </div>
+            <div class="card reveal reveal-delay-2">
+                <h3><span class="icon-circle">&#9881;</span> Capacidad Productiva</h3>
+                <p>Liquid blends: 820 t/dia (2da linea de reactores instalada en 2025, +70% capacidad). Solid blends: 150 t/dia. Despacho: +80.000 t/ano, 40 camiones diarios de fertilizantes liquidos. Mezcladora nueva para mezclas fisicas (2026).</p>
+            </div>
+            <div class="card reveal reveal-delay-3">
+                <h3><span class="icon-circle">&#128230;</span> Logistica y Despachos</h3>
+                <p>82.588 t despachadas en 2025 (record). 66.000 t recibidas desde buques directamente en planta. Nuevo equipo de despacho a granel (+50% productividad). Menor descarte por desterronador. Planificacion con sistema de cupos y respuesta a cupos del mismo dia.</p>
+            </div>
+            <div class="card reveal reveal-delay-4">
+                <h3><span class="icon-circle">&#127942;</span> Hitos de Planta 2025</h3>
+                <p>Record anual de despachos totales. Puesta en marcha del 2do reactor de liquidos. Produccion estable de Zurko 28-5. Consolidacion de mandos medios en administracion, balanza y supervision. Operacion en dos turnos. Reduccion de horas extra y operacion fines de semana.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── PRODUCTOS ─── -->
+<section id="productos" class="alt-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Portfolio</span>
+            <h2 class="section-title">Nuestros Productos</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Cuatro lineas de productos para cubrir cada necesidad del productor</p>
+        </div>
+
+        <div class="mix-visual reveal">
+            <div class="pie-chart"><div class="pie-center">88.412 t<br>total</div></div>
+            <div class="pie-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:var(--brand-blue-dark);"></div><span><strong>Commodities</strong> &mdash; 40.996 t (46,4%)</span></div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--brand-blue);"></div><span><strong>Zurko (Liquid Blends)</strong> &mdash; 34.504 t (39,0%)</span></div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--brand-orange);"></div><span><strong>Chacarero (Solid Blends)</strong> &mdash; 12.913 t (14,6%)</span></div>
+            </div>
+        </div>
+
+        <div class="product-line line-commodities reveal">
+            <div class="product-line-header">&#128302; Linea Commodities &mdash; Fertilizantes clasicos para nutricion esencial</div>
+            <table class="product-table">
+                <thead><tr><th>Producto</th><th>Grado Tecnico</th><th>Uso Principal</th></tr></thead>
+                <tbody>
+                    <tr><td class="product-name">Urea Perlada / Granulada</td><td>46-0-0</td><td>Trigo, maiz, soja, girasol &mdash; alta concentracion de nitrogeno</td></tr>
+                    <tr><td class="product-name">Sulfato de Amonio</td><td>21-0-0-24S</td><td>Maiz, girasol, trigo &mdash; nitrogeno + azufre</td></tr>
+                    <tr><td class="product-name">Sulfato de Calcio</td><td>0-0-0-18S-30Ca</td><td>Soja, girasol &mdash; corrector de acidez, calcio y azufre</td></tr>
+                    <tr><td class="product-name">MAP (Fosfato Monoamonico)</td><td>11-52-0</td><td>Trigo, maiz, girasol &mdash; fosfatado de alta solubilidad</td></tr>
+                    <tr><td class="product-name">Cloruro de Potasio</td><td>0-0-60</td><td>Maiz, girasol &mdash; potasio para resistencia al estres</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="product-line line-zurko reveal">
+            <div class="product-line-header">&#128167; Linea Zurko &mdash; Fertilizantes liquidos de alta tecnologia (Producto Estrella)</div>
+            <table class="product-table">
+                <thead><tr><th>Producto</th><th>Grado Tecnico</th><th>Uso Principal</th></tr></thead>
+                <tbody>
+                    <tr><td class="product-name">Zurko NS &#11088;</td><td>27-0-0-3S</td><td>Trigo, maiz &mdash; liquido NS, sin volatilizacion, relacion 9:1, pH neutro. No produce fitotoxicidad hasta 700 L/ha</td></tr>
+                    <tr><td class="product-name">Zurko Max</td><td>27-0-0-3S-0,05Zn</td><td>Maiz &mdash; NS + zinc quelatado grado alimenticio (8-10x mas eficiente que sales)</td></tr>
+                    <tr><td class="product-name">Zurko Foliar</td><td>20% N</td><td>Trigo, soja &mdash; nutricion foliar en estres</td></tr>
+                    <tr><td class="product-name">Zurko Foliar Max</td><td>20% N + 0,05% Zn</td><td>Trigo, soja &mdash; foliar con zinc quelatado</td></tr>
+                    <tr><td class="product-name">Zurko Foliar Max Bio</td><td>20% N + 0,05% Zn + bacterias</td><td>Soja, maiz &mdash; foliar con bacterias solubilizadoras de fosforo (Bactools)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="product-line line-chacarero reveal">
+            <div class="product-line-header">&#127806; Linea Chacarero &mdash; Mezclas solidas personalizadas</div>
+            <table class="product-table">
+                <thead><tr><th>Producto</th><th>Grado Tecnico</th><th>Uso Principal</th></tr></thead>
+                <tbody>
+                    <tr><td class="product-name">ANSUL</td><td>30-0-0-8S</td><td>Maiz, trigo &mdash; 100% N nitrico y amoniacal (sin ureico), minima volatilizacion. Para fertirriego</td></tr>
+                    <tr><td class="product-name">ANSCA</td><td>28-0-0-4S-5Ca</td><td>Maiz, trigo &mdash; nitrogeno nitrico/amoniacal + azufre + calcio. Se puede volear</td></tr>
+                    <tr><td class="product-name">Urea Azufrada</td><td>41-0-0-5S</td><td>Trigo &mdash; perfil proteico del grano</td></tr>
+                    <tr><td class="product-name">Urea S Reforzada</td><td>40-0-0-3S-4Ca</td><td>Trigo, girasol &mdash; nitrogeno, azufre y calcio</td></tr>
+                    <tr><td class="product-name">Nitro C</td><td>28-0-0-4S-5Ca</td><td>Maiz &mdash; nitrogeno, azufre y calcio</td></tr>
+                    <tr><td class="product-name">Nitro C Mix</td><td>13,5-0-24-2S-3Ca-18Cl</td><td>Soja &mdash; equilibrio nutricional completo con potasio</td></tr>
+                    <tr><td class="product-name">NPS</td><td>13-40-0-6S</td><td>Trigo, girasol &mdash; arranque de ciclo</td></tr>
+                    <tr><td class="product-name">NPS MAX</td><td>13-40-0-6S + 0,05Zn</td><td>Maiz &mdash; eficiencia de fertilizacion con zinc</td></tr>
+                    <tr><td class="product-name">NPSCa</td><td>8,25-39-0-4,5S-7,5Ca</td><td>Maiz, trigo &mdash; fosforo, azufre y calcio</td></tr>
+                    <tr><td class="product-name">Mezcla Quimica 8-40</td><td>8-40-0-5S-8Ca</td><td>Superadora de la 7-40 fisica. Todos los nutrientes en cada granulo, sin polvo</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="product-line line-bactools reveal">
+            <div class="product-line-header">&#129516; Linea Bactools &mdash; Bioinsumos de ultima generacion</div>
+            <table class="product-table">
+                <thead><tr><th>Producto</th><th>Estado</th><th>Detalle</th></tr></thead>
+                <tbody>
+                    <tr><td class="product-name">B4 (Consorcio bacteriano)</td><td>Registrado ARG</td><td>Bioestimulo anti-estres + ISR. Validado en trigo, maiz, soja. Foliar 1 L/ha</td></tr>
+                    <tr><td class="product-name">BSP (Solubilizadoras de P)</td><td>Registrado ARG</td><td>Bacterias solubilizadoras de fosforo. Produccion 2.000 L</td></tr>
+                    <tr><td class="product-name">BSN (Probiotico Natto)</td><td>En tramite</td><td>Probiotico animal (Bacillus subtilis). Ensayos con FCV-UNL en terneros</td></tr>
+                    <tr><td class="product-name">Zurko Bio</td><td>Comercial</td><td>90% Zurko + 10% B4: co-nutricion + bioestimulacion. ROI +5% maiz, +2-6% soja</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ─── CIFRAS CLAVE ─── -->
+<section id="numeros">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Numeros</span>
+            <h2 class="section-title">Cifras Clave 2025/26</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">El ano del salto de escala</p>
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card reveal reveal-delay-1"><span class="kpi-value">88.412 t</span><span class="kpi-label">Ventas totales</span></div>
+            <div class="kpi-card reveal reveal-delay-2"><span class="kpi-value">82.588 t</span><span class="kpi-label">Despachadas (93,4%)</span></div>
+            <div class="kpi-card reveal reveal-delay-3"><span class="kpi-value">>US$40M</span><span class="kpi-label">Facturacion anual</span></div>
+            <div class="kpi-card reveal reveal-delay-4"><span class="kpi-value">15,5%</span><span class="kpi-label">Margen bruto estimado</span></div>
+            <div class="kpi-card reveal reveal-delay-5"><span class="kpi-value">0,49%</span><span class="kpi-label">Reclamos de calidad</span></div>
+            <div class="kpi-card reveal reveal-delay-1"><span class="kpi-value">246</span><span class="kpi-label">Clientes activos</span></div>
+            <div class="kpi-card reveal reveal-delay-2"><span class="kpi-value">359 t</span><span class="kpi-label">Promedio por cliente</span></div>
+            <div class="kpi-card reveal reveal-delay-3"><span class="kpi-value">53,6%</span><span class="kpi-label">Mix marcas propias</span></div>
+            <div class="kpi-card reveal reveal-delay-4"><span class="kpi-value">US$6,3M</span><span class="kpi-label">Caja promedio anual</span></div>
+            <div class="kpi-card reveal reveal-delay-5"><span class="kpi-value">62.824 t</span><span class="kpi-label">Importadas (17 buques)</span></div>
+        </div>
+
+        <h3 style="text-align:center; margin-top:3.5rem; color:var(--text-primary); font-weight:700;" class="reveal">Evolucion de Volumen (toneladas)</h3>
+        <div class="volume-chart reveal">
+            <div class="bar-group"><div class="bar" style="height:55px;"><span class="bar-label">22.300</span></div><div class="bar-year">2022</div></div>
+            <div class="bar-group"><div class="bar" style="height:72px;"><span class="bar-label">28.500</span></div><div class="bar-year">2023</div></div>
+            <div class="bar-group"><div class="bar" style="height:125px;"><span class="bar-label">50.000</span></div><div class="bar-year">2024</div></div>
+            <div class="bar-group"><div class="bar" style="height:218px;"><span class="bar-label">88.412</span></div><div class="bar-year">2025</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── OPERACIONES COMERCIALES ─── -->
+<section id="operaciones" class="alt-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Ventas</span>
+            <h2 class="section-title">Operacion Comercial</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Segmentacion de clientes, proceso de venta y zonas comerciales</p>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin-bottom:1rem; font-weight:700;" class="reveal">Segmentacion por Tamano</h3>
+        <div class="seg-grid">
+            <div class="seg-card reveal reveal-delay-1">
+                <h4>Cuenta Nacional</h4>
+                <span class="seg-vol">>5.000 t/ano</span>
+                <p>Pago a 30 dias. Buscan disponibilidad, flexibilidad y calidad. Valoran precios bajos. Se cobra almacenaje.</p>
+            </div>
+            <div class="seg-card reveal reveal-delay-2">
+                <h4>Distribuidor Gold</h4>
+                <span class="seg-vol">>2.000 t/ano</span>
+                <p>Desarrollan mercado. Buenos precios, colocacion de tanques, charlas tecnicas y financiacion.</p>
+            </div>
+            <div class="seg-card reveal reveal-delay-3">
+                <h4>Distribuidor</h4>
+                <span class="seg-vol">>1.000 t/ano</span>
+                <p>Red de distribucion regional. Acceso al portfolio completo de productos Agrefert.</p>
+            </div>
+            <div class="seg-card reveal reveal-delay-4">
+                <h4>Productor Gold</h4>
+                <span class="seg-vol">>500 t/ano</span>
+                <p>Dispuestos a realizar ensayos. Tanques, charlas tecnicas y financiacion con respaldo.</p>
+            </div>
+            <div class="seg-card reveal reveal-delay-5">
+                <h4>Productor</h4>
+                <span class="seg-vol">Min. 1 camion</span>
+                <p>Compra directa. Precios de lista.</p>
+            </div>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin: 2.5rem 0 1rem; font-weight:700;" class="reveal">Zonas Comerciales</h3>
+        <div class="seg-grid">
+            <div class="seg-card reveal"><h4>Zona 1: Norte</h4><p>Salta, Jujuy, Tucuman</p></div>
+            <div class="seg-card reveal"><h4>Zona 2: Cordoba & San Luis</h4><p>Region centro-oeste</p></div>
+            <div class="seg-card reveal"><h4>Zona 3: Pampa Humeda</h4><p>Nucleo productivo principal</p></div>
+            <div class="seg-card reveal"><h4>Zona 4: Cuyo</h4><p>Mendoza, San Juan</p></div>
+            <div class="seg-card reveal"><h4>Zona 5: Buenos Aires Norte</h4><p>Zona de influencia directa de planta</p></div>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin: 2.5rem 0 1rem; font-weight:700;" class="reveal">Proceso de Venta</h3>
+        <div class="reveal" style="display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; justify-content:center; margin-bottom:1rem;">
+            <div style="background:var(--accent-green-2); padding:0.65rem 1.1rem; border-radius:8px; font-size:0.85rem; font-weight:600; color:var(--text-primary);">Prospecto</div>
+            <span style="color:var(--brand-green); font-weight:700;">&rarr;</span>
+            <div style="background:var(--accent-green-2); padding:0.65rem 1.1rem; border-radius:8px; font-size:0.85rem; font-weight:600; color:var(--text-primary);">Contacto inicial</div>
+            <span style="color:var(--brand-green); font-weight:700;">&rarr;</span>
+            <div style="background:var(--accent-green-2); padding:0.65rem 1.1rem; border-radius:8px; font-size:0.85rem; font-weight:600; color:var(--text-primary);">Calificacion</div>
+            <span style="color:var(--brand-green); font-weight:700;">&rarr;</span>
+            <div style="background:var(--accent-green-2); padding:0.65rem 1.1rem; border-radius:8px; font-size:0.85rem; font-weight:600; color:var(--text-primary);">Envio de info</div>
+            <span style="color:var(--brand-green); font-weight:700;">&rarr;</span>
+            <div style="background:var(--accent-green-2); padding:0.65rem 1.1rem; border-radius:8px; font-size:0.85rem; font-weight:600; color:var(--text-primary);">Reunion</div>
+            <span style="color:var(--brand-green); font-weight:700;">&rarr;</span>
+            <div style="background:var(--accent-green-2); padding:0.65rem 1.1rem; border-radius:8px; font-size:0.85rem; font-weight:600; color:var(--text-primary);">Cotizacion</div>
+            <span style="color:var(--brand-green); font-weight:700;">&rarr;</span>
+            <div style="background:var(--brand-green); padding:0.65rem 1.1rem; border-radius:8px; font-size:0.85rem; font-weight:700; color:white; box-shadow: 0 2px 8px rgba(27,178,117,0.25);">Nota de Venta</div>
+        </div>
+        <div class="prose reveal" style="text-align:center; margin: 0 auto;">
+            <p style="font-size:0.88rem;">Formas de cobro: Contado | Financiado | Canje | Tarjetas Agro | Compensacion de facturas | Cuenta y Orden</p>
+        </div>
+    </div>
+</section>
+
+<!-- ─── COMEX ─── -->
+<section id="comex">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Importaciones</span>
+            <h2 class="section-title">Comercio Exterior</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Importaciones 2025: 62.824 t en 17 buques/Zona Franca (+13,9% vs 2024)</p>
+        </div>
+
+        <div class="reveal" style="overflow-x:auto; border-radius:var(--radius); border:1px solid var(--border); box-shadow: var(--shadow-xs);">
+            <table class="import-table">
+                <thead><tr><th>Producto</th><th style="text-align:right;">2024 (t)</th><th style="text-align:right;">2025 (t)</th><th style="text-align:right;">Var.</th></tr></thead>
+                <tbody>
+                    <tr><td>Urea Granulada</td><td class="number">24.038</td><td class="number">28.050</td><td class="number" style="color:var(--brand-green);">+4.012</td></tr>
+                    <tr><td>Urea Perlada</td><td class="number">10.500</td><td class="number">10.400</td><td class="number" style="color:#c53030;">-100</td></tr>
+                    <tr><td>Nitrato de Amonio</td><td class="number">11.730</td><td class="number">10.174</td><td class="number" style="color:#c53030;">-1.556</td></tr>
+                    <tr><td>Sulfato de Amonio Granulado</td><td class="number">4.883</td><td class="number">5.500</td><td class="number" style="color:var(--brand-green);">+617</td></tr>
+                    <tr><td>MAP</td><td class="number">1.930</td><td class="number">2.750</td><td class="number" style="color:var(--brand-green);">+820</td></tr>
+                    <tr><td>MAP 10-50</td><td class="number">&mdash;</td><td class="number">2.000</td><td class="number" style="color:var(--brand-green);">Nuevo</td></tr>
+                    <tr><td>Chacarero 8-40-0-5S-8Ca</td><td class="number">2.000</td><td class="number">2.500</td><td class="number" style="color:var(--brand-green);">+500</td></tr>
+                    <tr><td>Cloruro de Potasio Granulado</td><td class="number">&mdash;</td><td class="number">1.450</td><td class="number" style="color:var(--brand-green);">Nuevo</td></tr>
+                    <tr style="font-weight:700; background:var(--accent-green-2);"><td>Total</td><td class="number">55.181</td><td class="number">62.824</td><td class="number" style="color:var(--brand-green);">+7.643</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="prose reveal" style="margin-top:1.75rem;">
+            <p>Argentina importo mas de 3,4 Mt de fertilizantes en 2025 (+19% interanual), por un valor de US$ 1.926 MM (+38%). Urea + MAP explicaron el 56% del volumen y 61% del valor. Agrefert diversifico origenes para sostener abastecimiento, manejando ventanas de compra y stock estrategico.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ─── CALENDARIO AGRICOLA ─── -->
+<section id="calendario" class="alt-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Estacionalidad</span>
+            <h2 class="section-title">Calendario Agricola</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Campanas fina (invierno) y gruesa (verano) que determinan la estacionalidad de la demanda</p>
+        </div>
+
+        <div class="agcal reveal"><div class="agcal-grid">
+            <div class="agcal-header">Cultivo</div>
+            <div class="agcal-header">Abr</div><div class="agcal-header">May</div><div class="agcal-header">Jun</div>
+            <div class="agcal-header">Jul</div><div class="agcal-header">Ago</div><div class="agcal-header">Sep</div>
+            <div class="agcal-header">Oct</div><div class="agcal-header">Nov</div><div class="agcal-header">Dic</div>
+            <div class="agcal-header">Ene</div><div class="agcal-header">Feb</div><div class="agcal-header">Mar</div>
+
+            <div class="agcal-crop">Trigo <span class="agcal-tag agcal-tag-fina">Fina</span></div>
+            <div class="agcal-cell"></div><div class="agcal-cell s">Siembra</div><div class="agcal-cell s">Siembra</div>
+            <div class="agcal-cell f">N</div><div class="agcal-cell f">N</div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell c">Cosecha</div>
+            <div class="agcal-cell c">Cosecha</div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+
+            <div class="agcal-crop">Maiz Temp. <span class="agcal-tag agcal-tag-gruesa">Gruesa</span></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell s">Siembra</div>
+            <div class="agcal-cell s">Siembra</div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell c">Cosecha</div>
+
+            <div class="agcal-crop">Maiz Tardio <span class="agcal-tag agcal-tag-gruesa">Gruesa</span></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell s">Siembra</div><div class="agcal-cell s">Siembra</div>
+            <div class="agcal-cell f">N</div><div class="agcal-cell f">N</div><div class="agcal-cell"></div>
+
+            <div class="agcal-crop">Soja 1ra <span class="agcal-tag agcal-tag-gruesa">Gruesa</span></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell s">Siembra</div><div class="agcal-cell s">Siembra</div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell c">Cosecha</div>
+
+            <div class="agcal-crop">Soja 2da <span class="agcal-tag agcal-tag-gruesa">Gruesa</span></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell s">Siembra</div>
+            <div class="agcal-cell f">N</div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+
+            <div class="agcal-crop">Girasol <span class="agcal-tag agcal-tag-gruesa">Gruesa</span></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell s">Siembra</div>
+            <div class="agcal-cell f">N</div><div class="agcal-cell f">N</div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell c">Cosecha</div><div class="agcal-cell"></div>
+        </div></div>
+
+        <div class="agcal-legend reveal">
+            <div class="agcal-legend-item"><div class="agcal-legend-dot" style="background:var(--accent-green-2);"></div> Siembra + fertilizacion arranque</div>
+            <div class="agcal-legend-item"><div class="agcal-legend-dot" style="background:#FFF7E0;"></div> Aplicacion de nitrogeno</div>
+            <div class="agcal-legend-item"><div class="agcal-legend-dot" style="background:#FFE8E8;"></div> Cosecha</div>
+            <div class="agcal-legend-item"><div class="agcal-legend-dot" style="background:#E8F0FE;"></div> Campana fina</div>
+            <div class="agcal-legend-item"><div class="agcal-legend-dot" style="background:#FFF0E0;"></div> Campana gruesa</div>
+        </div>
+
+        <div class="prose reveal" style="margin-top:1.75rem;">
+            <p>La campana <strong>fina</strong> (trigo, cebada, colza) se siembra mayo-julio y cosecha noviembre-enero. La campana <strong>gruesa</strong> (soja, maiz, girasol, sorgo) se siembra septiembre-enero y cosecha marzo-junio. Es posible hacer doble cultivo (ej: Trigo &rarr; Soja de 2da). Estos ciclos determinan la estacionalidad de la demanda de fertilizantes y la planificacion de stock, importaciones y produccion.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ─── BACTOOLS ─── -->
+<section id="bactools">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Biotecnologia</span>
+            <h2 class="section-title">Bactools &mdash; Bioinsumos</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Unidad de biotecnologia aplicada a la agricultura sustentable</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card reveal reveal-delay-1">
+                <h3><span class="icon-circle">&#128300;</span> Planta Bactools</h3>
+                <p>Obra civil finalizada. Sistema de fermentacion, esterilizacion y envasado operativo. Validaciones CIP/SIP y UHT completadas. Servicios: caldera, torre de enfriamiento, chiller, osmosis inversa y automatizacion. Escalado exitoso de laboratorio a planta.</p>
+            </div>
+            <div class="card reveal reveal-delay-2">
+                <h3><span class="icon-circle">&#127793;</span> I+D y Validacion</h3>
+                <p>Eficacia validada en trigo, maiz, soja (semilla y foliar). Expansion a papa, vid, algodon, tomate, garbanzo, arveja y mani. Protocolos de compatibilidad con fertilizantes. Formulaciones para aplicacion aerea (drones). Ensayos de probioticos animales con ANR $50.000.000 y FCV-UNL.</p>
+            </div>
+            <div class="card reveal reveal-delay-3">
+                <h3><span class="icon-circle">&#127758;</span> Internacionalizacion</h3>
+                <p>Ferias: Ecuador, Peru, Brasil (Agritech Sao Paulo). Ensayos: cacao, cafe, banano, maiz. Relacion con Multivet (Peru) para palta, arandanos, maiz. Avance en registros internacionales (Uruguay). Productos B4 y BSP registrados en Argentina.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── OBJETIVOS 2026 ─── -->
+<section id="objetivos" class="alt-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Plan 2026</span>
+            <h2 class="section-title">Plan y Objetivos 2026</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Consolidar el crecimiento de 2025 y superar 110.000 toneladas</p>
+        </div>
+
+        <div class="obj-grid">
+            <div class="obj-card reveal reveal-delay-1">
+                <h4>Mix y Margen (Marcas Propias)</h4>
+                <p>Definir Core Portfolio (top 7-10 SKUs por margen y rotacion). Pricing por zona/canal. Disciplina de contribucion marginal por familia. Plan tecnico-comercial con ensayos y argumentario.</p>
+            </div>
+            <div class="obj-card reveal reveal-delay-2">
+                <h4>Mezclas Fisicas (Nueva Mezcladora)</h4>
+                <p>Implementacion con estandares: recetas, control de lotes, trazabilidad y liberacion de calidad. Layout de depositos ordenado. Objetivo: capturar especialidades solidas con servicio y velocidad.</p>
+            </div>
+            <div class="obj-card reveal reveal-delay-3">
+                <h4>Liquidos (Aprovechar 2da Linea)</h4>
+                <p>Programacion de planta y forecast semanal por familia. Metrica de eficiencia: costo por tonelada producida. Crecer sin que aumente proporcionalmente el costo fijo/t.</p>
+            </div>
+            <div class="obj-card reveal reveal-delay-4">
+                <h4>Nitricas (Ventana Comercial)</h4>
+                <p>Diversificacion de origenes, planificacion por ventanas, stock minimo por familia. Solucion tecnica o decision de portfolio para UAN 32.</p>
+            </div>
+            <div class="obj-card reveal reveal-delay-5">
+                <h4>Capital de Trabajo</h4>
+                <p>Inventario: "una sola verdad" con cierre mensual. CC: aging mensual, limites, garantias y semaforo. Compras: comite semanal Comercial-Comex-Finanzas-Planta.</p>
+            </div>
+            <div class="obj-card reveal reveal-delay-6">
+                <h4>Bactools (Lanzamiento)</h4>
+                <p>Portafolio 2026: elegir 2-3 productos lideres. Pipeline de distribuidores prioritarios con metricas de conversion. Unit economics: costo por litro, margen y capacidad utilizada.</p>
+            </div>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin: 3rem 0 1rem; font-weight:700;" class="reveal">KPIs de Directorio (Tablero Mensual)</h3>
+        <div class="seg-grid">
+            <div class="seg-card reveal"><h4>Volumen y Mix</h4><p>Toneladas vendidas y % por familia</p></div>
+            <div class="seg-card reveal"><h4>Margen Bruto</h4><p>% por familia y top SKUs (US$/t)</p></div>
+            <div class="seg-card reveal"><h4>Costo Fijo/t</h4><p>Evolucion y punto de equilibrio</p></div>
+            <div class="seg-card reveal"><h4>Inventario</h4><p>Dias de stock por familia + quiebres</p></div>
+            <div class="seg-card reveal"><h4>Cuentas Corrientes</h4><p>Aging 0-30/31-60/61-90/+90, top 10</p></div>
+            <div class="seg-card reveal"><h4>OTIF</h4><p>Entrega completa y a tiempo (%)</p></div>
+            <div class="seg-card reveal"><h4>Calidad</h4><p>Reclamos (%) con base definida</p></div>
+            <div class="seg-card reveal"><h4>Caja</h4><p>Posicion neta, lineas y compromisos</p></div>
+            <div class="seg-card reveal"><h4>Capacidad</h4><p>% utilizada: liquidos y solidos</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── IDENTIDAD DE MARCA ─── -->
+<section id="marca">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Branding</span>
+            <h2 class="section-title">Identidad de Marca</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Guidelines visuales, paleta cromatica, tipografia y logos oficiales</p>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin-bottom:0.5rem; font-size:1.15rem; font-weight:700;" class="reveal">Logos Oficiales</h3>
+        <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:1.5rem;" class="reveal">Nuestro isologo combina una hoja (nutricion vegetal) con una gota (fertilizantes liquidos), representando la esencia de Agrefert.</p>
+
+        <div class="logo-gallery">
+            <div class="logo-card reveal reveal-delay-1">
+                <img src="img/isologo.png" alt="Agrefert Isologo">
+                <div class="logo-name">Isologo</div>
+                <div class="logo-desc">Icono solo: hoja + gota</div>
+            </div>
+            <div class="logo-card reveal reveal-delay-2">
+                <img src="img/logo.png" alt="Agrefert Logo">
+                <div class="logo-name">Imagotipo</div>
+                <div class="logo-desc">Texto Agrefert + icono</div>
+            </div>
+            <div class="logo-card reveal reveal-delay-3">
+                <img src="img/logo_fert.png" alt="Agrefert Fertilizantes">
+                <div class="logo-name">Imagotipo con bajada</div>
+                <div class="logo-desc">Agrefert + FERTILIZANTES</div>
+            </div>
+            <div class="logo-card reveal reveal-delay-4">
+                <img src="img/chacarero.png" alt="Chacarero">
+                <div class="logo-name">Chacarero</div>
+                <div class="logo-desc">Linea de mezclas solidas</div>
+            </div>
+            <div class="logo-card reveal reveal-delay-5">
+                <img src="img/zurko.png" alt="Zurko">
+                <div class="logo-name">Zurko</div>
+                <div class="logo-desc">Linea de fertilizantes liquidos</div>
+            </div>
+            <div class="logo-card reveal reveal-delay-6">
+                <img src="img/zurkomax.png" alt="ZurkoMax">
+                <div class="logo-name">ZurkoMax</div>
+                <div class="logo-desc">Linea premium de liquidos</div>
+            </div>
+            <div class="logo-card reveal">
+                <img src="img/commodities.png" alt="Commodities">
+                <div class="logo-name">Commodities</div>
+                <div class="logo-desc">Linea de granulados simples</div>
+            </div>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin:3rem 0 0.5rem; font-size:1.15rem; font-weight:700;" class="reveal">Paleta Cromatica</h3>
+
+        <div class="color-group reveal">
+            <div class="color-group-title">Colores Primarios — Isologo</div>
+            <div class="brand-colors">
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#1BB275;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Verde Agrefert</span><span class="swatch-hex">#1BB275</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#00BFE3;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Cyan Agrefert</span><span class="swatch-hex">#00BFE3</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#212121;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Dark</span><span class="swatch-hex">#212121</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="color-group reveal">
+            <div class="color-group-title">Colores Primarios — Productos</div>
+            <div class="brand-colors">
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#FF9239;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Chacarero</span><span class="swatch-hex">#FF9239</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#1877F2;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Zurko</span><span class="swatch-hex">#1877F2</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#0A50CC;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Commodities</span><span class="swatch-hex">#0A50CC</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#FFBC00;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Amarillo</span><span class="swatch-hex">#FFBC00</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="color-group reveal">
+            <div class="color-group-title">Colores Secundarios — Acentos</div>
+            <div class="brand-colors">
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#90F1AC;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Verde Claro</span><span class="swatch-hex">#90F1AC</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#CFFCDE;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Verde Pastel</span><span class="swatch-hex">#CFFCDE</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#83F6FF;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Cyan Claro</span><span class="swatch-hex">#83F6FF</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#AEF9FF;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Cyan Pastel</span><span class="swatch-hex">#AEF9FF</span></div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin:3rem 0 0.5rem; font-size:1.15rem; font-weight:700;" class="reveal">Tipografia</h3>
+        <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:1.25rem;" class="reveal">La marca utiliza Maven Pro como tipografia principal. Para textos extensos se recomienda Proxima Nova Regular.</p>
+
+        <div class="typo-sample">
+            <div class="typo-row reveal">
+                <span class="typo-label">Maven Pro Bold<br><span style="font-size:0.7rem; opacity:0.7;">Logo &amp; encabezados</span></span>
+                <span class="typo-preview-bold">Agrefert Fertilizantes</span>
+            </div>
+            <div class="typo-row reveal">
+                <span class="typo-label">Maven Pro Regular<br><span style="font-size:0.7rem; opacity:0.7;">Titulos &amp; subtitulos</span></span>
+                <span class="typo-preview-regular">Nutricion vegetal de calidad</span>
+            </div>
+            <div class="typo-row reveal">
+                <span class="typo-label">Inter / Body<br><span style="font-size:0.7rem; opacity:0.7;">Textos &amp; parrafos</span></span>
+                <span class="typo-preview-body">Somos una empresa argentina dedicada a la elaboracion y distribucion de fertilizantes solidos y liquidos, contribuyendo con el sector agropecuario.</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── CONTACTO ─── -->
+<section id="contacto" class="alt-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Comunicacion</span>
+            <h2 class="section-title">Contacto</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Canales de comunicacion</p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-card reveal reveal-delay-1">
+                <div class="contact-icon">&#128205;</div>
+                <h4>Planta y Depositos</h4>
+                <p>Av. Central Energia Argentina 480<br>Complejo Industrial COMIRSA<br>Ramallo &ndash; San Nicolas, Buenos Aires</p>
+            </div>
+            <div class="contact-card reveal reveal-delay-2">
+                <div class="contact-icon">&#128231;</div>
+                <h4>Ventas</h4>
+                <p><a href="mailto:ventas@agrefert.com">ventas@agrefert.com</a></p>
+            </div>
+            <div class="contact-card reveal reveal-delay-3">
+                <div class="contact-icon">&#127760;</div>
+                <h4>Web y Redes</h4>
+                <p>
+                    <a href="https://agrefert.com" target="_blank">www.agrefert.com</a><br>
+                    <a href="https://ar.linkedin.com/company/agrefert" target="_blank">LinkedIn</a> &bull;
+                    <a href="https://www.instagram.com/agrefert/" target="_blank">Instagram</a> &bull;
+                    <a href="https://www.facebook.com/Agrefert/" target="_blank">Facebook</a>
+                </p>
+            </div>
+            <div class="contact-card reveal reveal-delay-4">
+                <div class="contact-icon">&#128218;</div>
+                <h4>Herramientas Internas</h4>
+                <p>ERP: Finnegans<br>CRM: HubSpot<br>Confluence (documentacion)</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+    <img src="img/logo_fert_white.png" alt="Agrefert Fertilizantes" style="max-width:180px; width:50%; margin-bottom:1rem; opacity:0.8;">
+    <p>Desde 1999 contribuyendo a la produccion de mas y mejores alimentos.</p>
+    <p style="margin-top:0.5rem; font-size:0.75rem; opacity:0.5;">Material de induccion &mdash; Uso interno &mdash; 2026</p>
+</footer>
+
+<!-- ─── BACK TO TOP ─── -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0})" aria-label="Volver arriba">&#8593;</button>
+
+<!-- ─── JAVASCRIPT ─── -->
+<script>
+(function() {
+    // Scroll reveal with IntersectionObserver
+    // Scroll reveal with IntersectionObserver
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right').forEach(function(el) { observer.observe(el); });
+
+    // Counter animation for KPI numbers
+    var counterObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting && !entry.target.dataset.counted) {
+                entry.target.dataset.counted = 'true';
+                var target = parseInt(entry.target.textContent.replace(/[^0-9]/g, ''));
+                var suffix = entry.target.textContent.replace(/[0-9]/g, '');
+                if (isNaN(target)) return;
+                var start = 0;
+                var duration = 1500;
+                var startTime = null;
+                function animate(ts) {
+                    if (!startTime) startTime = ts;
+                    var progress = Math.min((ts - startTime) / duration, 1);
+                    var eased = 1 - Math.pow(1 - progress, 4);
+                    entry.target.textContent = Math.floor(eased * target) + suffix;
+                    if (progress < 1) requestAnimationFrame(animate);
+                }
+                requestAnimationFrame(animate);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.kpi-number').forEach(function(el) { counterObserver.observe(el); });
+
+    // Scroll progress bar
+    var progressBar = document.getElementById('scrollProgress');
+    var backToTop = document.getElementById('backToTop');
+    var topnav = document.getElementById('topnav');
+
+    window.addEventListener('scroll', function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = progress + '%';
+
+        // Back to top
+        if (scrollTop > 600) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+
+        // Nav shadow on scroll
+        if (scrollTop > 10) {
+            topnav.classList.add('scrolled');
+        } else {
+            topnav.classList.remove('scrolled');
+        }
+    });
+
+    // Active nav link highlight
+    var sections = document.querySelectorAll('section[id]');
+    var navLinks = document.querySelectorAll('.nav-links a');
+    var groupLabels = document.querySelectorAll('.nav-group-label');
+
+    window.addEventListener('scroll', function() {
+        var scrollPos = window.pageYOffset + 100;
+        navLinks.forEach(function(l) { l.classList.remove('active'); });
+        groupLabels.forEach(function(g) { g.classList.remove('active'); });
+        sections.forEach(function(section) {
+            if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+                var id = section.getAttribute('id');
+                navLinks.forEach(function(link) {
+                    if (link.getAttribute('href') === '#' + id) {
+                        link.classList.add('active');
+                        var parentGroup = link.closest('.nav-group');
+                        if (parentGroup) {
+                            parentGroup.querySelector('.nav-group-label').classList.add('active');
+                        }
+                    }
+                });
+            }
+        });
+    });
+
+    // Close mobile menu on link click
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.remove('open');
+        });
+    });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos — Induccion Agrefert</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+<script>
+    // Apply saved theme immediately to prevent flash
+    (function(){var t=localStorage.getItem('agrefert-theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark')}})();
+    </script>
+</head>
+<body>
+<!-- ─── PROGRESS BAR ─── -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ─── NAVBAR ─── -->
+<nav class="topnav" id="topnav">
+    <div class="topnav-inner">
+        <a href="index.html" class="logo"><img src="img/logo.png" alt="Agrefert"></a>
+        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+        <div class="nav-links">
+            <a href="index.html">La Empresa</a>
+            <a href="equipo.html">Equipo</a>
+            <a href="productos.html" class="current">Productos</a>
+            <a href="documentacion.html">Documentacion</a>
+            <a href="operaciones.html">Operaciones</a>
+            <a href="manuales.html">Manuales</a>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Cambiar tema" title="Modo oscuro / claro">&#9790;</button>
+        </div>
+    </div>
+</nav>
+
+<!-- ─── PAGE HEADER ─── -->
+<div style="padding-top: 80px; padding-bottom: 1.5rem; background: var(--surface-alt);">
+    <div class="container" style="padding-top: 1.5rem;">
+        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+            <a href="index.html" style="color: var(--brand-green); text-decoration: none;">Home</a> → Productos
+        </div>
+        <h1 style="font-size: clamp(1.75rem, 2.5vw, 2.25rem); font-weight: 900; color: var(--text-primary); margin-bottom: 0.35rem;">Productos</h1>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">Catalogo completo de fertilizantes, bioinsumos e identidad de marca</p>
+    </div>
+</div>
+
+<!-- ─── PRODUCTOS SECTION ─── -->
+<section id="productos" class="alt-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Portfolio</span>
+            <h2 class="section-title">Nuestros Productos</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Cuatro lineas de productos para cubrir cada necesidad del productor</p>
+        </div>
+
+        <div class="mix-visual reveal">
+            <div class="pie-chart"><div class="pie-center">88.412 t<br>total</div></div>
+            <div class="pie-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:var(--brand-blue-dark);"></div><span><strong>Commodities</strong> &mdash; 40.996 t (46,4%)</span></div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--brand-blue);"></div><span><strong>Zurko (Liquid Blends)</strong> &mdash; 34.504 t (39,0%)</span></div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--brand-orange);"></div><span><strong>Chacarero (Solid Blends)</strong> &mdash; 12.913 t (14,6%)</span></div>
+            </div>
+        </div>
+
+        <div class="product-line line-commodities reveal">
+            <div class="product-line-header">&#128302; Linea Commodities &mdash; Fertilizantes clasicos para nutricion esencial</div>
+            <table class="product-table">
+                <thead><tr><th>Producto</th><th>Grado Tecnico</th><th>Uso Principal</th></tr></thead>
+                <tbody>
+                    <tr><td class="product-name">Urea Perlada / Granulada</td><td>46-0-0</td><td>Trigo, maiz, soja, girasol &mdash; alta concentracion de nitrogeno</td></tr>
+                    <tr><td class="product-name">Sulfato de Amonio</td><td>21-0-0-24S</td><td>Maiz, girasol, trigo &mdash; nitrogeno + azufre</td></tr>
+                    <tr><td class="product-name">Sulfato de Calcio</td><td>0-0-0-18S-30Ca</td><td>Soja, girasol &mdash; corrector de acidez, calcio y azufre</td></tr>
+                    <tr><td class="product-name">MAP (Fosfato Monoamonico)</td><td>11-52-0</td><td>Trigo, maiz, girasol &mdash; fosfatado de alta solubilidad</td></tr>
+                    <tr><td class="product-name">Cloruro de Potasio</td><td>0-0-60</td><td>Maiz, girasol &mdash; potasio para resistencia al estres</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="product-line line-zurko reveal">
+            <div class="product-line-header">&#128167; Linea Zurko &mdash; Fertilizantes liquidos de alta tecnologia (Producto Estrella)</div>
+            <table class="product-table">
+                <thead><tr><th>Producto</th><th>Grado Tecnico</th><th>Uso Principal</th></tr></thead>
+                <tbody>
+                    <tr><td class="product-name">Zurko NS &#11088;</td><td>27-0-0-3S</td><td>Trigo, maiz &mdash; liquido NS, sin volatilizacion, relacion 9:1, pH neutro. No produce fitotoxicidad hasta 700 L/ha</td></tr>
+                    <tr><td class="product-name">Zurko Max</td><td>27-0-0-3S-0,05Zn</td><td>Maiz &mdash; NS + zinc quelatado grado alimenticio (8-10x mas eficiente que sales)</td></tr>
+                    <tr><td class="product-name">Zurko Foliar</td><td>20% N</td><td>Trigo, soja &mdash; nutricion foliar en estres</td></tr>
+                    <tr><td class="product-name">Zurko Foliar Max</td><td>20% N + 0,05% Zn</td><td>Trigo, soja &mdash; foliar con zinc quelatado</td></tr>
+                    <tr><td class="product-name">Zurko Foliar Max Bio</td><td>20% N + 0,05% Zn + bacterias</td><td>Soja, maiz &mdash; foliar con bacterias solubilizadoras de fosforo (Bactools)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="product-line line-chacarero reveal">
+            <div class="product-line-header">&#127806; Linea Chacarero &mdash; Mezclas solidas personalizadas</div>
+            <table class="product-table">
+                <thead><tr><th>Producto</th><th>Grado Tecnico</th><th>Uso Principal</th></tr></thead>
+                <tbody>
+                    <tr><td class="product-name">ANSUL</td><td>30-0-0-8S</td><td>Maiz, trigo &mdash; 100% N nitrico y amoniacal (sin ureico), minima volatilizacion. Para fertirriego</td></tr>
+                    <tr><td class="product-name">ANSCA</td><td>28-0-0-4S-5Ca</td><td>Maiz, trigo &mdash; nitrogeno nitrico/amoniacal + azufre + calcio. Se puede volear</td></tr>
+                    <tr><td class="product-name">Urea Azufrada</td><td>41-0-0-5S</td><td>Trigo &mdash; perfil proteico del grano</td></tr>
+                    <tr><td class="product-name">Urea S Reforzada</td><td>40-0-0-3S-4Ca</td><td>Trigo, girasol &mdash; nitrogeno, azufre y calcio</td></tr>
+                    <tr><td class="product-name">Nitro C</td><td>28-0-0-4S-5Ca</td><td>Maiz &mdash; nitrogeno, azufre y calcio</td></tr>
+                    <tr><td class="product-name">Nitro C Mix</td><td>13,5-0-24-2S-3Ca-18Cl</td><td>Soja &mdash; equilibrio nutricional completo con potasio</td></tr>
+                    <tr><td class="product-name">NPS</td><td>13-40-0-6S</td><td>Trigo, girasol &mdash; arranque de ciclo</td></tr>
+                    <tr><td class="product-name">NPS MAX</td><td>13-40-0-6S + 0,05Zn</td><td>Maiz &mdash; eficiencia de fertilizacion con zinc</td></tr>
+                    <tr><td class="product-name">NPSCa</td><td>8,25-39-0-4,5S-7,5Ca</td><td>Maiz, trigo &mdash; fosforo, azufre y calcio</td></tr>
+                    <tr><td class="product-name">Mezcla Quimica 8-40</td><td>8-40-0-5S-8Ca</td><td>Superadora de la 7-40 fisica. Todos los nutrientes en cada granulo, sin polvo</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="product-line line-bactools reveal">
+            <div class="product-line-header">&#129516; Linea Bactools &mdash; Bioinsumos de ultima generacion</div>
+            <table class="product-table">
+                <thead><tr><th>Producto</th><th>Estado</th><th>Detalle</th></tr></thead>
+                <tbody>
+                    <tr><td class="product-name">B4 (Consorcio bacteriano)</td><td>Registrado ARG</td><td>Bioestimulo anti-estres + ISR. Validado en trigo, maiz, soja. Foliar 1 L/ha</td></tr>
+                    <tr><td class="product-name">BSP (Solubilizadoras de P)</td><td>Registrado ARG</td><td>Bacterias solubilizadoras de fosforo. Produccion 2.000 L</td></tr>
+                    <tr><td class="product-name">BSN (Probiotico Natto)</td><td>En tramite</td><td>Probiotico animal (Bacillus subtilis). Ensayos con FCV-UNL en terneros</td></tr>
+                    <tr><td class="product-name">Zurko Bio</td><td>Comercial</td><td>90% Zurko + 10% B4: co-nutricion + bioestimulacion. ROI +5% maiz, +2-6% soja</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ─── BACTOOLS SECTION ─── -->
+<section id="bactools">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Biotecnologia</span>
+            <h2 class="section-title">Bactools &mdash; Bioinsumos</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Unidad de biotecnologia aplicada a la agricultura sustentable</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card reveal reveal-delay-1">
+                <h3><span class="icon-circle">&#128300;</span> Planta Bactools</h3>
+                <p>Obra civil finalizada. Sistema de fermentacion, esterilizacion y envasado operativo. Validaciones CIP/SIP y UHT completadas. Servicios: caldera, torre de enfriamiento, chiller, osmosis inversa y automatizacion. Escalado exitoso de laboratorio a planta.</p>
+            </div>
+            <div class="card reveal reveal-delay-2">
+                <h3><span class="icon-circle">&#127793;</span> I+D y Validacion</h3>
+                <p>Eficacia validada en trigo, maiz, soja (semilla y foliar). Expansion a papa, vid, algodon, tomate, garbanzo, arveja y mani. Protocolos de compatibilidad con fertilizantes. Formulaciones para aplicacion aerea (drones). Ensayos de probioticos animales con ANR $50.000.000 y FCV-UNL.</p>
+            </div>
+            <div class="card reveal reveal-delay-3">
+                <h3><span class="icon-circle">&#127758;</span> Internacionalizacion</h3>
+                <p>Ferias: Ecuador, Peru, Brasil (Agritech Sao Paulo). Ensayos: cacao, cafe, banano, maiz. Relacion con Multivet (Peru) para palta, arandanos, maiz. Avance en registros internacionales (Uruguay). Productos B4 y BSP registrados en Argentina.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── IDENTIDAD DE MARCA SECTION ─── -->
+<section id="marca" class="alt-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Branding</span>
+            <h2 class="section-title">Identidad de Marca</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Guidelines visuales, paleta cromatica, tipografia y logos oficiales</p>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin-bottom:0.5rem; font-size:1.15rem; font-weight:700;" class="reveal">Logos Oficiales</h3>
+        <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:1.5rem;" class="reveal">Nuestro isologo combina una hoja (nutricion vegetal) con una gota (fertilizantes liquidos), representando la esencia de Agrefert.</p>
+
+        <div class="logo-gallery">
+            <div class="logo-card reveal reveal-delay-1">
+                <img src="img/isologo.png" alt="Agrefert Isologo">
+                <div class="logo-name">Isologo</div>
+                <div class="logo-desc">Icono solo: hoja + gota</div>
+            </div>
+            <div class="logo-card reveal reveal-delay-2">
+                <img src="img/logo.png" alt="Agrefert Logo">
+                <div class="logo-name">Imagotipo</div>
+                <div class="logo-desc">Texto Agrefert + icono</div>
+            </div>
+            <div class="logo-card reveal reveal-delay-3">
+                <img src="img/logo_fert.png" alt="Agrefert Fertilizantes">
+                <div class="logo-name">Imagotipo con bajada</div>
+                <div class="logo-desc">Agrefert + FERTILIZANTES</div>
+            </div>
+            <div class="logo-card reveal reveal-delay-4">
+                <img src="img/chacarero.png" alt="Chacarero">
+                <div class="logo-name">Chacarero</div>
+                <div class="logo-desc">Linea de mezclas solidas</div>
+            </div>
+            <div class="logo-card reveal reveal-delay-5">
+                <img src="img/zurko.png" alt="Zurko">
+                <div class="logo-name">Zurko</div>
+                <div class="logo-desc">Linea de fertilizantes liquidos</div>
+            </div>
+            <div class="logo-card reveal reveal-delay-6">
+                <img src="img/zurkomax.png" alt="ZurkoMax">
+                <div class="logo-name">ZurkoMax</div>
+                <div class="logo-desc">Linea premium de liquidos</div>
+            </div>
+            <div class="logo-card reveal">
+                <img src="img/commodities.png" alt="Commodities">
+                <div class="logo-name">Commodities</div>
+                <div class="logo-desc">Linea de granulados simples</div>
+            </div>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin:3rem 0 0.5rem; font-size:1.15rem; font-weight:700;" class="reveal">Paleta Cromatica</h3>
+
+        <div class="color-group reveal">
+            <div class="color-group-title">Colores Primarios — Isologo</div>
+            <div class="brand-colors">
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#1BB275;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Verde Agrefert</span><span class="swatch-hex">#1BB275</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#00BFE3;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Cyan Agrefert</span><span class="swatch-hex">#00BFE3</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#212121;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Dark</span><span class="swatch-hex">#212121</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="color-group reveal">
+            <div class="color-group-title">Colores Primarios — Productos</div>
+            <div class="brand-colors">
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#FF9239;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Chacarero</span><span class="swatch-hex">#FF9239</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#1877F2;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Zurko</span><span class="swatch-hex">#1877F2</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#0A50CC;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Commodities</span><span class="swatch-hex">#0A50CC</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#FFBC00;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Amarillo</span><span class="swatch-hex">#FFBC00</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="color-group reveal">
+            <div class="color-group-title">Colores Secundarios — Acentos</div>
+            <div class="brand-colors">
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#90F1AC;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Verde Claro</span><span class="swatch-hex">#90F1AC</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#CFFCDE;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Verde Pastel</span><span class="swatch-hex">#CFFCDE</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#83F6FF;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Cyan Claro</span><span class="swatch-hex">#83F6FF</span></div>
+                </div>
+                <div class="color-swatch">
+                    <div class="swatch-color" style="background:#AEF9FF;"></div>
+                    <div class="swatch-info"><span class="swatch-name">Cyan Pastel</span><span class="swatch-hex">#AEF9FF</span></div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin:3rem 0 0.5rem; font-size:1.15rem; font-weight:700;" class="reveal">Tipografia</h3>
+        <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:1.25rem;" class="reveal">La marca utiliza Maven Pro como tipografia principal. Para textos extensos se recomienda Proxima Nova Regular.</p>
+
+        <div class="typo-sample">
+            <div class="typo-row reveal">
+                <span class="typo-label">Maven Pro Bold<br><span style="font-size:0.7rem; opacity:0.7;">Logo &amp; encabezados</span></span>
+                <span class="typo-preview-bold">Agrefert Fertilizantes</span>
+            </div>
+            <div class="typo-row reveal">
+                <span class="typo-label">Maven Pro Regular<br><span style="font-size:0.7rem; opacity:0.7;">Titulos &amp; subtitulos</span></span>
+                <span class="typo-preview-regular">Nutricion vegetal de calidad</span>
+            </div>
+            <div class="typo-row reveal">
+                <span class="typo-label">Inter / Body<br><span style="font-size:0.7rem; opacity:0.7;">Textos &amp; parrafos</span></span>
+                <span class="typo-preview-body">Somos una empresa argentina dedicada a la elaboracion y distribucion de fertilizantes solidos y liquidos, contribuyendo con el sector agropecuario.</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+    <img src="img/logo_fert_white.png" alt="Agrefert Fertilizantes" style="max-width:180px; width:50%; margin-bottom:1rem; opacity:0.8;">
+    <p>Desde 1999 contribuyendo a la produccion de mas y mejores alimentos.</p>
+    <p style="margin-top:0.5rem; font-size:0.75rem; opacity:0.5;">Material de induccion &mdash; Uso interno &mdash; 2026</p>
+</footer>
+
+<!-- ─── BACK TO TOP ─── -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0})" aria-label="Volver arriba">&#8593;</button>
+
+<!-- ─── JAVASCRIPT ─── -->
+<script>
+(function() {
+    // Scroll reveal with IntersectionObserver
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right').forEach(function(el) { observer.observe(el); });
+
+    // Scroll progress bar
+    var progressBar = document.getElementById('scrollProgress');
+    var backToTop = document.getElementById('backToTop');
+    var topnav = document.getElementById('topnav');
+
+    window.addEventListener('scroll', function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = progress + '%';
+
+        // Back to top
+        if (scrollTop > 600) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+
+        // Nav shadow on scroll
+        if (scrollTop > 10) {
+            topnav.classList.add('scrolled');
+        } else {
+            topnav.classList.remove('scrolled');
+        }
+    });
+
+    // Active nav link highlight
+    var sections = document.querySelectorAll('section[id]');
+    var navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', function() {
+        var scrollPos = window.pageYOffset + 100;
+        navLinks.forEach(function(l) { l.classList.remove('current'); });
+        sections.forEach(function(section) {
+            if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+                var id = section.getAttribute('id');
+                navLinks.forEach(function(link) {
+                    if (link.getAttribute('href') === '#' + id) {
+                        link.classList.add('current');
+                    }
+                });
+            }
+        });
+    });
+
+    // Close mobile menu on link click
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.remove('open');
+        });
+    });
+})();
+</script>
+
+<script>
+function toggleTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('agrefert-theme', next);
+    updateToggleIcon();
+}
+function updateToggleIcon() {
+    var btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    btn.innerHTML = isDark ? '&#9728;' : '&#9790;';
+    btn.title = isDark ? 'Modo claro' : 'Modo oscuro';
+}
+updateToggleIcon();
+</script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block title %}{% if obj %}Editar Objetivo{% else %}Crear Objetivo de Calidad{% endif %} - SGC Agrefert{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="text-success mb-2">
+                {% if obj %}Editar Objetivo: {{ obj.code }}{% else %}Crear Objetivo de Calidad{% endif %}
+            </h1>
+            <p class="text-muted">Define los objetivos estratégicos del sistema de calidad</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card bg-dark border-success">
+                <div class="card-body">
+                    <form method="POST" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="code" class="form-label text-success">
+                                Código <span class="text-danger">*</span>
+                            </label>
+                            <input type="text"
+                                   class="form-control bg-secondary text-white border-success"
+                                   id="code"
+                                   name="code"
+                                   placeholder="OBJ-001"
+                                   value="{{ obj.code if obj else '' }}"
+                                   {% if obj %}readonly{% else %}required{% endif %}>
+                            <div class="invalid-feedback">El código es obligatorio.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label text-success">
+                                Nombre <span class="text-danger">*</span>
+                            </label>
+                            <input type="text"
+                                   class="form-control bg-secondary text-white border-success"
+                                   id="name"
+                                   name="name"
+                                   placeholder="Ej: Reducir defectos de fabricación"
+                                   value="{{ obj.name if obj else '' }}"
+                                   required>
+                            <div class="invalid-feedback">El nombre es obligatorio.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label text-success">
+                                Descripción
+                            </label>
+                            <textarea class="form-control bg-secondary text-white border-success"
+                                      id="description"
+                                      name="description"
+                                      rows="3"
+                                      placeholder="Describe el objetivo de calidad">{{ obj.description if obj else '' }}</textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="area_id" class="form-label text-success">
+                                Área Responsable <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-select bg-secondary text-white border-success"
+                                    id="area_id"
+                                    name="area_id"
+                                    required>
+                                <option value="">Selecciona un área</option>
+                                {% if areas %}
+                                    {% for area in areas %}
+                                    <option value="{{ area.id }}" {% if obj and obj.area_id == area.id %}selected{% endif %}>
+                                        {{ area.name }}
+                                    </option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                            <div class="invalid-feedback">Selecciona un área válida.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="indicator" class="form-label text-success">
+                                Indicador <span class="text-danger">*</span>
+                            </label>
+                            <input type="text"
+                                   class="form-control bg-secondary text-white border-success"
+                                   id="indicator"
+                                   name="indicator"
+                                   placeholder="Ej: Número de defectos por lote"
+                                   value="{{ obj.indicator if obj else '' }}"
+                                   required>
+                            <div class="invalid-feedback">El indicador es obligatorio.</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="target" class="form-label text-success">
+                                    Meta <span class="text-danger">*</span>
+                                </label>
+                                <input type="number"
+                                       class="form-control bg-secondary text-white border-success"
+                                       id="target"
+                                       name="target"
+                                       step="0.01"
+                                       value="{{ obj.target if obj else '' }}"
+                                       required>
+                                <div class="invalid-feedback">La meta es obligatoria.</div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="unit" class="form-label text-success">
+                                    Unidad <span class="text-danger">*</span>
+                                </label>
+                                <input type="text"
+                                       class="form-control bg-secondary text-white border-success"
+                                       id="unit"
+                                       name="unit"
+                                       placeholder="Ej: %"
+                                       value="{{ obj.unit if obj else '' }}"
+                                       required>
+                                <div class="invalid-feedback">La unidad es obligatoria.</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="frequency" class="form-label text-success">
+                                    Frecuencia de Medición <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select bg-secondary text-white border-success"
+                                        id="frequency"
+                                        name="frequency"
+                                        required>
+                                    <option value="">Selecciona frecuencia</option>
+                                    <option value="diaria" {% if obj and obj.frequency == 'diaria' %}selected{% endif %}>Diaria</option>
+                                    <option value="semanal" {% if obj and obj.frequency == 'semanal' %}selected{% endif %}>Semanal</option>
+                                    <option value="mensual" {% if obj and obj.frequency == 'mensual' %}selected{% endif %}>Mensual</option>
+                                    <option value="trimestral" {% if obj and obj.frequency == 'trimestral' %}selected{% endif %}>Trimestral</option>
+                                    <option value="anual" {% if obj and obj.frequency == 'anual' %}selected{% endif %}>Anual</option>
+                                </select>
+                                <div class="invalid-feedback">Selecciona una frecuencia válida.</div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="due_date" class="form-label text-success">
+                                    Fecha de Vencimiento <span class="text-danger">*</span>
+                                </label>
+                                <input type="date"
+                                       class="form-control bg-secondary text-white border-success"
+                                       id="due_date"
+                                       name="due_date"
+                                       value="{{ obj.due_date.strftime('%Y-%m-%d') if obj and obj.due_date else '' }}"
+                                       required>
+                                <div class="invalid-feedback">La fecha es obligatoria.</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="responsible_id" class="form-label text-success">
+                                Responsable <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-select bg-secondary text-white border-success"
+                                    id="responsible_id"
+                                    name="responsible_id"
+                                    required>
+                                <option value="">Selecciona responsable</option>
+                                {% if users %}
+                                    {% for user in users %}
+                                    <option value="{{ user.id }}" {% if obj and obj.responsible_id == user.id %}selected{% endif %}>
+                                        {{ user.name }} ({{ user.email }})
+                                    </option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                            <div class="invalid-feedback">Selecciona un responsable.</div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> {% if obj %}Actualizar{% else %}Crear{% endif %}
+                            </button>
+                            <a href="{{ url_for('objectives') if obj else url_for('objectives') }}" class="btn btn-outline-success">
+                                <i class="fas fa-arrow-left"></i> Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
+{% endblock %}

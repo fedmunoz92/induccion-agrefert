@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Usuarios - SGC Agrefert{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="text-success mb-2">Usuarios del Sistema</h1>
+            <p class="text-muted">Administra los usuarios y sus permisos</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{{ url_for('user_form') }}" class="btn btn-success">
+                <i class="fas fa-plus"></i> Crear Usuario
+            </a>
+        </div>
+    </div>
+
+    {% if users %}
+    <div class="card bg-dark border-success">
+        <div class="table-responsive">
+            <table class="table table-dark table-hover mb-0">
+                <thead class="table-secondary">
+                    <tr>
+                        <th class="text-dark">Nombre</th>
+                        <th class="text-dark">Email</th>
+                        <th class="text-dark">Rol</th>
+                        <th class="text-dark">Área</th>
+                        <th class="text-dark">Estado</th>
+                        <th class="text-dark">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td class="text-success">{{ user.name }}</td>
+                        <td>
+                            <small class="text-muted">{{ user.email }}</small>
+                        </td>
+                        <td>
+                            <span class="badge bg-info text-dark">{{ user.role }}</span>
+                        </td>
+                        <td>
+                            {{ user.area.name if user.area else 'Sin área' }}
+                        </td>
+                        <td>
+                            {% if user.active %}
+                            <span class="badge bg-success">Activo</span>
+                            {% else %}
+                            <span class="badge bg-secondary">Inactivo</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ url_for('user_form', user_id=user.id) }}" class="btn btn-outline-success" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button type="button" class="btn btn-outline-danger" title="Eliminar" data-bs-toggle="modal" data-bs-target="#deleteUserModal" data-user-id="{{ user.id }}" data-user-name="{{ user.name }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        <i class="fas fa-info-circle"></i> No hay usuarios en el sistema aún.
+    </div>
+    {% endif %}
+</div>
+
+<!-- Delete User Modal -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark border-danger">
+            <div class="modal-header border-danger">
+                <h5 class="modal-title text-danger" id="deleteUserLabel">
+                    <i class="fas fa-exclamation-triangle"></i> Eliminar Usuario
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-muted">
+                ¿Estás seguro de que deseas eliminar a <strong id="userNameDisplay" class="text-warning"></strong>?
+                <br><small>Esta acción no se puede deshacer.</small>
+            </div>
+            <div class="modal-footer border-danger">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form method="POST" style="display: inline;" id="deleteUserForm">
+                    <button type="submit" class="btn btn-danger" name="_method" value="DELETE">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const deleteUserModal = document.getElementById('deleteUserModal');
+    deleteUserModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget;
+        const userId = button.getAttribute('data-user-id');
+        const userName = button.getAttribute('data-user-name');
+
+        document.getElementById('userNameDisplay').textContent = userName;
+        document.getElementById('deleteUserForm').action = "{{ url_for('user_form', user_id='USER_ID') }}".replace('USER_ID', userId);
+    });
+</script>
+{% endblock %}

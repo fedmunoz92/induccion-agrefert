@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+
+{% block title %}{% if doc %}Editar Documento{% else %}Crear Nuevo Documento{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="mb-0">{% if doc %}Editar Documento{% else %}Crear Nuevo Documento{% endif %}</h1>
+            <p class="text-muted mt-2">Sistema de Gestión de Calidad ISO 9001</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{{ url_for('documents') }}" class="btn btn-outline-success">
+                <i class="fas fa-arrow-left"></i> Volver
+            </a>
+        </div>
+    </div>
+
+    <!-- Form Card -->
+    <div class="card bg-dark border-success">
+        <div class="card-body p-4">
+            <form method="POST" class="needs-validation">
+                <!-- Code and Title Row -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="code" class="form-label text-success fw-bold">Código del Documento *</label>
+                        <input type="text" class="form-control bg-dark text-light border-success" id="code" name="code"
+                               value="{{ doc.code if doc else '' }}" required placeholder="e.g., SGC-DOC-001">
+                        <small class="text-muted">Identificador único del documento</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="title" class="form-label text-success fw-bold">Título del Documento *</label>
+                        <input type="text" class="form-control bg-dark text-light border-success" id="title" name="title"
+                               value="{{ doc.title if doc else '' }}" required placeholder="Título descriptivo">
+                        <small class="text-muted">Nombre completo del documento</small>
+                    </div>
+                </div>
+
+                <!-- Type and Area Row -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="type_id" class="form-label text-success fw-bold">Tipo de Documento *</label>
+                        <select class="form-select bg-dark text-light border-success" id="type_id" name="type_id" required>
+                            <option value="">Selecciona un tipo...</option>
+                            {% for doc_type in doc_types %}
+                            <option value="{{ doc_type.id }}" {% if doc and doc.type_id == doc_type.id %}selected{% endif %}>
+                                {{ doc_type.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <small class="text-muted">Procedimiento, Política, Formulario, etc.</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="area_id" class="form-label text-success fw-bold">Área Responsable *</label>
+                        <select class="form-select bg-dark text-light border-success" id="area_id" name="area_id" required>
+                            <option value="">Selecciona un área...</option>
+                            {% for area in areas %}
+                            <option value="{{ area.id }}" {% if doc and doc.area_id == area.id %}selected{% endif %}>
+                                {{ area.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <small class="text-muted">Departamento responsable de mantener este documento</small>
+                    </div>
+                </div>
+
+                <!-- Status Row -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="status" class="form-label text-success fw-bold">Estado *</label>
+                        <select class="form-select bg-dark text-light border-success" id="status" name="status" required>
+                            <option value="">Selecciona un estado...</option>
+                            <option value="borrador" {% if doc and doc.status == 'borrador' %}selected{% endif %}>Borrador</option>
+                            <option value="en_revision" {% if doc and doc.status == 'en_revision' %}selected{% endif %}>En Revisión</option>
+                            <option value="vigente" {% if doc and doc.status == 'vigente' %}selected{% endif %}>Vigente</option>
+                            <option value="obsoleto" {% if doc and doc.status == 'obsoleto' %}selected{% endif %}>Obsoleto</option>
+                        </select>
+                        <small class="text-muted">Estado actual del documento</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="next_review_date" class="form-label text-success fw-bold">Próxima Revisión</label>
+                        <input type="date" class="form-control bg-dark text-light border-success" id="next_review_date"
+                               name="next_review_date" value="{{ doc.next_review_date.strftime('%Y-%m-%d') if doc and doc.next_review_date else '' }}">
+                        <small class="text-muted">Fecha programada para la próxima revisión</small>
+                    </div>
+                </div>
+
+                <!-- Google Drive URL -->
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label for="drive_url" class="form-label text-success fw-bold">URL Google Drive</label>
+                        <input type="url" class="form-control bg-dark text-light border-success" id="drive_url" name="drive_url"
+                               value="{{ doc.drive_url if doc else '' }}" placeholder="https://drive.google.com/...">
+                        <small class="text-muted">Enlace al documento en Google Drive (opcional)</small>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label for="content" class="form-label text-success fw-bold">Contenido del Documento</label>
+                        <textarea class="form-control bg-dark text-light border-success" id="content" name="content"
+                                  rows="10" placeholder="Contenido del documento...">{{ doc.content if doc else '' }}</textarea>
+                        <small class="text-muted">Texto completo del documento</small>
+                    </div>
+                </div>
+
+                <!-- Version Control Section (for editing only) -->
+                {% if doc %}
+                <hr class="border-success my-4">
+                <h5 class="text-success fw-bold mb-3">Control de Versiones</h5>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="new_version" name="new_version"
+                                   onchange="toggleVersionFields()">
+                            <label class="form-check-label text-light" for="new_version">
+                                Crear nueva versión
+                            </label>
+                        </div>
+                        <small class="text-muted d-block mt-1">Incrementar versión y registrar cambios</small>
+                    </div>
+                    <div class="col-md-6">
+                        <small class="text-muted">Versión actual: <span class="text-success fw-bold">{{ doc.version }}</span></small>
+                    </div>
+                </div>
+
+                <div class="row mb-3" id="version_fields" style="display: none;">
+                    <div class="col-12">
+                        <label for="changes" class="form-label text-success fw-bold">Descripción de Cambios</label>
+                        <textarea class="form-control bg-dark text-light border-success" id="changes" name="changes"
+                                  rows="5" placeholder="Describe los cambios realizados en esta versión..."></textarea>
+                        <small class="text-muted">Documentar qué cambió y por qué</small>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Submit Buttons -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-success me-2">
+                            <i class="fas fa-save"></i> {% if doc %}Guardar Cambios{% else %}Crear Documento{% endif %}
+                        </button>
+                        <a href="{{ url_for('documents') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-times"></i> Cancelar
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Help Text -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="alert alert-info bg-dark border-info text-light" role="alert">
+                <i class="fas fa-info-circle"></i>
+                <strong>Recomendaciones:</strong>
+                <ul class="mb-0 mt-2">
+                    <li>Utiliza códigos consistentes para identificar documentos (ej: SGC-DOC-001, SGC-PROC-002)</li>
+                    <li>Asigna un estado Borrador inicial para documentos en desarrollo</li>
+                    <li>Establece fechas de revisión según la política de control de cambios</li>
+                    <li>Vincula al documento en Google Drive para acceso centralizado</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
+</style>
+
+<script>
+    function toggleVersionFields() {
+        const newVersionCheckbox = document.getElementById('new_version');
+        const versionFields = document.getElementById('version_fields');
+
+        if (newVersionCheckbox.checked) {
+            versionFields.style.display = 'block';
+        } else {
+            versionFields.style.display = 'none';
+        }
+    }
+
+    // Bootstrap form validation
+    (function () {
+        'use strict'
+        window.addEventListener('load', function () {
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        }, false)
+    }())
+</script>
+{% endblock %}

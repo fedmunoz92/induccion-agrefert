@@ -1,0 +1,324 @@
+{% extends 'base.html' %}
+
+{% block title %}Reclamo {{ claim.code }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="text-white mb-2">Reclamo de {{ claim.customer_name }}</h1>
+            <div class="d-flex gap-2 align-items-center">
+                <code class="text-info">{{ claim.code }}</code>
+                {% if claim.status == 'abierto' %}
+                    <span class="badge badge-status status-abierta">Abierto</span>
+                    <span class="traffic-light rojo"></span>
+                {% elif claim.status == 'investigacion' %}
+                    <span class="badge badge-status status-en-tratamiento">Investigación</span>
+                    <span class="traffic-light amarillo"></span>
+                {% elif claim.status == 'resuelto' %}
+                    <span class="badge badge-status status-cerrada">Resuelto</span>
+                    <span class="traffic-light verde"></span>
+                {% elif claim.status == 'cerrado' %}
+                    <span class="badge badge-status status-verificada">Cerrado</span>
+                    <span class="traffic-light gris"></span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{{ url_for('claims') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+        </div>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-dark border-secondary">
+                <div class="card-body">
+                    <h6 class="text-muted small mb-2">TIPO</h6>
+                    {% if claim.claim_type == 'defecto' %}
+                        <span class="badge bg-danger">Defecto</span>
+                    {% elif claim.claim_type == 'entrega' %}
+                        <span class="badge bg-warning text-dark">Entrega</span>
+                    {% elif claim.claim_type == 'rotulacion' %}
+                        <span class="badge bg-info">Rotulación</span>
+                    {% elif claim.claim_type == 'otro' %}
+                        <span class="badge bg-secondary">Otro</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-dark border-secondary">
+                <div class="card-body">
+                    <h6 class="text-muted small mb-2">SEVERIDAD</h6>
+                    {% if claim.severity == 'critica' %}
+                        <span class="badge bg-danger">Crítica</span>
+                    {% elif claim.severity == 'alta' %}
+                        <span class="badge bg-warning text-dark">Alta</span>
+                    {% elif claim.severity == 'media' %}
+                        <span class="badge bg-info">Media</span>
+                    {% elif claim.severity == 'baja' %}
+                        <span class="badge bg-success">Baja</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-dark border-secondary">
+                <div class="card-body">
+                    <h6 class="text-muted small mb-2">PRODUCTO</h6>
+                    <p class="text-white small mb-0">{{ claim.product }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-dark border-secondary">
+                <div class="card-body">
+                    <h6 class="text-muted small mb-2">LOTE</h6>
+                    <p class="text-white small mb-0">{{ claim.lot_number if claim.lot_number else '-' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <form method="POST" action="{{ url_for('claim_detail', claim_id=claim.id) }}">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Initial Description -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h5 class="text-white mb-0">Descripción del Reclamo</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-light mb-0">{{ claim.description }}</p>
+                    </div>
+                </div>
+
+                <!-- Investigation Section -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h5 class="text-white mb-0">Investigación</h5>
+                    </div>
+                    <div class="card-body">
+                        <textarea
+                            class="form-control form-control-dark"
+                            name="investigation"
+                            rows="4"
+                            placeholder="Resultados de la investigación del reclamo">{{ claim.investigation or '' }}</textarea>
+                        <small class="form-text text-muted d-block mt-2">Hallazgos y análisis realizado</small>
+                    </div>
+                </div>
+
+                <!-- Root Cause (if applicable) -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h5 class="text-white mb-0">Causa Identificada</h5>
+                    </div>
+                    <div class="card-body">
+                        <textarea
+                            class="form-control form-control-dark"
+                            name="root_cause"
+                            rows="3"
+                            placeholder="Causa raíz del problema reportado">{{ claim.root_cause or '' }}</textarea>
+                        <small class="form-text text-muted d-block mt-2">Si aplica, describe la causa identificada</small>
+                    </div>
+                </div>
+
+                <!-- Resolution Section -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h5 class="text-white mb-0">Resolución</h5>
+                    </div>
+                    <div class="card-body">
+                        <textarea
+                            class="form-control form-control-dark"
+                            name="resolution"
+                            rows="4"
+                            placeholder="Cómo se resolvió el reclamo">{{ claim.resolution or '' }}</textarea>
+                        <small class="form-text text-muted d-block mt-2">Acciones tomadas para resolver el problema</small>
+                    </div>
+                </div>
+
+                <!-- Corrective Actions -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h5 class="text-white mb-0">Acciones Correctivas</h5>
+                    </div>
+                    <div class="card-body">
+                        <textarea
+                            class="form-control form-control-dark"
+                            name="corrective_actions"
+                            rows="4"
+                            placeholder="Acciones para prevenir futuros reclamos similares">{{ claim.corrective_actions or '' }}</textarea>
+                        <small class="form-text text-muted d-block mt-2">Mejoras implementadas o planeadas</small>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="d-flex gap-2 mb-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-circle"></i> Guardar Cambios
+                    </button>
+                    <a href="{{ url_for('claims') }}" class="btn btn-outline-secondary">
+                        Cancelar
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Customer Info -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h6 class="text-white mb-0">Información del Cliente</h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-light small mb-0">
+                            <i class="bi bi-person"></i>
+                            {{ claim.customer_name }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Assigned Person -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h6 class="text-white mb-0">Responsable</h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-light small mb-0">
+                            <i class="bi bi-person-check"></i>
+                            {{ claim.assignee.username if claim.assignee else 'Sin asignar' }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Status Change -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h6 class="text-white mb-0">Cambiar Estado</h6>
+                    </div>
+                    <div class="card-body">
+                        <select
+                            class="form-select form-select-dark form-select-sm"
+                            name="status">
+                            <option value="abierto" {% if claim.status == 'abierto' %}selected{% endif %}>Abierto</option>
+                            <option value="investigacion" {% if claim.status == 'investigacion' %}selected{% endif %}>Investigación</option>
+                            <option value="resuelto" {% if claim.status == 'resuelto' %}selected{% endif %}>Resuelto</option>
+                            <option value="cerrado" {% if claim.status == 'cerrado' %}selected{% endif %}>Cerrado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="card bg-dark border-secondary mb-3">
+                    <div class="card-header bg-secondary bg-opacity-25 border-secondary">
+                        <h6 class="text-white mb-0">Cronograma</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="small">
+                            <div class="mb-2">
+                                <span class="text-muted">Reportado:</span>
+                                <br>
+                                <span class="text-light">{{ claim.created_at.strftime('%d/%m/%Y %H:%M') if claim.created_at else '-' }}</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="text-muted">Actualizado:</span>
+                                <br>
+                                <span class="text-light">{{ claim.updated_at.strftime('%d/%m/%Y %H:%M') if claim.updated_at else '-' }}</span>
+                            </div>
+                            <div>
+                                <span class="text-muted">Vencimiento:</span>
+                                <br>
+                                <span class="text-warning">{{ claim.due_date.strftime('%d/%m/%Y') if claim.due_date else '-' }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+.traffic-light {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #666;
+}
+
+.traffic-light.verde {
+    background-color: #28a745;
+}
+
+.traffic-light.amarillo {
+    background-color: #ffc107;
+}
+
+.traffic-light.rojo {
+    background-color: #dc3545;
+}
+
+.traffic-light.gris {
+    background-color: #6c757d;
+}
+
+.badge-status {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+}
+
+.badge-status.status-abierta {
+    background-color: #dc3545;
+}
+
+.badge-status.status-en-tratamiento {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.badge-status.status-cerrada {
+    background-color: #28a745;
+}
+
+.badge-status.status-verificada {
+    background-color: #17a2b8;
+}
+
+.form-control-dark {
+    background-color: #495057;
+    border-color: #495057;
+    color: #ffffff;
+}
+
+.form-control-dark:focus {
+    background-color: #495057;
+    border-color: #80bdff;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-select-dark {
+    background-color: #495057;
+    border-color: #495057;
+    color: #ffffff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.form-select-dark:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-select-dark option {
+    background-color: #495057;
+    color: #ffffff;
+}
+</style>
+{% endblock %}

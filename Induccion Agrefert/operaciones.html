@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operaciones — Induccion Agrefert</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+<script>
+    // Apply saved theme immediately to prevent flash
+    (function(){var t=localStorage.getItem('agrefert-theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark')}})();
+    </script>
+</head>
+<body>
+<!-- ─── PROGRESS BAR ─── -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ─── NAVBAR ─── -->
+<nav class="topnav" id="topnav">
+    <div class="topnav-inner">
+        <a href="index.html" class="logo"><img src="img/logo.png" alt="Agrefert"></a>
+        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+        <div class="nav-links">
+            <a href="index.html">La Empresa</a>
+            <a href="equipo.html">Equipo</a>
+            <a href="productos.html">Productos</a>
+            <a href="documentacion.html">Documentacion</a>
+            <a href="operaciones.html" class="current">Operaciones</a>
+            <a href="manuales.html">Manuales</a>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Cambiar tema" title="Modo oscuro / claro">&#9790;</button>
+        </div>
+    </div>
+</nav>
+
+<!-- ─── PAGE HEADER ─── -->
+<div style="padding-top: 80px; padding-bottom: 1.5rem; background: var(--surface-alt);">
+    <div class="container" style="padding-top: 1.5rem;">
+        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+            <a href="index.html" style="color: var(--brand-green); text-decoration: none;">Home</a> → Operaciones
+        </div>
+        <h1 style="font-size: clamp(1.75rem, 2.5vw, 2.25rem); font-weight: 900; color: var(--text-primary); margin-bottom: 0.35rem;">Operaciones</h1>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">Planta productiva, logistica, calendario agricola y cifras clave del negocio</p>
+    </div>
+</div>
+
+<!-- ─── PLANTA SECTION ─── -->
+<section id="planta">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Infraestructura</span>
+            <h2 class="section-title">Nuestra Planta</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Complejo Industrial Ramallo &ndash; San Nicolas (COMIRSA), Buenos Aires</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card reveal reveal-delay-1">
+                <h3><span class="icon-circle">&#127981;</span> Infraestructura</h3>
+                <p>Predio de 50.000 m2 con planta totalmente automatizada. Ubicacion: Av. Central Energia Argentina 480, COMIRSA. 3 depositos para fertilizante solido no peligroso (45.000 t) + 1 deposito de nitrato de amonio (10.000 t, certificado ANMaC). Total solidos: 52.000 t. Liquidos: 4.500 t.</p>
+            </div>
+            <div class="card reveal reveal-delay-2">
+                <h3><span class="icon-circle">&#9881;</span> Capacidad Productiva</h3>
+                <p>Liquid blends: 820 t/dia (2da linea de reactores instalada en 2025, +70% capacidad). Solid blends: 150 t/dia. Despacho: +80.000 t/ano, 40 camiones diarios de fertilizantes liquidos. Mezcladora nueva para mezclas fisicas (2026).</p>
+            </div>
+            <div class="card reveal reveal-delay-3">
+                <h3><span class="icon-circle">&#128230;</span> Logistica y Despachos</h3>
+                <p>82.588 t despachadas en 2025 (record). 66.000 t recibidas desde buques directamente en planta. Nuevo equipo de despacho a granel (+50% productividad). Menor descarte por desterronador. Planificacion con sistema de cupos y respuesta a cupos del mismo dia.</p>
+            </div>
+            <div class="card reveal reveal-delay-4">
+                <h3><span class="icon-circle">&#127942;</span> Hitos de Planta 2025</h3>
+                <p>Record anual de despachos totales. Puesta en marcha del 2do reactor de liquidos. Produccion estable de Zurko 28-5. Consolidacion de mandos medios en administracion, balanza y supervision. Operacion en dos turnos. Reduccion de horas extra y operacion fines de semana.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── CIFRAS CLAVE ─── -->
+<section id="numeros">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Numeros</span>
+            <h2 class="section-title">Cifras Clave 2025/26</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">El ano del salto de escala</p>
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card reveal reveal-delay-1"><span class="kpi-value">88.412 t</span><span class="kpi-label">Ventas totales</span></div>
+            <div class="kpi-card reveal reveal-delay-2"><span class="kpi-value">82.588 t</span><span class="kpi-label">Despachadas (93,4%)</span></div>
+            <div class="kpi-card reveal reveal-delay-3"><span class="kpi-value">>US$40M</span><span class="kpi-label">Facturacion anual</span></div>
+            <div class="kpi-card reveal reveal-delay-4"><span class="kpi-value">15,5%</span><span class="kpi-label">Margen bruto estimado</span></div>
+            <div class="kpi-card reveal reveal-delay-5"><span class="kpi-value">0,49%</span><span class="kpi-label">Reclamos de calidad</span></div>
+            <div class="kpi-card reveal reveal-delay-1"><span class="kpi-value">246</span><span class="kpi-label">Clientes activos</span></div>
+            <div class="kpi-card reveal reveal-delay-2"><span class="kpi-value">359 t</span><span class="kpi-label">Promedio por cliente</span></div>
+            <div class="kpi-card reveal reveal-delay-3"><span class="kpi-value">53,6%</span><span class="kpi-label">Mix marcas propias</span></div>
+            <div class="kpi-card reveal reveal-delay-4"><span class="kpi-value">US$6,3M</span><span class="kpi-label">Caja promedio anual</span></div>
+            <div class="kpi-card reveal reveal-delay-5"><span class="kpi-value">62.824 t</span><span class="kpi-label">Importadas (17 buques)</span></div>
+        </div>
+
+        <h3 style="text-align:center; margin-top:3.5rem; color:var(--text-primary); font-weight:700;" class="reveal">Evolucion de Volumen (toneladas)</h3>
+        <div class="volume-chart reveal">
+            <div class="bar-group"><div class="bar" style="height:55px;"><span class="bar-label">22.300</span></div><div class="bar-year">2022</div></div>
+            <div class="bar-group"><div class="bar" style="height:72px;"><span class="bar-label">28.500</span></div><div class="bar-year">2023</div></div>
+            <div class="bar-group"><div class="bar" style="height:125px;"><span class="bar-label">50.000</span></div><div class="bar-year">2024</div></div>
+            <div class="bar-group"><div class="bar" style="height:218px;"><span class="bar-label">88.412</span></div><div class="bar-year">2025</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── OPERACIONES COMERCIALES ─── -->
+<section id="operaciones" class="alt-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Ventas</span>
+            <h2 class="section-title">Operacion Comercial</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Segmentacion de clientes, proceso de venta y zonas comerciales</p>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin-bottom:1rem; font-weight:700;" class="reveal">Segmentacion por Tamano</h3>
+        <div class="seg-grid">
+            <div class="seg-card reveal reveal-delay-1">
+                <h4>Cuenta Nacional</h4>
+                <span class="seg-vol">>5.000 t/ano</span>
+                <p>Pago a 30 dias. Buscan disponibilidad, flexibilidad y calidad. Valoran precios bajos. Se cobra almacenaje.</p>
+            </div>
+            <div class="seg-card reveal reveal-delay-2">
+                <h4>Distribuidor Gold</h4>
+                <span class="seg-vol">>2.000 t/ano</span>
+                <p>Desarrollan mercado. Buenos precios, colocacion de tanques, charlas tecnicas y financiacion.</p>
+            </div>
+            <div class="seg-card reveal reveal-delay-3">
+                <h4>Distribuidor</h4>
+                <span class="seg-vol">>1.000 t/ano</span>
+                <p>Red de distribucion regional. Acceso al portfolio completo de productos Agrefert.</p>
+            </div>
+            <div class="seg-card reveal reveal-delay-4">
+                <h4>Productor Gold</h4>
+                <span class="seg-vol">>500 t/ano</span>
+                <p>Dispuestos a realizar ensayos. Tanques, charlas tecnicas y financiacion con respaldo.</p>
+            </div>
+            <div class="seg-card reveal reveal-delay-5">
+                <h4>Productor</h4>
+                <span class="seg-vol">Min. 1 camion</span>
+                <p>Compra directa. Precios de lista.</p>
+            </div>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin: 2.5rem 0 1rem; font-weight:700;" class="reveal">Zonas Comerciales</h3>
+        <div class="seg-grid">
+            <div class="seg-card reveal"><h4>Zona 1: Norte</h4><p>Salta, Jujuy, Tucuman</p></div>
+            <div class="seg-card reveal"><h4>Zona 2: Cordoba & San Luis</h4><p>Region centro-oeste</p></div>
+            <div class="seg-card reveal"><h4>Zona 3: Pampa Humeda</h4><p>Nucleo productivo principal</p></div>
+            <div class="seg-card reveal"><h4>Zona 4: Cuyo</h4><p>Mendoza, San Juan</p></div>
+            <div class="seg-card reveal"><h4>Zona 5: Buenos Aires Norte</h4><p>Zona de influencia directa de planta</p></div>
+        </div>
+
+        <h3 style="color:var(--text-primary); margin: 2.5rem 0 1rem; font-weight:700;" class="reveal">Proceso de Venta</h3>
+        <div class="reveal" style="display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; justify-content:center; margin-bottom:1rem;">
+            <div style="background:var(--accent-green-2); padding:0.65rem 1.1rem; border-radius:8px; font-size:0.85rem; font-weight:600; color:var(--text-primary);">Prospecto</div>
+            <span style="color:var(--brand-green); font-weight:700;">&rarr;</span>
+            <div style="background:var(--accent-green-2); padding:0.65rem 1.1rem; border-radius:8px; font-size:0.85rem; font-weight:600; color:var(--text-primary);">Contacto inicial</div>
+            <span style="color:var(--brand-green); font-weight:700;">&rarr;</span>
+            <div style="background:var(--accent-green-2); padding:0.65rem 1.1rem; border-radius:8px; font-size:0.85rem; font-weight:600; color:var(--text-primary);">Calificacion</div>
+            <span style="color:var(--brand-green); font-weight:700;">&rarr;</span>
+            <div style="background:var(--accent-green-2); padding:0.65rem 1.1rem; border-radius:8px; font-size:0.85rem; font-weight:600; color:var(--text-primary);">Envio de info</div>
+            <span style="color:var(--brand-green); font-weight:700;">&rarr;</span>
+            <div style="background:var(--accent-green-2); padding:0.65rem 1.1rem; border-radius:8px; font-size:0.85rem; font-weight:600; color:var(--text-primary);">Reunion</div>
+            <span style="color:var(--brand-green); font-weight:700;">&rarr;</span>
+            <div style="background:var(--accent-green-2); padding:0.65rem 1.1rem; border-radius:8px; font-size:0.85rem; font-weight:600; color:var(--text-primary);">Cotizacion</div>
+            <span style="color:var(--brand-green); font-weight:700;">&rarr;</span>
+            <div style="background:var(--brand-green); padding:0.65rem 1.1rem; border-radius:8px; font-size:0.85rem; font-weight:700; color:white; box-shadow: 0 2px 8px rgba(27,178,117,0.25);">Nota de Venta</div>
+        </div>
+        <div class="prose reveal" style="text-align:center; margin: 0 auto;">
+            <p style="font-size:0.88rem;">Formas de cobro: Contado | Financiado | Canje | Tarjetas Agro | Compensacion de facturas | Cuenta y Orden</p>
+        </div>
+    </div>
+</section>
+
+<!-- ─── COMEX ─── -->
+<section id="comex">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Importaciones</span>
+            <h2 class="section-title">Comercio Exterior</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Importaciones 2025: 62.824 t en 17 buques/Zona Franca (+13,9% vs 2024)</p>
+        </div>
+
+        <div class="reveal" style="overflow-x:auto; border-radius:var(--radius); border:1px solid var(--border); box-shadow: var(--shadow-xs);">
+            <table class="import-table">
+                <thead><tr><th>Producto</th><th style="text-align:right;">2024 (t)</th><th style="text-align:right;">2025 (t)</th><th style="text-align:right;">Var.</th></tr></thead>
+                <tbody>
+                    <tr><td>Urea Granulada</td><td class="number">24.038</td><td class="number">28.050</td><td class="number" style="color:var(--brand-green);">+4.012</td></tr>
+                    <tr><td>Urea Perlada</td><td class="number">10.500</td><td class="number">10.400</td><td class="number" style="color:#c53030;">-100</td></tr>
+                    <tr><td>Nitrato de Amonio</td><td class="number">11.730</td><td class="number">10.174</td><td class="number" style="color:#c53030;">-1.556</td></tr>
+                    <tr><td>Sulfato de Amonio Granulado</td><td class="number">4.883</td><td class="number">5.500</td><td class="number" style="color:var(--brand-green);">+617</td></tr>
+                    <tr><td>MAP</td><td class="number">1.930</td><td class="number">2.750</td><td class="number" style="color:var(--brand-green);">+820</td></tr>
+                    <tr><td>MAP 10-50</td><td class="number">&mdash;</td><td class="number">2.000</td><td class="number" style="color:var(--brand-green);">Nuevo</td></tr>
+                    <tr><td>Chacarero 8-40-0-5S-8Ca</td><td class="number">2.000</td><td class="number">2.500</td><td class="number" style="color:var(--brand-green);">+500</td></tr>
+                    <tr><td>Cloruro de Potasio Granulado</td><td class="number">&mdash;</td><td class="number">1.450</td><td class="number" style="color:var(--brand-green);">Nuevo</td></tr>
+                    <tr style="font-weight:700; background:var(--accent-green-2);"><td>Total</td><td class="number">55.181</td><td class="number">62.824</td><td class="number" style="color:var(--brand-green);">+7.643</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="prose reveal" style="margin-top:1.75rem;">
+            <p>Argentina importo mas de 3,4 Mt de fertilizantes en 2025 (+19% interanual), por un valor de US$ 1.926 MM (+38%). Urea + MAP explicaron el 56% del volumen y 61% del valor. Agrefert diversifico origenes para sostener abastecimiento, manejando ventanas de compra y stock estrategico.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ─── CALENDARIO AGRICOLA ─── -->
+<section id="calendario" class="alt-bg">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-tag">Estacionalidad</span>
+            <h2 class="section-title">Calendario Agricola</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Campanas fina (invierno) y gruesa (verano) que determinan la estacionalidad de la demanda</p>
+        </div>
+
+        <div class="agcal reveal"><div class="agcal-grid">
+            <div class="agcal-header">Cultivo</div>
+            <div class="agcal-header">Abr</div><div class="agcal-header">May</div><div class="agcal-header">Jun</div>
+            <div class="agcal-header">Jul</div><div class="agcal-header">Ago</div><div class="agcal-header">Sep</div>
+            <div class="agcal-header">Oct</div><div class="agcal-header">Nov</div><div class="agcal-header">Dic</div>
+            <div class="agcal-header">Ene</div><div class="agcal-header">Feb</div><div class="agcal-header">Mar</div>
+
+            <div class="agcal-crop">Trigo <span class="agcal-tag agcal-tag-fina">Fina</span></div>
+            <div class="agcal-cell"></div><div class="agcal-cell s">Siembra</div><div class="agcal-cell s">Siembra</div>
+            <div class="agcal-cell f">N</div><div class="agcal-cell f">N</div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell c">Cosecha</div>
+            <div class="agcal-cell c">Cosecha</div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+
+            <div class="agcal-crop">Maiz Temp. <span class="agcal-tag agcal-tag-gruesa">Gruesa</span></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell s">Siembra</div>
+            <div class="agcal-cell s">Siembra</div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell c">Cosecha</div>
+
+            <div class="agcal-crop">Maiz Tardio <span class="agcal-tag agcal-tag-gruesa">Gruesa</span></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell s">Siembra</div><div class="agcal-cell s">Siembra</div>
+            <div class="agcal-cell f">N</div><div class="agcal-cell f">N</div><div class="agcal-cell"></div>
+
+            <div class="agcal-crop">Soja 1ra <span class="agcal-tag agcal-tag-gruesa">Gruesa</span></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell s">Siembra</div><div class="agcal-cell s">Siembra</div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell c">Cosecha</div>
+
+            <div class="agcal-crop">Soja 2da <span class="agcal-tag agcal-tag-gruesa">Gruesa</span></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell s">Siembra</div>
+            <div class="agcal-cell f">N</div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+
+            <div class="agcal-crop">Girasol <span class="agcal-tag agcal-tag-gruesa">Gruesa</span></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell"></div><div class="agcal-cell s">Siembra</div>
+            <div class="agcal-cell f">N</div><div class="agcal-cell f">N</div><div class="agcal-cell"></div>
+            <div class="agcal-cell"></div><div class="agcal-cell c">Cosecha</div><div class="agcal-cell"></div>
+        </div></div>
+
+        <div class="agcal-legend reveal">
+            <div class="agcal-legend-item"><div class="agcal-legend-dot" style="background:var(--accent-green-2);"></div> Siembra + fertilizacion arranque</div>
+            <div class="agcal-legend-item"><div class="agcal-legend-dot" style="background:#FFF7E0;"></div> Aplicacion de nitrogeno</div>
+            <div class="agcal-legend-item"><div class="agcal-legend-dot" style="background:#FFE8E8;"></div> Cosecha</div>
+            <div class="agcal-legend-item"><div class="agcal-legend-dot" style="background:#E8F0FE;"></div> Campana fina</div>
+            <div class="agcal-legend-item"><div class="agcal-legend-dot" style="background:#FFF0E0;"></div> Campana gruesa</div>
+        </div>
+
+        <div class="prose reveal" style="margin-top:1.75rem;">
+            <p>La campana <strong>fina</strong> (trigo, cebada, colza) se siembra mayo-julio y cosecha noviembre-enero. La campana <strong>gruesa</strong> (soja, maiz, girasol, sorgo) se siembra septiembre-enero y cosecha marzo-junio. Es posible hacer doble cultivo (ej: Trigo &rarr; Soja de 2da). Estos ciclos determinan la estacionalidad de la demanda de fertilizantes y la planificacion de stock, importaciones y produccion.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+    <img src="img/logo_fert_white.png" alt="Agrefert Fertilizantes" style="max-width:180px; width:50%; margin-bottom:1rem; opacity:0.8;">
+    <p>Desde 1999 contribuyendo a la produccion de mas y mejores alimentos.</p>
+    <p style="margin-top:0.5rem; font-size:0.75rem; opacity:0.5;">Material de induccion &mdash; Uso interno &mdash; 2026</p>
+</footer>
+
+<!-- ─── BACK TO TOP ─── -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0})" aria-label="Volver arriba">&#8593;</button>
+
+<!-- ─── JAVASCRIPT ─── -->
+<script>
+(function() {
+    // Scroll reveal with IntersectionObserver
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right').forEach(function(el) { observer.observe(el); });
+
+    // Scroll progress bar
+    var progressBar = document.getElementById('scrollProgress');
+    var backToTop = document.getElementById('backToTop');
+    var topnav = document.getElementById('topnav');
+
+    window.addEventListener('scroll', function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = progress + '%';
+
+        // Back to top
+        if (scrollTop > 600) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+
+        // Nav shadow on scroll
+        if (scrollTop > 10) {
+            topnav.classList.add('scrolled');
+        } else {
+            topnav.classList.remove('scrolled');
+        }
+    });
+
+    // Active nav link highlight
+    var sections = document.querySelectorAll('section[id]');
+    var navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', function() {
+        var scrollPos = window.pageYOffset + 100;
+        navLinks.forEach(function(l) { l.classList.remove('current'); });
+        sections.forEach(function(section) {
+            if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+                var id = section.getAttribute('id');
+                navLinks.forEach(function(link) {
+                    if (link.getAttribute('href') === '#' + id) {
+                        link.classList.add('current');
+                    }
+                });
+            }
+        });
+    });
+
+    // Close mobile menu on link click
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.remove('open');
+        });
+    });
+})();
+</script>
+
+<script>
+function toggleTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('agrefert-theme', next);
+    updateToggleIcon();
+}
+function updateToggleIcon() {
+    var btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    btn.innerHTML = isDark ? '&#9728;' : '&#9790;';
+    btn.title = isDark ? 'Modo claro' : 'Modo oscuro';
+}
+updateToggleIcon();
+</script>
+</body>
+</html>

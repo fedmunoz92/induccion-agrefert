@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Induccion Agrefert - Bienvenido</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Maven+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>
+    // Apply saved theme immediately to prevent flash
+    (function(){var t=localStorage.getItem('agrefert-theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark')}})();
+    </script>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="topnav" id="topnav">
+    <div class="topnav-inner">
+        <a href="index.html" class="logo"><img src="img/logo.png" alt="Agrefert"></a>
+        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+        <div class="nav-links">
+            <a href="empresa.html">La Empresa</a>
+            <a href="equipo.html">Equipo</a>
+            <a href="productos.html">Productos</a>
+            <a href="documentacion.html">Documentacion</a>
+            <a href="operaciones.html">Operaciones</a>
+            <a href="manuales.html">Manuales</a>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Cambiar tema" title="Modo oscuro / claro">&#9790;</button>
+        </div>
+    </div>
+</nav>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+    <div class="hero-float"></div>
+    <div class="hero-float"></div>
+    <div class="hero-float"></div>
+    <div class="hero-content">
+        <img src="img/logo_fert_white.png" alt="Agrefert Fertilizantes" style="max-width:320px; width:75%;">
+        <h1>Bienvenido al equipo</h1>
+        <p>Somos una empresa argentina dedicada a la elaboracion y distribucion de fertilizantes solidos y liquidos, contribuyendo con el sector agropecuario a la produccion de mas y mejores alimentos desde 1999.</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><span class="num">88.412</span><span class="label">Toneladas vendidas 2025</span></div>
+            <div class="hero-stat"><span class="num">246</span><span class="label">Clientes activos</span></div>
+            <div class="hero-stat"><span class="num">21</span><span class="label">Provincias</span></div>
+            <div class="hero-stat"><span class="num">34</span><span class="label">Productos (SKUs)</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── QUICK ACCESS ─── -->
+<section style="padding: 5rem 2rem;">
+    <div class="container">
+        <div class="reveal" style="text-align: center; margin-bottom: 2rem;">
+            <span class="section-tag">Comienza Aqui</span>
+            <h2 class="section-title">Explora Agrefert</h2>
+            <div class="section-divider" style="margin: 1rem auto;"></div>
+            <p class="section-subtitle">Acceso rapido a la informacion fundamental para entender nuestra empresa, equipo, productos y operaciones</p>
+        </div>
+
+        <div class="quick-grid">
+            <!-- La Empresa -->
+            <a href="empresa.html" class="quick-card reveal" style="--card-accent: linear-gradient(135deg, var(--brand-green), var(--brand-teal));">
+                <div class="quick-card-icon" style="background: rgba(27, 178, 117, 0.12);">🏢</div>
+                <h3>La Empresa</h3>
+                <p>Mision, vision, valores e historia de Agrefert desde 1999</p>
+                <div class="quick-card-arrow">Explorar →</div>
+            </a>
+
+            <!-- Equipo -->
+            <a href="equipo.html" class="quick-card reveal" style="--card-accent: linear-gradient(135deg, var(--brand-blue), var(--brand-cyan));">
+                <div class="quick-card-icon" style="background: rgba(41, 128, 185, 0.12);">👥</div>
+                <h3>Equipo</h3>
+                <p>Organigrama completo y datos de contacto</p>
+                <div class="quick-card-arrow">Explorar →</div>
+            </a>
+
+            <!-- Productos -->
+            <a href="productos.html" class="quick-card reveal" style="--card-accent: linear-gradient(135deg, var(--brand-orange), var(--brand-yellow));">
+                <div class="quick-card-icon" style="background: rgba(230, 126, 34, 0.12);">📦</div>
+                <h3>Productos</h3>
+                <p>Catalogo de fertilizantes, Bactools e identidad de marca</p>
+                <div class="quick-card-arrow">Explorar →</div>
+            </a>
+
+            <!-- Documentacion -->
+            <a href="documentacion.html" class="quick-card reveal" style="--card-accent: linear-gradient(135deg, var(--brand-cyan), var(--brand-purple));">
+                <div class="quick-card-icon" style="background: rgba(52, 152, 219, 0.12);">📚</div>
+                <h3>Documentacion</h3>
+                <p>Manuales, procedimientos e instructivos (Drive + Confluence)</p>
+                <div class="quick-card-arrow">Explorar →</div>
+            </a>
+
+            <!-- Operaciones -->
+            <a href="operaciones.html" class="quick-card reveal" style="--card-accent: linear-gradient(135deg, var(--brand-grey), var(--brand-dark));">
+                <div class="quick-card-icon" style="background: rgba(108, 117, 125, 0.12);">⚙️</div>
+                <h3>Operaciones</h3>
+                <p>Procesos, planta, calendario agricola y cifras clave</p>
+                <div class="quick-card-arrow">Explorar →</div>
+            </a>
+
+            <!-- Manuales -->
+            <a href="manuales.html" class="quick-card reveal" style="--card-accent: linear-gradient(135deg, #1BB275, #00BFE3);">
+                <div class="quick-card-icon" style="background: rgba(27, 178, 117, 0.12);">📖</div>
+                <h3>Manuales</h3>
+                <p>Todos los manuales y politicas de Confluence migrados en un solo lugar</p>
+                <div class="quick-card-arrow">Explorar →</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ─── QUICK CONTACT ─── -->
+<section style="padding: 4rem 2rem; background: var(--surface-alt);">
+    <div class="container">
+        <div class="reveal" style="text-align: center; margin-bottom: 2rem;">
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); font-family: 'Maven Pro', sans-serif;">Contacto Rapido</h3>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; max-width: 800px; margin: 0 auto;">
+            <div class="reveal" style="text-align: center;">
+                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📞</div>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Telefono</p>
+                <p style="font-weight: 600; color: var(--text-primary);">+54 (300) 4423-6969</p>
+            </div>
+            <div class="reveal" style="text-align: center;">
+                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📍</div>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Ubicacion</p>
+                <p style="font-weight: 600; color: var(--text-primary);">Ruta 9, km 15.5, Lomas de Zamora</p>
+            </div>
+            <div class="reveal" style="text-align: center;">
+                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📧</div>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Email</p>
+                <p style="font-weight: 600; color: var(--text-primary);">info@agrefert.com.ar</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem;">
+            <div>
+                <img src="img/logo_fert_white.png" alt="Agrefert" style="max-width: 120px; margin-bottom: 1rem;">
+                <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem;">Elaboracion y distribucion de fertilizantes solidos y liquidos desde 1999.</p>
+            </div>
+            <div style="text-align: right; font-size: 0.8rem; color: rgba(255,255,255,0.6);">
+                <p>&copy; 2026 Agrefert</p>
+                <p>Todos los derechos reservados</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Back to top button -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+<script>
+(function() {
+    // Scroll reveal with IntersectionObserver
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right').forEach(function(el) { observer.observe(el); });
+
+    // Counter animation for KPI numbers
+    var counterObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting && !entry.target.dataset.counted) {
+                entry.target.dataset.counted = 'true';
+                var target = parseInt(entry.target.textContent.replace(/[^0-9]/g, ''));
+                var suffix = entry.target.textContent.replace(/[0-9]/g, '');
+                if (isNaN(target)) return;
+                var start = 0;
+                var duration = 1500;
+                var startTime = null;
+                function animate(ts) {
+                    if (!startTime) startTime = ts;
+                    var progress = Math.min((ts - startTime) / duration, 1);
+                    var eased = 1 - Math.pow(1 - progress, 4);
+                    entry.target.textContent = Math.floor(eased * target) + suffix;
+                    if (progress < 1) requestAnimationFrame(animate);
+                }
+                requestAnimationFrame(animate);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.kpi-number').forEach(function(el) { counterObserver.observe(el); });
+
+    // Scroll progress bar
+    var progressBar = document.getElementById('scrollProgress');
+    var backToTop = document.getElementById('backToTop');
+    var topnav = document.getElementById('topnav');
+
+    window.addEventListener('scroll', function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = progress + '%';
+
+        // Back to top
+        if (scrollTop > 600) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+
+        // Nav shadow on scroll
+        if (scrollTop > 10) {
+            topnav.classList.add('scrolled');
+        } else {
+            topnav.classList.remove('scrolled');
+        }
+    });
+
+    // Close mobile menu on link click
+    var navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.remove('open');
+        });
+    });
+})();
+</script>
+
+<script>
+function toggleTheme() {
+    var html = document.documentElement;
+    var current = html.getAttribute('data-theme');
+    var next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('agrefert-theme', next);
+    updateToggleIcon();
+}
+function updateToggleIcon() {
+    var btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    btn.innerHTML = isDark ? '&#9728;' : '&#9790;';
+    btn.title = isDark ? 'Modo claro' : 'Modo oscuro';
+}
+updateToggleIcon();
+</script>
+</body>
+</html>
